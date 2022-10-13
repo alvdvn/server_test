@@ -3,6 +3,20 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+/*a {*/
+/*  color: #00B7FF;*/
+/*}*/
+.bg-login {
+
+  background-image: url('../image/bg1.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-weight: bold;
+  color: brown;
+  width: 100%;
+
+}
+
+.nav-link {
+  color: brown;
 }

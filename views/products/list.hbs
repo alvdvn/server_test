@@ -1,0 +1,45 @@
+<style>
+    tr{
+        border: 1px solid black;
+    }
+    th{
+        border: 1px solid black;
+    }
+</style>
+<div class="datalist">
+    <div class="col-12" id="headerlist">
+
+    </div>
+    <div class="tables" style="background: #ffffff; border: 2px solid black;">
+        <h3>Danh sách</h3>
+        <table class="table table-bordered" >
+            <thead>
+            <tr>
+                <!--                <th>ID</th>-->
+                <th>Tên</th>
+                <th>Giá</th>
+                <th>Mô tả</th>
+                <th>Loại</th>
+                <th>Ảnh</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each listProduct}}
+                <tr>
+                    <!--                    <td scope="row">{{this. }}</td>-->
+                    <td scope="row">{{this.}}</td>
+                    <td>{{this.giasanpham}}</td>
+                    <td>{{this.mota}}</td>
+                    <td>{{this.loai}}</td>
+                    <td><img src="{{this.anhsanpham}}" width="100px" style="vertical-align: center"></td>
+                    <td>
+                        <a href="/products/edit/{{this._id}}" class="btn btn-primary" id="btnAction">Edit</a>
+                        <a href="/products/delete/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')" id="btnAction" class="btn btn-danger">Del</a>
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
