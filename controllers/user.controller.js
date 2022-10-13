@@ -5,6 +5,9 @@ const jwt = require("jsonwebtoken");
 exports.getListUSer=(req,res,next)=>{
     res.render('./User/list-User');
 }
+exports.getFormLogin = (req,res,next)=>{
+    res.render('./User/login');
+}
 //hien thi form add
 exports.GetFormAddUser=(req,res,next)=>{
     res.render('./User/add-User');
