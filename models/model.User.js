@@ -6,6 +6,7 @@ const UserSchema = new mongoose.Schema(
         full_name: { type: String, required: true },
         address: { type: String},
         phone_number: { type: Number,required:true },
+            role:{type:String,required:true, default:'user'}
     },
     { timestamps: true }
 );
