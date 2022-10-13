@@ -1,41 +1,36 @@
-const  UserModel = require('../models/User');
-const  bcrypt = require('bcrypt');
-
-
-
-exports.getFormLogin = (req,res,next)=>{
-    res.render('./users/login');
+const UserModel = require('../models/model.User');
+const CryptoJS = require("crypto-js");
+const jwt = require("jsonwebtoken");
+//hien thi danh sach User
+exports.getListUSer=(req,res,next)=>{
+    res.render('./User/list-User');
 }
-exports.postLogin =  async (req,res,next)=>{
+//hien thi form add
+exports.GetFormAddUser=(req,res,next)=>{
+    res.render('./User/add-User');
+}
+//xu li them vao csdl
+exports.postAddUser= (req,res,next)=>{
     console.log(req.body);
-    const body = req.body;
-    const  User  = await  UserModel.findOne({
-       email:body.email
-    });
-   // if(User.)
-}
-exports.getFormRegister =(req,res,next) =>{
-    res.render('../user/regster');
-}
-exports.getFormAddUser =(req,res,next) =>{
-    res.render('../user/regster');
-}
-exports.getFormEditUser =(req,res,next) =>{
-    res.render('../user/regster');
-}
-exports.postAdd =(req,res,next) =>{
+ const newUser = new UserModel({
+     email:req.body.user_email,
+     password:CryptoJS.AES.encrypt(
+         req.body.user_password,
+         process.env.PASS_SEC
+     ).toString(),
+     full_name:req.body.user_full_name,
+     address:req.body.user_address,
+     phone_number:Number(req.body.user_phone_number),
+     role:req.body.role,
+     avatar:req.file.filename
+ });
+ newUser.save(function (err){
+     if (err){
+         console.log(err);
+     }else {
+         console.log('ghi du lieu thanh cong')
+     }
+ })
 
-    res.redirect('./users')
-}
-exports.postEdit =(req,res,next) =>{
-
-    res.redirect('./users')
-}
-exports.postDel =(req,res,next) =>{
-    res.render('../user/regster');
-    res.redirect('./users')
-}
-//get User
-exports.getUser =(req,res ,next )=>{
-    res.render('')
+    res.redirect('/User/');
 }
