@@ -11,6 +11,7 @@ const OrderSchema = new mongoose.Schema(
                     type: Number,
                     default: 1,
                 },
+                price:{type:Number, required:true},
             },
         ],
         address: {
@@ -21,7 +22,7 @@ const OrderSchema = new mongoose.Schema(
             type: Number,
             require: true,
         },
-       price:{type:Number, required:true},
+
         status: { type: String, default: "pending" },
     },
     { timestamps: true }
