@@ -9,6 +9,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/list',ProC.getListProduct);
 router.get('/add',ProC.getFormAddPro);
+router.post('/add',ProC.postAddPro)
 
 
 

@@ -289,9 +289,12 @@
                 <!--form-stars-here-->
                 <div class="form-w3-agile">
                     <h2>ADD PRODUCT</h2>
+                    {{#if msg}}
+                        <p class="text-danger">{{{msg}}}</p>
+                    {{/if}}
                     <form action="#" method="post">
                         <div class="form-sub-w3">
-                            <input type="text" name="Title" placeholder="Title " required="" />
+                            <input type="text" name="title" placeholder="title " required="" />
 
                         </div>
                         <div class="form-sub-w3">
@@ -299,20 +302,17 @@
 
                         </div>
                         <div class="form-sub-w3">
-                            <input type="text" name="Desk" placeholder="Desk " required="" />
-
-                        </div>
-                        <div class="form-sub-w3">
-                            <input type="file" name="Ảnh" placeholder="image " required="" />
+                            <input type="text" name="desc" placeholder="desc" required="" />
 
                         </div>
 
-                        <div class="form-sub-w3">
-                            <input type="text" name="categories" placeholder="categories " required="" />
 
-                        </div>
+<!--                        <div class="form-sub-w3">-->
+<!--                            <input type="text" name="categories" placeholder="categories " required="" />-->
+
+<!--                        </div>-->
                         <div class="form-sub-w3">
-                            <input type="text" name="size" placeholder="size " required="" />
+                            <input type="text" name="sizes" placeholder="sizes " required="" />
 
                         </div>
 
@@ -321,10 +321,13 @@
 
                         </div>
                         <div class="form-sub-w3">
-                            <input type="text" name="stock    " placeholder="stock" required="" />
+                            <input type="text" name="stock" placeholder="stock" required="" />
 
                         </div>
+                        <div class="form-sub-w3">
+                            <input type="file" name="img" placeholder="img " required="" />
 
+                        </div>
                         <div class="clear"></div>
                         <div class="submit-w3l">
                             <input type="submit" value="ADD">

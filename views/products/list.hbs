@@ -16,28 +16,36 @@
             <thead>
             <tr>
                 <!--                <th>ID</th>-->
-                <th>Tên</th>
-                <th>Giá</th>
-                <th>Mô tả</th>
-                <th>Loại</th>
-                <th>Ảnh</th>
+                <th>title</th>
+                <th>price</th>
+                <th>desc</th>
+                <th>Image</th>
+                <th>category</th>
+                <th>size</th>
+                <th>color</th>
+                <th>stock</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            {{#each listProduct}}
+                {{#each listProduct}}
                 <tr>
-                    <!--                    <td scope="row">{{this. }}</td>-->
-                    <td scope="row">{{this.}}</td>
-                    <td>{{this.giasanpham}}</td>
-                    <td>{{this.mota}}</td>
-                    <td>{{this.loai}}</td>
-                    <td><img src="{{this.anhsanpham}}" width="100px" style="vertical-align: center"></td>
+                    <td scope="row">{{this.title}}</td>
+                    <td>{{this.price}}</td>
+                    <td>{{this.desc}}</td>
+                    <td>{{this.img}}</td>
+                    <td>{{this.category}}</td>
+                    <td>{{this.sizes}}</td>
+                    <td>{{this.color}}</td>
+                    <td>{{this.stock}}</td>
+<!--                    <td><img src="" width="100px" style="vertical-align: center"></td>-->
                     <td>
-                        <a href="/products/edit/{{this._id}}" class="btn btn-primary" id="btnAction">Edit</a>
-                        <a href="/products/delete/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')" id="btnAction" class="btn btn-danger">Del</a>
+                        <a href="/products/edit/" class="btn btn-primary" id="btnAction">Edit</a>
+                        <a href="/products/delete/" onclick="return confirm('Bạn có muốn xóa không?')" id="btnAction" class="btn btn-danger">Del</a>
                     </td>
                 </tr>
+
+
             {{/each}}
             </tbody>
         </table>
