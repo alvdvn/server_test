@@ -1,0 +1,34 @@
+<div class="datalist">
+    <div class="col-12" id="headerlist">
+        <div class="btnaddbanner">
+            <a href="/banners/add" class="btn btn-primary">Thêm</a>
+        </div>
+    </div>
+    <div class="tables">
+        <h3>Danh sách</h3>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Mô tả</th>
+                <th>Ảnh</th>
+                <th>Hành động</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each itemList}}
+                <tr>
+                    <td scope="row">{{this._id}}</td>
+                    <td scope="row">{{this.description}}</td>
+                    <td><img src="{{this.anh}}" width="100px" style="vertical-align: center"></td>
+                    <td>
+                        <a href="/banners/edit/{{this._id}}" class="btn btn-primary" id="btnAction">Sửa</a>
+                        <a href="/banners/delete/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')"
+                           id="btnAction" class="btn btn-danger">Xóa</a>
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

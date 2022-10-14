@@ -1,4 +1,4 @@
-const  productModel = require('../models/model.Product');
+const  productModel = require('../models/product.model');
 // const  bcrypt = require('bcrypt');
 const fs = require('fs')
 const Console = require("console");
