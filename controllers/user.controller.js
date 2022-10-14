@@ -1,6 +1,7 @@
 const UserModel = require('../models/user.model');
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
+const fs = require('fs');
 //hien thi danh sach User
 exports.getListUSer=(req,res,next)=>{
     res.render('./User/list-User');
@@ -14,7 +15,21 @@ exports.GetFormAddUser=(req,res,next)=>{
 }
 //xu li them vao csdl
 exports.postAddUser= (req,res,next)=>{
-    console.log(req.body);
+
+    try {
+        fs.rename(req.file.destination + req.file.filename,
+            './public/uploads/' + req.file.originalname,
+            function (err){
+                if(err){
+                    console.log(err)
+                }
+            }
+        )
+    }catch (err){
+        return res.render('./users/add',{msg:"Vui lòng thêm ảnh"})
+    }
+    const filename = 'http://localhost:3000/uploads/'+req.file.originalname;
+
  const newUser = new UserModel({
      email:req.body.user_email,
      password:CryptoJS.AES.encrypt(
@@ -25,7 +40,7 @@ exports.postAddUser= (req,res,next)=>{
      address:req.body.user_address,
      phone_number:Number(req.body.user_phone_number),
      role:req.body.role,
-     avatar:req.file.filename
+     avatar:filename
  });
  newUser.save(function (err){
      if (err){
@@ -35,5 +50,5 @@ exports.postAddUser= (req,res,next)=>{
      }
  })
 
-    res.redirect('/User/');
+    res.redirect('/users/add')
 }

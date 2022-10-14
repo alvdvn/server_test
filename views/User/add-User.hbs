@@ -1,24 +1,25 @@
-<h1>Add Book</h1>
-<form method="post" action="/add" enctype="multipart/form-data" >
-    <div className="mb-3">
-        <label htmlFor="inputEmail" className="form-label">Email</label>
-        <input type="text" className="form-control" name="user_email">
+
+<form class="adddata" method="post" action="" enctype="multipart/form-data" >
+    <h1>Add User</h1>
+    <div class="mb-3">
+        <label htmlFor="inputEmail" class="form-label">Email</label>
+        <input type="text" class="form-control" name="user_email">
     </div>
     <div className="mb-3">
-        <label htmlFor="input_password" className="form-label">Password</label>
-        <input type="text" className="form-control" name="user_password">
+        <label htmlFor="input_password" class="form-label">Password</label>
+        <input type="text" class="form-control" name="user_password">
     </div>
-    <div className="mb-3">
-        <label htmlFor="input_full_name" className="form-label">Full name</label>
-        <input type="text" className="form-control" name="user_full_name">
+    <div class="mb-3">
+        <label htmlFor="input_full_name" class="form-label">Full name</label>
+        <input type="text" class="form-control" name="user_full_name">
     </div>
-    <div className="mb-3">
-        <label htmlFor="input_phone_number" className="form-label">phone_number</label>
-        <input type="Number" className="form-control" name="user_phone_number" rows="4">
+    <div class="mb-3">
+        <label htmlFor="input_phone_number" class="form-label">phone_number</label>
+        <input type="Number" class="form-control" name="user_phone_number" rows="4">
     </div>
-    <div className="mb-3">
-        <label htmlFor="input_phone_number" className="form-label">address</label>
-        <input type="Number" className="form-control" name="user_address" rows="4">
+    <div class="mb-3">
+        <label htmlFor="input_phone_number" class="form-label">address</label>
+        <input type="text" class="form-control" name="user_address" rows="4">
     </div>
     <div class="form-check">
         <input class="form-check-input" type="radio" name="role" value="Admin" id="flexRadioDefault1">
@@ -39,10 +40,10 @@
         </label>
     </div>
     <div class="mb-3">
-        <label for="image" class="form-label">CHon Hinh</label>
+        <label for="image" class="form-label">chọn File</label>
         <input type="file" name="avatar" class="form-control form-control-lg">
     </div>
-    <button type="submit" className="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
 
 
 </form>
