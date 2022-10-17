@@ -2,6 +2,7 @@ const  productModel = require('../models/product.model');
 // const  bcrypt = require('bcrypt');
 const fs = require('fs')
 const Console = require("console");
+const bannerModel = require("../models/banner.model");
 exports.getListProduct = async (req,res,next)=>{
     const listProduct = await productModel.find().exec();
     res.render('./products/list',{listProduct:listProduct});
@@ -12,33 +13,33 @@ exports.getFormAddPro = (req,res,next)=>{
 }
 exports.postAddPro = async (req,res,next ) => {
     console.log(req.body);
+    console.log(req.file)
 
-    if (req.body.title.length == 0 && req.body.price.length == 0
-        && req.body.desc.length == 0 && req.body.sizes.length==0.
-        && req.body.color.length== 0 && req.body.stock.length == 0) {
-        return res.render('./products/add', {msg: "Vui lòng nhập đủ thông tin trước khi thêm "})
-
+    try {
+        fs.rename(req.file.destination + req.file.filename,
+            './public/uploads/' + req.file.originalname,
+            function (err){
+                if(err){
+                    console.log(err)
+                }
+            }
+        )
+    }catch (err){
+        return res.render('./products/add',{msg:"Vui lòng thêm ảnh"})
     }
-    // try {
-    //     fs.rename(req.file.destination + req.file.filename,
-    //         './public/uploads/') + req.file.originalname,
-    //         function (err) {
-    //             if (err)
-    //             console.log(err);
-    //         }
-    // } catch (err) {
-    //     return  res.render('./products/add',{msg: "Vui long them anh "})
-    // }
-    // const filename = req.body.file.originalname;
+    const filename = 'http://localhost:3000/uploads/'+req.file.originalname;
+
     const product = new productModel({
         title : req.body.title,
-        price :  req.body.price,
+        price : req.body.price,
         desc  : req.body.desc,
-        size  : req.body.size,
+        sizes  : req.body.sizes,
         color : req.body.color,
         stock : req.body.stock,
-        img :   req.body.img
+        img   :   filename
     });
+
+
     await  product.save((err) =>{
         if(err){
             console.log("loi add")
@@ -46,5 +47,69 @@ exports.postAddPro = async (req,res,next ) => {
             console.log("success")
         }
     })
-    res.redirect('/pro/add');
+    res.redirect('/pro/list');
+}
+exports.getFormEditPro = async (req,res,next) =>{
+    // console.log(req.params);
+    let  itemPro = await  productModel.findById(req.params.id)
+        .exec()
+        .catch(function (err){
+           console.log(err)
+        });
+
+    if(itemPro==null){
+        res.send('khong tim thay')
+    }
+
+    res.render('./products/editpro',{itemPro:itemPro})
+
+}
+exports.postEditPro = async (req,res,next) => {
+    console.log(req.params);
+
+    let dieu_kien ={
+        _id : req.params.id // lay id tren thanh dia chi
+    }
+    let  itemPro = await  productModel.findById(req.params.id)
+        .exec()
+        .catch(function (err){
+            console.log(err)
+        });
+    var filename = itemPro.img;
+    if(req.file.filename != null){
+        try {
+            fs.rename(req.file.destination + req.file.filename,
+                './public/uploads/' + req.file.originalname,
+                function (err){
+                    if(err){
+                        console.log(err)
+                    }
+                }
+            )
+        }catch (err){
+            return res.render('./products/edit',{msg:"Vui lòng thêm ảnh"})
+        }
+        const filename = 'http://localhost:3000/uploads/'+req.file.originalname;
+
+    }
+
+    let du_lieu = {
+        title : req.body.title,
+        price : req.body.price,
+        desc  : req.body.desc,
+        sizes  : req.body.sizes,
+        color : req.body.color,
+        stock : req.body.stock,
+        img   :   filename
+    }
+
+    //goi lenh update
+    productModel.updateOne(dieu_kien,du_lieu,function (err,res){
+        if (err)
+        {
+            console.log("Loi update"+err.message,{msg:'Lỗi update'})
+        }
+    })
+
+    res.redirect('/pro/list');
 }
