@@ -2,6 +2,8 @@ const UserModel = require('../models/user.model');
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 const fs = require('fs');
+const {raw} = require("body-parser");
+const bannerModel = require("../models/banner.model");
 //hien thi danh sach User
 exports.getListUSer=async(req,res,next)=>{
     var listUser = await UserModel.find();
@@ -105,3 +107,18 @@ exports.getPostEditUser=(req,res,next)=>{
     })
     res.redirect('/users/add');
 }
+//xu li delete
+exports.getFormDelete = async (req,res,next)=>{
+    let dieu_kien ={
+        _id : req.params.id // lay id tren thanh dia chi
+    }
+    //goi lenh update
+    UserModel.deleteOne(dieu_kien,function (err,res){
+        if (err)
+        {
+            console.log("Loi del"+err.message,{msg:'Lỗi del'})
+        }
+    })
+    res.redirect('/users/');
+}
+

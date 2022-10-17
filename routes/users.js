@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var usercontroller =require('../controllers/user.controller');
 var multer = require('multer');
+const bannerC = require("../controllers/banner.controller");
 const upload = multer({dest:'./tmp/'})
 
 
@@ -15,6 +16,8 @@ router.post('/add' ,upload.single('avatar'),usercontroller.postAddUser);
 router.get('/edit/:id' ,usercontroller.getFormEditUser);
 //edit post
 router.post('/edit/:id',upload.single('avatar') ,usercontroller.getPostEditUser);
+//delete get
+router.get('/delete/:id', usercontroller.getFormDelete);
 
 
 
