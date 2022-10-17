@@ -2,7 +2,7 @@ const  productModel = require('../models/product.model');
 // const  bcrypt = require('bcrypt');
 const fs = require('fs')
 const Console = require("console");
-const bannerModel = require("../models/banner.model");
+
 exports.getListProduct = async (req,res,next)=>{
     const listProduct = await productModel.find().exec();
     res.render('./products/list',{listProduct:listProduct});
@@ -112,4 +112,21 @@ exports.postEditPro = async (req,res,next) => {
     })
 
     res.redirect('/pro/list');
+}
+exports.postDelPro = async (req,res,next) =>{
+
+    console.log(req.params.id)
+    let dieu_kien ={
+        _id : req.params.id
+    }
+
+
+    productModel.deleteOne(dieu_kien,function (err,res){
+        if (err)
+        {
+            console.log("Loi del"+err.message,{msg:'Lỗi del'});
+        }
+    });
+    res.redirect('/pro/list');
+
 }
