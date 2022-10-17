@@ -33,9 +33,7 @@
                 <td>{{this.address}}</td>
                 <td>{{this.phone_number}}</td>
                 <td>{{this.role}}</td>
-                <td><img src="{{this.avatar}}" width="100px" style="vertical-align: center"></td>
-
-                <!--                    <td><img src="" width="100px" style="vertical-align: center"></td>-->
+                <td><img src="{{this.avatar}}" style="width: 50px;height: 50px;align-items: center"></td>
                 <td>
                     <a href="/users/edit/{{this._id}}" class="btn btn-primary" id="btnAction">Edit</a>
                     <a href="/users/delete/{{this._id}}" onClick="return confirm('Bạn có muốn xóa không?')" id="btnAction"

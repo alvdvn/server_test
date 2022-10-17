@@ -5,7 +5,6 @@ const fs = require('fs');
 //hien thi danh sach User
 exports.getListUSer=async(req,res,next)=>{
     var listUser = await UserModel.find();
-    console.log(listUser)
     res.render('./User/list-User',{listUser:listUser});
 }
 exports.getFormLogin =  (req,res,next)=>{
@@ -17,7 +16,6 @@ exports.GetFormAddUser=(req,res,next)=>{
 }
 //xu li them vao csdl
 exports.postAddUser= (req,res,next)=>{
-
     try {
         fs.rename(req.file.destination + req.file.filename,
             './public/uploads/' + req.file.originalname,
