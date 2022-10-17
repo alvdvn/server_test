@@ -9,9 +9,9 @@ var dotenv =require('dotenv');
 dotenv.config();
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var proRouter = require('./routes/product')
-var bannerRouter = require('./routes/banner')
-
+var proRouter = require('./routes/product');
+var bannerRouter = require('./routes/banner');
+var cateRouter =require('./routes/cate');
 var app = express();
 //ket noi voi database
 mongoose
@@ -31,9 +31,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/pro',proRouter)
-app.use('/banners',bannerRouter)
-
+app.use('/pro',proRouter);
+app.use('/banners',bannerRouter);
+app.use('/cate',cateRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
