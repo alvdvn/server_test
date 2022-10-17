@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/list',ProC.getListProduct);
 router.get('/add',ProC.getFormAddPro);
-router.post('/add',upload.single("img"), ProC.postAddPro)
+router.post('/add',upload.single("img"), ProC.postAddPro);
 router.get('/edit/:id',ProC.getFormEditPro);
 router.post('/edit/:id',ProC.postEditPro);
 router.get('/del/:id',ProC.postDelPro);
