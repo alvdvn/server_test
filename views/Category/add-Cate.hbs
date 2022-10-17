@@ -1,0 +1,20 @@
+
+<div class="adddata">
+    <h3>Thêm loại</h3>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {{#if msg}}
+            <p class="text-danger">{{{msg}}}</p>
+        {{/if}}
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Title</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="title">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Ảnh</label>
+            <input type="file" class="form-control2" id="exampleFormControlInput1" name="CateImg">
+        </div>
+        <br>
+        <Button type="submit" class="btn btn-primary">Thêm</Button>
+    </form>
+
+</div>

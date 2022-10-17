@@ -1,9 +1,6 @@
 const UserModel = require('../models/user.model');
 const CryptoJS = require("crypto-js");
-const jwt = require("jsonwebtoken");
 const fs = require('fs');
-const {raw} = require("body-parser");
-const bannerModel = require("../models/banner.model");
 //hien thi danh sach User
 exports.getListUSer=async(req,res,next)=>{
     var listUser = await UserModel.find();
@@ -66,8 +63,7 @@ exports.getFormEditUser=async (req,res,next)=>{
     res.render('./User/update-User',{UserData:UserData});
 }
 exports.getPostEditUser=(req,res,next)=>{
-    console.log(req.file)
-    console.log(req.params);
+
     let condition ={
         _id : req.params.id // lay id tren thanh dia chi
     }

@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var usercontroller =require('../controllers/user.controller');
 var multer = require('multer');
-const bannerC = require("../controllers/banner.controller");
 const upload = multer({dest:'./tmp/'})
 
 
