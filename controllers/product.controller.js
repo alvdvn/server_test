@@ -22,38 +22,38 @@ exports.getFormAddPro = async (req,res,next)=>{
 exports.postAddPro = async (req,res,next ) => {
     console.log(req.body);
     console.log(req.file.filename)
-    let storage = multer.diskStorage({
-        destination: (req,file,callback) =>{
-            callback(null,path.join('./uploads'));
-        },
-        filename: (req,file,callback) =>{
-            let math = ["image/png","image/jpeg"];
-            if(math.indexOf(file.mimetype)===-1){
-                let  mss = ' vui long upload file png hoac jpeg'
-                return callback(mss,null)
-            }
-            let filename = 'http://localhost:3000/uploads/' + req.file.originalname;
-            callback(null,filename);
-        }
-
-    });
-    let listImage = multer({storage:storage}).array('img',5);
+    // let storage = multer.diskStorage({
+    //     destination: (req,file,callback) =>{
+    //         callback(null,path.join('./uploads'));
+    //     },
+    //     filename: (req,file,callback) =>{
+    //         let math = ["image/png","image/jpeg"];
+    //         if(math.indexOf(file.mimetype)===-1){
+    //             let  mss = ' vui long upload file png hoac jpeg'
+    //             return callback(mss,null)
+    //         }
+    //         let filename = 'http://localhost:3000/uploads/' + req.file.originalname;
+    //         callback(null,filename);
+    //     }
+    //
+    // });
+    // let listImage = multer({storage:storage}).array('img',5);
     // let multipleUploadMiddleware = util.promisify(uploadManyFiles);
     // module.exports = multipleUploadMiddleware;
     //
-    // try {
-    //     fs.rename(req.file.destination + req.file.filename,
-    //         './public/uploads/' + req.file.originalname,
-    //         function (err){
-    //             if(err){
-    //                 console.log(err)
-    //             }
-    //         }
-    //     )
-    // }catch (err){
-    //     return res.render('./products/add',{msg:"Vui lòng thêm ảnh"})
-    // }
-    // const filename = 'http://localhost:3000/uploads/'+req.file.originalname;
+    try {
+        fs.rename(req.file.destination + req.file.filename,
+            './public/uploads/' + req.file.originalname,
+            function (err){
+                if(err){
+                    console.log(err)
+                }
+            }
+        )
+    }catch (err){
+        return res.render('./products/add',{msg:"Vui lòng thêm ảnh"})
+    }
+    const filename = 'http://localhost:3000/uploads/'+req.file.originalname;
     // const  sel = req.body.form("select").value;
     // const  listImg = new Array(filename);
 
@@ -70,7 +70,7 @@ exports.postAddPro = async (req,res,next ) => {
         sizes  : req.body.sizes,
         color : req.body.color,
         stock : req.body.stock,
-        img   :   listImage
+        img   :   filename
     });
 
 
