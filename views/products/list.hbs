@@ -1,34 +1,27 @@
-<style>
-    tr{
-        border: 1px solid black;
-    }
-    th{
-        border: 1px solid black;
-    }
-</style>
 <div class="datalist">
     <div class="col-12" id="headerlist">
-
+        <div class="btnaddbanner">
+            <a href="/banners/add" class="btn btn-primary">Thêm</a>
+        </div>
     </div>
-    <div class="tables" style="background: #ffffff; border: 2px solid black;">
+    <div class="tables">
         <h3>Danh sách</h3>
-        <table class="table table-bordered" >
+        <table class="table table-bordered">
             <thead>
             <tr>
-                <!--                <th>ID</th>-->
-                <th>title</th>
-                <th>price</th>
-                <th>desc</th>
-                <th>Image</th>
-                <th>category</th>
-                <th>size</th>
-                <th>color</th>
-                <th>stock</th>
-                <th>Action</th>
+                <th>Tên sản phẩm</th>
+                <th>Giá</th>
+                <th>Mô tả</th>
+                <th>Ảnh sản phẩm</th>
+                <th>Loại</th>
+                <th>Size</th>
+                <th>Màu</th>
+                <th>Còn lại</th>
+                <th>Hành động</th>
             </tr>
             </thead>
             <tbody>
-                {{#each listProduct}}
+            {{#each listProduct}}
                 <tr>
                     <td scope="row">{{this.title}}</td>
                     <td>{{this.price}}</td>
@@ -38,18 +31,16 @@
                     <td>{{this.sizes}}</td>
                     <td>{{this.color}}</td>
                     <td>{{this.stock}}</td>
-<!--                    <td><img src="" width="100px" style="vertical-align: center"></td>-->
-
+                    <!--                    <td><img src="" width="100px" style="vertical-align: center"></td>-->
                     <td>
-                        <a href="/pro/edit/{{this._id}}" class="btn btn-primary" id="btnAction">Edit</a>
-                        <a href="/pro/delete/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')" id="btnAction" class="btn btn-danger">Del</a>
+                        <a href="/pro/edit/{{this._id}}" class="btn btn-primary" id="btnAction">Sửa</a>
+                        <a href="/pro/delete/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')" id="btnAction" class="btn btn-danger">Xóa</a>
                     </td>
                     </td>
                 </tr>
-
-
             {{/each}}
             </tbody>
         </table>
     </div>
 </div>
+
