@@ -12,6 +12,8 @@ var usersRouter = require('./routes/users');
 var proRouter = require('./routes/product')
 var bannerRouter = require('./routes/banner');
 var apiBannerRouter = require('./routes/api.banner');
+var categoryRouter = require('./routes/cate');
+
 
 
 var app = express();
@@ -33,9 +35,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/pro',proRouter);
+app.use('/products',proRouter);
 app.use('/banners',bannerRouter);
 app.use('/api/banners',apiBannerRouter);
+app.use('/categorys',categoryRouter);
 
 
 
