@@ -1,39 +1,49 @@
+<style>
+    tr{
+    border: 1px solid black;
+}
+    th{
+    border: 1px solid black;
+}
+</style>
 <div class="datalist">
     <div class="col-12" id="headerlist">
-        <div class="btnaddusers">
-            <a href="/users/add" class="btn btn-primary">Thêm</a>
-        </div>
+
     </div>
-    <div class="tables">
+    <div class="tables" style="background: #ffffff; border: 2px solid black;">
         <h3>Danh sách</h3>
         <table class="table table-bordered">
             <thead>
             <tr>
+                <!--                <th>ID</th>-->
                 <th>email</th>
-                <th>full name</th>
+                <th>full_name</th>
                 <th>address</th>
-                <th>phone number</th>
+                <th>phone_number</th>
                 <th>role</th>
                 <th>avatar</th>
+
             </tr>
             </thead>
             <tbody>
             {{#each listUser}}
-                <tr>
-                    <td scope="row">{{this.email}}</td>
-                    <td scope="row">{{this.full_name}}</td>
-                    <td scope="row">{{this.address}}</td>
-                    <td scope="row">{{this.phone_number}}</td>
-                    <td scope="row">{{this.role}}</td>
-                    <td><img src="{{this.avatar}}" style="width: 50px;height: 50px;align-items: center"></td>
-                    <td>
-                        <a href="/users/edit/{{this._id}}" class="btn btn-primary" id="btnAction">Sửa</a>
-                        <a href="/users/delete/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')"
-                           id="btnAction" class="btn btn-danger">Xóa</a>
-                    </td>
-                </tr>
+            <tr>
+                <td scope="row">{{this.email}}</td>
+                <td>{{this.full_name}}</td>
+                <td>{{this.address}}</td>
+                <td>{{this.phone_number}}</td>
+                <td>{{this.role}}</td>
+                <td><img src="{{this.avatar}}" style="width: 50px;height: 50px;align-items: center"></td>
+                <td>
+                    <a href="/users/edit/{{this._id}}" class="btn btn-primary" id="btnAction">Edit</a>
+                    <a href="/users/delete/{{this._id}}" onClick="return confirm('Bạn có muốn xóa không?')" id="btnAction"
+                       class="btn btn-danger">Del</a>
+                </td>
+            </tr>
+
+
             {{/each}}
-            </tbody>
-        </table>
-    </div>
-</div>
+                </tbody>
+                </table>
+                </div>
+                </div>
