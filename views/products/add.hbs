@@ -281,7 +281,7 @@
 <!--color: { type: String },-->
 <!--stock: { type: Number ,required:true },-->
 
-<div class="container demo-1" >
+<div class="container demo-1"  style="color: #ffffff    ">
     <div class="content">
         <div id="large-header" >
 
@@ -292,7 +292,7 @@
                     {{#if msg}}
                         <p class="text-danger">{{{msg}}}</p>
                     {{/if}}
-                    <form action="#" method="post" enctype="multipart/form-data">
+                    <form action="#" id="uploadForm" method="post" enctype="multipart/form-data">
                         <div class="form-sub-w3">
                             <input type="text" name="title" placeholder="title " required="" />
 
@@ -306,14 +306,31 @@
 
                         </div>
 
-
-
                         <div class="form-sub-w3">
-                            <input type="text" name="sizes" placeholder="sizes " required="" />
+
+                            <select class="form-control form-control-sm" id="select_category" Name="cate"style="width: 250px; height: 50px;" onchange="select();">
+                                <option > chọn category </option>
+                                {{#each listCate}}
+
+                                    <option value="{{this.title}}"> {{this.title}}  </option>
+                                {{/each}}
+                            </select>
 
                         </div>
+                        <div>
+                            <select class="form-control form-control-sm" id="select_size"  size="{{sizeLength}}" Name="sizes"style="width: 250px;" onchange="select();" multiple>
+                                {{#each listSize}}
 
-                        <div class="form-sub-w3">
+                                    <option value="{{this}}"> {{this}}  </option>
+                                {{/each}}
+                            </select>
+                        </div>
+<!--                        <div class="form-sub-w3">-->
+<!--                            <input type="text" name="sizes" placeholder="sizes " required="" />-->
+
+<!--                        </div>-->
+
+                        <div class="form-sub-w3" style="margin-top: 20px">
                             <input type="text" name="color" placeholder="color" required="" />
 
                         </div>
@@ -322,12 +339,12 @@
 
                         </div>
                         <div class="form-sub-w3">
-                            <input type="file" name="img" placeholder="img " required="" />
-
+                            <input type="file" name="img" placeholder="img " required=""  multiple/>
+                            <span id = "status"></span>
                         </div>
                         <div class="clear"></div>
                         <div class="submit-w3l">
-                            <input type="submit" value="ADD">
+                            <input type="submit" id="submit" value="ADD">
                         </div>
                     </form>
                     <div class="social w3layouts">
@@ -342,3 +359,35 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        // Multiple images preview in browser - trungquandev.com
+        let imagesPreview = function(input, placeToInsertImagePreview) {
+            if (input.files) {
+                let filesAmount = input.files.length;
+                for (i = 0; i < filesAmount; i++) {
+                    let reader = new FileReader();
+                    reader.onload = function(event) {
+                        $($.parseHTML("<img>")).attr("src", event.target.result).appendTo(placeToInsertImagePreview);
+                    }
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+        };
+        $("#input-many-files").on("change", function() {
+            imagesPreview(this, "div.preview-images");
+        });
+    });
+ // function select() {
+ //     // let element   = $('#select_category').val();
+ //     // let value = request.form("cate").toString();
+ //     // console.log(element);
+ //     const anh_manga = document.querySelector('#select_category');
+ //     const reader = new select();
+ //     reader.addEventListener("load", function () {
+ //
+ //         preview.src = reader.result;
+ //         anh_manga.value = reader.result;
+ //     }, false);
+ // }
+</script>

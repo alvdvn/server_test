@@ -1,0 +1,19 @@
+<div class="adddata">
+    <h4>Cập nhật trạng thái</h4>
+    <br>
+
+    <form method="post">
+        <div>
+            <span class="form-label">Loại : </span>
+            <select class="form-select" aria-label="Default select example" name="trangthai" autofocus>
+                <option value="{{itemOrder.status}}" selected >{{itemOrder.status}}</option>
+                <option value="Đang chờ xử lý">Đang chờ xử lý</option>
+                <option value="Đang giao hàng">Đang giao hàng</option>
+                <option value="Đã giao hàng">Đã giao hàng</option>
+            </select>
+            <br>
+            <br>
+        </div>
+        <Button type="submit" class="btn btn-primary">Cập nhật</Button>
+    </form>
+</div>
