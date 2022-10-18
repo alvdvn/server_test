@@ -1,5 +1,5 @@
 const UserModel = require('../models/user.model');
-const CryptoJS = require("crypto-js");
+const bcrypt = require("bcrypt");
 const fs = require('fs');
 //hien thi danh sach User
 exports.getListUSer=async(req,res,next)=>{
@@ -14,7 +14,8 @@ exports.GetFormAddUser=(req,res,next)=>{
     res.render('./User/add-User');
 }
 //xu li them vao csdl
-exports.postAddUser= (req,res,next)=>{
+exports.postAddUser= async (req,res,next)=>{
+    const salt = await bcrypt.genSalt(10);
     try {
         fs.rename(req.file.destination + req.file.filename,
             './public/uploads/' + req.file.originalname,
@@ -31,17 +32,14 @@ exports.postAddUser= (req,res,next)=>{
 
  const newUser = new UserModel({
      email:req.body.user_email,
-     password:CryptoJS.AES.encrypt(
-         req.body.user_password,
-         process.env.PASS_SEC
-     ).toString(),
+     password: await bcrypt.hash(req.body.user_password,salt),
      full_name:req.body.user_full_name,
      address:req.body.user_address,
      phone_number:Number(req.body.user_phone_number),
      role:req.body.role,
      avatar:filename
  });
- newUser.save(function (err){
+ await newUser.save(function (err){
      if (err){
          console.log(err);
      }else {

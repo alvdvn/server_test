@@ -282,13 +282,13 @@
                     <h2>login Now</h2>
                     <form action="#" method="post">
                         <div class="form-sub-w3">
-                            <input type="text" name="Username" placeholder="Username " required="" />
+                            <input type="email" name="email" placeholder="email" required="" />
                             <div class="icon-w3">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                             </div>
                         </div>
                         <div class="form-sub-w3">
-                            <input type="password" name="Password" placeholder="Password" required="" />
+                            <input type="password" name="password" placeholder="Password" required="" />
                             <div class="icon-w3">
                                 <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                             </div>
@@ -296,6 +296,9 @@
                         <p class="p-bottom-w3ls">Forgot Password?<a class href="#">  Click here</a></p>
                         <p class="p-bottom-w3ls1">New User?<a class href="#">  Register here</a></p>
                         <div class="clear"></div>
+                        {{#if msg}}
+                            <p class="text-danger">{{{msg}}}</p>
+                        {{/if}}
                         <div class="submit-w3l">
                             <input type="submit" value="Login">
                         </div>
