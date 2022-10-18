@@ -6,12 +6,22 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose =require('mongoose');
 var dotenv =require('dotenv');
+var session = require('express-session');
 dotenv.config();
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var proRouter = require('./routes/product');
+var proRouter = require('./routes/product')
 var bannerRouter = require('./routes/banner');
-var cateRouter =require('./routes/cate');
+var apiBannerRouter = require('./routes/api.banner');
+var categoryRouter = require('./routes/cate');
+var apiCategoryRouter = require('./routes/api.categorys');
+var apiProductRouter = require('./routes/api.product');
+
+
+
+
+
 var app = express();
 //ket noi voi database
 mongoose
@@ -28,12 +38,24 @@ app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret:'fksdfn24235bdInfsdHSNF9999',
+  resave:true,
+  saveUninitialized:true,
+}))
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/pro',proRouter);
+app.use('/products',proRouter);
 app.use('/banners',bannerRouter);
-app.use('/cate',cateRouter);
+app.use('/api/banners',apiBannerRouter);
+app.use('/categorys',categoryRouter);
+app.use('/api/categorys',apiCategoryRouter);
+app.use('/api/products',apiProductRouter);
+
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
