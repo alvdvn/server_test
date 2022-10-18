@@ -13,6 +13,10 @@ var proRouter = require('./routes/product')
 var bannerRouter = require('./routes/banner');
 var apiBannerRouter = require('./routes/api.banner');
 var categoryRouter = require('./routes/cate');
+var apiCategoryRouter = require('./routes/api.categorys');
+var apiProductRouter = require('./routes/api.product');
+
+
 
 
 
@@ -39,6 +43,10 @@ app.use('/products',proRouter);
 app.use('/banners',bannerRouter);
 app.use('/api/banners',apiBannerRouter);
 app.use('/categorys',categoryRouter);
+app.use('/api/categorys',apiCategoryRouter);
+app.use('/api/products',apiProductRouter);
+
+
 
 
 
