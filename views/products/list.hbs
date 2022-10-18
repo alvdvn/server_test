@@ -33,15 +33,17 @@
                     <td scope="row">{{this.title}}</td>
                     <td>{{this.price}}</td>
                     <td>{{this.desc}}</td>
-                    <td>{{this.img}}</td>
+                    <td><img src="{{this.img}}" style="width: 50px;height: 50px;align-items: center"></td>
                     <td>{{this.category}}</td>
                     <td>{{this.sizes}}</td>
                     <td>{{this.color}}</td>
                     <td>{{this.stock}}</td>
 <!--                    <td><img src="" width="100px" style="vertical-align: center"></td>-->
+
                     <td>
-                        <a href="/products/edit/" class="btn btn-primary" id="btnAction">Edit</a>
-                        <a href="/products/delete/" onclick="return confirm('Bạn có muốn xóa không?')" id="btnAction" class="btn btn-danger">Del</a>
+                        <a href="/pro/edit/{{this._id}}" class="btn btn-primary" id="btnAction">Edit</a>
+                        <a href="/pro/delete/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')" id="btnAction" class="btn btn-danger">Del</a>
+                    </td>
                     </td>
                 </tr>
 

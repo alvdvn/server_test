@@ -6,12 +6,12 @@
             <p class="text-danger">{{{msg}}}</p>
         {{/if}}
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Mô tả</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" name="description">
+            <label for="exampleFormControlInput1" class="form-label">Title</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" value={{CateData.title}} name="title">
         </div>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Ảnh</label>
-            <input type="file" class="form-control2" id="exampleFormControlInput1" name="anhbanner">
+            <input type="file" class="form-control2" id="exampleFormControlInput1" name="CateImg">
         </div>
         <br>
         <Button type="submit" class="btn btn-primary">Thêm</Button>
