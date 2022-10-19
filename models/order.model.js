@@ -14,7 +14,7 @@ const OrderSchema = new mongoose.Schema(
                 productId: {
                     type: String,
                 },
-                quantity: {
+                    quantity: {
                     type: Number,
                     default: 1,
                 },
@@ -29,7 +29,6 @@ const OrderSchema = new mongoose.Schema(
             type: Number,
             require: true,
         },
-
         status: { type: String, default: "pending" },
     },
     { timestamps: true }
