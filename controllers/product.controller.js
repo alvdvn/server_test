@@ -41,6 +41,29 @@ exports.postAddPro = async (req,res,next ) => {
     // let multipleUploadMiddleware = util.promisify(uploadManyFiles);
     // module.exports = multipleUploadMiddleware;
     //
+    // try {
+    //     fs.rename(req.file.destination + req.file.filename,
+    //         './public/uploads/' + req.file.originalname,
+    //         function (err){
+    //             if(err){
+    //                 console.log(err)
+    //             }
+    //         }
+    //     )
+    // }catch (err){
+    //     return res.render('./products/add',{msg:"Vui lòng thêm ảnh"})
+    // }
+    // const filename = 'http://localhost:3000/uploads/'+req.file.originalname;
+    // const  sel = req.body.form("select").value;
+    // const  listImg = new Array(filename);
+
+    // for (var i=0;i<listImg.size;i++){
+    //     listImg[i] ='http://localhost:3000/uploads/'+listImg[i];
+    // }
+    // var listimg = new Array();
+    // listimg.push(req.file)
+    // var listfirename = new Array();
+
     try {
         fs.rename(req.file.destination + req.file.filename,
             './public/uploads/' + req.file.originalname,
@@ -53,13 +76,8 @@ exports.postAddPro = async (req,res,next ) => {
     }catch (err){
         return res.render('./products/add',{msg:"Vui lòng thêm ảnh"})
     }
-    const filename = 'http://localhost:3000/uploads/'+req.file.originalname;
-    // const  sel = req.body.form("select").value;
-    // const  listImg = new Array(filename);
-
-    // for (var i=0;i<listImg.size;i++){
-    //     listImg[i] ='http://localhost:3000/uploads/'+listImg[i];
-    // }
+        const filename = 'http://localhost:3000/uploads/'+req.file.originalname;
+        // listfirename.push(filename);
 
     console.log( req.body.cate);
     const product = new productModel({
