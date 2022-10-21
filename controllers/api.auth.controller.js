@@ -2,7 +2,7 @@ const UserModel = require('../models/user.model');
 const bcrypt =require('bcrypt');
 
 
-exports.postReg= async (req,res,next)=>{
+exports.postReg= async (req,res)=>{
     try {
         const salt = await bcrypt.genSalt(10);
         const userReg = new UserModel(req.body);
@@ -17,7 +17,7 @@ exports.postReg= async (req,res,next)=>{
         res.status(500).json(e);
     }
 }
-exports.postLogin= async(req,res,next)=>{
+exports.postLogin= async(req,res)=>{
     try {
         const user = await UserModel.findByCredentials(req.body.email,req.body.password)
         if (!user){
@@ -29,4 +29,8 @@ exports.postLogin= async(req,res,next)=>{
         console.log(error)
         res.status(400).send(error)
     }
+}
+exports.getProfile = (req,res,next)=>{
+    console.log(req.user)
+    res.send(req.user)
 }

@@ -10,7 +10,6 @@ const auth = async (req, res, next) => {
     }
     const token = req.header('Authorization').replace('Bearer','')
     const data = jwt.verify(token, chuoi_ky_tu_bi_mat)
-    console.log(data);
     try {
         const user = await User.findOne({_id: data.id,'tokens.token':token})
         if (!user){
