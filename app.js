@@ -13,10 +13,7 @@ var proRouter = require('./routes/product');
 var bannerRouter = require('./routes/banner');
 var cateRouter =require('./routes/cate');
 var apiAuthRouter =require('./routes/api.auth');
-var apiBannerRouter = require('./routes/api.banner');
-var apiCategoryRouter = require('./routes/api.categorys');
-var apiProductRouter = require('./routes/api.product');
-var apiBannerRouter = require('./routes/api.banner');
+var apiCategory = require('./routes/api.categorys');
 var app = express();
 //ket noi voi database
 mongoose
@@ -40,10 +37,7 @@ app.use('/pro',proRouter);
 app.use('/banners',bannerRouter);
 app.use('/cate',cateRouter);
 app.use('/api/auth',apiAuthRouter);
-app.use('/api/banners',apiBannerRouter);
-app.use('/api/categorys',apiCategoryRouter);
-app.use('/api/products',apiProductRouter);
-app.use('/api/banners',apiBannerRouter);
+app.use('/api/cate',apiCategory);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
