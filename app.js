@@ -16,7 +16,7 @@ var apiAuthRouter =require('./routes/api.auth');
 var apiBannerRouter = require('./routes/api.banner');
 var apiCategoryRouter = require('./routes/api.categorys');
 var apiProductRouter = require('./routes/api.product');
-var apiBannerRouter = require('./routes/api.banner');
+
 var app = express();
 //ket noi voi database
 mongoose
@@ -43,7 +43,6 @@ app.use('/api/auth',apiAuthRouter);
 app.use('/api/banners',apiBannerRouter);
 app.use('/api/categorys',apiCategoryRouter);
 app.use('/api/products',apiProductRouter);
-app.use('/api/banners',apiBannerRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
