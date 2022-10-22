@@ -47,6 +47,7 @@ exports.postAddUser= async (req,res,next)=>{
      }
  })
 
+
     res.redirect('/users/add')
 }
 //xu li lay form edit
