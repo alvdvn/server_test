@@ -4,7 +4,7 @@ exports.getApiProduct= async (req,res,next) =>{
     res.send(itemList)
 }
 exports.GetOne = async (req,res,next)=>{
-    let item = await  productModel.findById(req.body.idproduct)
+    let item = await  productModel.findById(req.params.id)
         .exec().catch(err=>{
             console.log(err)
         });
