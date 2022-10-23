@@ -4,8 +4,8 @@ const apiCartController = require('../controllers/api.cart.controller');
 var auth = require('../middleware/api.auth.middleware');
 
  router.post('/add',auth, apiCartController.postAddCart);
-// router.get('/list',auth, apiCartController.getCart);
-// router.delete('/delete', auth, apiCartController.postDel);
+ router.get('/list',auth, apiCartController.getAllCartByUserID);
+ router.delete('/delete', auth, apiCartController.DeleteCartItem);
 
 
 

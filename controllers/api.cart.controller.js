@@ -6,7 +6,7 @@ const user =req.user
     let cart = await CartModel.findOne({idUser:user._id})
     if (!cart){
         cart = new  CartModel({
-            idUser:user._id,
+            userId:user._id,
             products:[
                 {
                     productId:req.body.productId,
@@ -44,4 +44,34 @@ const user =req.user
         _id:cart._id,
     },dataUpdate);
     return res.json({success:true,dataUpdate});
+}
+// get all list cart by userID
+exports.getAllCartByUserID = async (req,res)=>{
+const user =req.user
+    let cart =await CartModel.findOne({userId:user._id})
+    res.send(cart);
+    console.log(cart);
+}
+exports.DeleteCartItem =async (req,res)=>{
+    const user =req.user
+    const {productId} =req.body
+    console.log(req.params.id)
+    const cart =await CartModel.findOne({userId:user._id})
+    if (!cart){
+        res.json({ success: true });
+    }
+    const productIndex =cart.products.findIndex(item => String(item.productId)=== productId)
+    if (productIndex <0){
+        return res.json({success:true});
+    }
+    const newItems =cart.products.slice(productIndex,1);
+    await CartModel.updateOne({
+        _id:cart._id
+    },
+        {
+            $set:{
+                products:newItems
+            }
+        })
+    return res.json({success:true});
 }
