@@ -3,7 +3,7 @@ const CartModel =require('../models/cart.model');
 exports.postAddCart = async (req,res)=>{
 const { productId,quantity } =req.body;
 const user =req.user
-    let cart = await CartModel.findOne({idUser:user._id})
+    let cart = await CartModel.findOne({userId:user._id})
     if (!cart){
         cart = new  CartModel({
             userId:user._id,
@@ -11,10 +11,10 @@ const user =req.user
                 {
                     productId:req.body.productId,
                     title:req.body.title,
-                    price:Number(req.body.price),
+                    price:req.body.price,
                     img:req.body.img,
                     quantity,
-                    Amount:Number(req.body.Amount)
+                    Amount:req.body.Amount,
                 }
             ]
         });
@@ -33,16 +33,18 @@ const user =req.user
             products:{
               productId :productId,
               title:req.body.title,
-              price:Number(req.body.price),
+              price:req.body.price,
               img:req.body.img,
-              quantity:Number(req.body.quantity),
-              Amount:Number(req.body.Amount)
+              quantity:req.body.quantity,
+              Amount:req.body.Amount
           }
         };
     }
+
     await CartModel.updateOne({
-        _id:cart._id,
+        _id:cart. _id,
     },dataUpdate);
+    console.log(cart._id);
     return res.json({success:true,dataUpdate});
 }
 // get all list cart by userID
