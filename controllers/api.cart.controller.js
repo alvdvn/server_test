@@ -1,5 +1,6 @@
 const CartModel =require('../models/cart.model');
 
+
 exports.postAddCart = async (req,res)=>{
 const { productId,quantity } =req.body;
 const user =req.user

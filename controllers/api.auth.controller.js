@@ -1,6 +1,9 @@
 const UserModel = require('../models/user.model');
 const bcrypt =require('bcrypt');
-
+const jwt =require('jsonwebtoken');
+const { Validator } = require('node-input-validator');
+const nodemailer =require('nodemailer');
+const {hash} = require("bcrypt");
 
 exports.postReg= async (req,res)=>{
     try {
@@ -66,4 +69,47 @@ exports.postLogoutAll = async (req,res,next)=>{
         res.status(500).send(error)
     }
 }
+
+exports.putChangePassword =async (req,res)=>{
+    const {oldPassword, newPassword} = req.body;
+    const userID = req.user._id;
+    console.log(userID)
+    const UserChangePass = await UserModel.findById(userID);
+    if(UserChangePass){
+        bcrypt.compare(oldPassword, UserChangePass.password, (err, isMatch) => {
+            if(err){
+                return res.status(500).json({
+                    status: false,
+                    message: "Server error",
+                    error: err
+                })
+            }else if(isMatch){
+                bcrypt.hash(newPassword, 10, async (err ,hash) => {
+                    if(err){
+                        return res.status(500).json({
+                            status: false,
+                            message: "Error, cannot encrypt password",
+                            error: err
+                        })
+                    }
+                    UserChangePass.password = hash;
+                    UserChangePass.save().then(updatedUser => {
+                        return res.status(200).json({
+                            status: true,
+                            message: "Password has been changed successfully",
+                            data: updatedUser
+                        })
+                    })
+                })
+            }else{
+                return res.status(401).json({
+                    status: true,
+                    message: "Old password incorrect",
+                    data: undefined
+                })
+            }
+        })
+    }
+        }
+
 
