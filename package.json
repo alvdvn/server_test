@@ -25,6 +25,8 @@
     "nodemailer": "^6.8.0",
     "path": "^0.12.7",
     "randomstring": "^1.2.3",
-    "util": "^0.12.5"
+    "strapi-provider-email-nodemailer": "^3.6.10",
+    "util": "^0.12.5",
+    "uuidv4": "^6.2.13"
   }
 }

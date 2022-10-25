@@ -3,8 +3,36 @@ const bcrypt =require('bcrypt');
 const jwt =require('jsonwebtoken');
 const { Validator } = require('node-input-validator');
 const nodemailer =require('nodemailer');
-const {hash} = require("bcrypt");
+const { uuid } = require('uuidv4');
 
+const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    service:'gmail',
+    auth:{
+        user:'nhom12ungdungquanao@gmail.com',
+        pass:'qlwhcmkjmwwllsxq'
+    }
+});
+let sendEmail = (emailTemplate) => {
+    transporter.sendMail(emailTemplate, (err, info) => {
+        if(err) {
+            console.log(err)
+        }else{
+            console.log('Email sent: ', info.response)
+        }
+    })
+}
+let restPassword = (email,token)=>{
+    const mailOptions ={
+        from:'nhom12ungdungquanao@gmail.com',
+        to:email,
+        subject:'Password reset for '+ email,
+        text:'Password reset link:'+'http://localhost:3000/api/auth/forgot-password/'+token
+    };
+    return mailOptions;
+}
 exports.postReg= async (req,res)=>{
     try {
         const salt = await bcrypt.genSalt(10);
@@ -39,8 +67,6 @@ exports.postLogin = async (req,res,next)=>{
 
 
 }
-
-
 exports.getProfile = (req,res,next)=>{
     res.send(req.user);
 }
@@ -110,6 +136,31 @@ exports.putChangePassword =async (req,res)=>{
             }
         })
     }
-        }
+}
+exports.postForgotPassword= async (req,res)=>{
+try {
+    const {email}= req.body;
+    const user=await UserModel.findOne({email});
+    if (!user){
+        return res.status(400).json({
+            status: false,
+            message: "Error or email does not exist",
+            data: undefined
+        })
+    }
+    const token =await user.generateAuthToken();
+    const emailTemplate =restPassword(user.email,token);
+    sendEmail(emailTemplate)
+    res.status(200).json({
+        status:true,
+        message:"Mail have been sent"
+    })
+}catch (e){
+    res.status(401).json({
+        status:false,
+        message:e
+    })
+}
+}
 
 

@@ -8,4 +8,5 @@ router.get('/profile',auth, apiAuth.getProfile);
 router.post('/logout',auth,apiAuth.postLogout ) ;// logout: đăng xuất
 router.post('/logout-all',auth,apiAuth.postLogoutAll ) ;// logout: đăng xuất
 router.put('/change-password',auth,apiAuth.putChangePassword);
+router.post('/forgot-password',apiAuth.postForgotPassword)
 module.exports = router;
