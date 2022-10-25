@@ -69,7 +69,6 @@ exports.postLogoutAll = async (req,res,next)=>{
         res.status(500).send(error)
     }
 }
-
 exports.putChangePassword =async (req,res)=>{
     const {oldPassword, newPassword} = req.body;
     const userID = req.user._id;
@@ -136,5 +135,33 @@ try {
     })
 }
 }
-
+exports.putResetPassword =async (req,res)=>{
+    const token =req.params.token;
+    const {newPassword}=req.body;
+    try {
+        const data = jwt.verify(token, process.env.TOKEN_SEC_KEY);
+        const user =await UserModel.findOne({_id:data._id,});
+                bcrypt.hash(newPassword,10,(err,hash)=>{
+                    if (err){
+                        return res.status(402).json({
+                            status:false,
+                            message:err
+                        });
+                    }
+                    user.password=hash;
+                    user.save().
+                        then(async (result)=>{
+                            res.status(200).json({
+                                status:true,
+                                message:"Password reset successfully"
+                            })
+                    })
+                })
+    }catch (e) {
+        return res.status(401).json({
+            status:false,
+            message:e,
+        })
+    }
+}
 
