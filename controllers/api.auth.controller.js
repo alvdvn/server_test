@@ -1,38 +1,12 @@
 const UserModel = require('../models/user.model');
 const bcrypt =require('bcrypt');
 const jwt =require('jsonwebtoken');
-const { Validator } = require('node-input-validator');
-const nodemailer =require('nodemailer');
-const { uuid } = require('uuidv4');
+const {restPassword} =require('../utils/emailTemplates');
+const {sendEmail} =require('../utils/sendEmail');
 
-const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,
-    service:'gmail',
-    auth:{
-        user:'nhom12ungdungquanao@gmail.com',
-        pass:'qlwhcmkjmwwllsxq'
-    }
-});
-let sendEmail = (emailTemplate) => {
-    transporter.sendMail(emailTemplate, (err, info) => {
-        if(err) {
-            console.log(err)
-        }else{
-            console.log('Email sent: ', info.response)
-        }
-    })
-}
-let restPassword = (email,token)=>{
-    const mailOptions ={
-        from:'nhom12ungdungquanao@gmail.com',
-        to:email,
-        subject:'Password reset for '+ email,
-        text:'Password reset link:'+'http://localhost:3000/api/auth/forgot-password/'+token
-    };
-    return mailOptions;
-}
+
+
+
 exports.postReg= async (req,res)=>{
     try {
         const salt = await bcrypt.genSalt(10);
