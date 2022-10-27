@@ -1,4 +1,5 @@
 const productModel = require('../models/product.model');
+const {model} = require("mongoose");
 exports.getApiProduct= async (req,res,next) =>{
     const  itemList = await productModel.find();
     res.send(itemList)

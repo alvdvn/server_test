@@ -3,6 +3,7 @@ const CartModel =require('../models/cart.model');
 
 exports.postAddCart = async (req,res)=>{
 const { productId,quantity } =req.body;
+//lay idUser
 const user =req.user
     let cart = await CartModel.findOne({userId:user._id})
     if (!cart){
