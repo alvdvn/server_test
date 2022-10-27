@@ -6,7 +6,4 @@ var auth = require('../middleware/api.auth.middleware');
  router.post('/add',auth, apiCartController.postAddCart);
  router.get('/list',auth, apiCartController.getAllCartByUserID);
  router.delete('/delete', auth, apiCartController.DeleteCartItem);
-
-
-
 module.exports = router;

@@ -4,7 +4,7 @@ const CartModel =require('../models/cart.model');
 exports.postAddCart = async (req,res)=> {
     const { productId, title, price, img,quantity ,Amount} = req.body;
 
-    const userId = req.user._id; //TODO: the logged in user id
+    const userId = req.user._id;
 
     try {
         let cart = await CartModel.findOne({ userId });
@@ -48,25 +48,27 @@ const user =req.user
     console.log(cart);
 }
 exports.DeleteCartItem =async (req,res)=>{
-    const user =req.user
-    const {productId} =req.body
-    console.log(req.params.id)
-    const cart =await CartModel.findOne({userId:user._id})
-    if (!cart){
+    const user = req.user
+    const { productId } = req.body
+    const cart = await CartModel.findOne({
+        userId: user._id
+    })
+    if (!cart) {
         res.json({ success: true });
     }
-    const productIndex =cart.products.findIndex(item => String(item.productId)=== productId)
-    if (productIndex <0){
-        return res.json({success:true});
+    const productIndex = cart.products.findIndex(item => String(item.productId) === productId )
+    if (productIndex < 0) {
+        return res.json({ success: true });
     }
-    const newItems =cart.products.slice(productIndex,1);
+    const newItems = cart
+        .products
+        .splice(productIndex, 1);
     await CartModel.updateOne({
-        _id:cart._id
-    },
-        {
-            $set:{
-                products:newItems
-            }
-        })
-    return res.json({success:true});
+        _id: cart._id
+    }, {
+        $set: {
+            products: newItems
+        }
+    })
+    return res.json({ success: true });
 }
