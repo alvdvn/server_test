@@ -1,54 +1,45 @@
 const CartModel =require('../models/cart.model');
 
 
-exports.postAddCart = async (req,res)=>{
-const { productId,quantity } =req.body;
-//lay idUser
-const user =req.user
-    let cart = await CartModel.findOne({userId:user._id})
-    if (!cart){
-        cart = new  CartModel({
-            userId:user._id,
-            products:[
-                {
-                    productId:req.body.productId,
-                    title:req.body.title,
-                    price:req.body.price,
-                    img:req.body.img,
-                    quantity,
-                    Amount:req.body.Amount,
-                }
-            ]
-        });
-        await cart.save();
-        return res.json({success:true,cart})
-    }
+exports.postAddCart = async (req,res)=> {
+    const { productId, title, price, img,quantity ,Amount} = req.body;
 
-    const dataUpdate ={};
-    const productInCartindex = cart.products.findIndex(item => String(item.productId) === productId);
-    if (productInCartindex >= 0){
-        dataUpdate.$inc = {
-            [`items.${productInCartindex}.quantity`]: quantity
+    const userId = req.user._id; //TODO: the logged in user id
+
+    try {
+        let cart = await CartModel.findOne({ userId });
+
+        if (cart) {
+            //cart exists for user
+            let itemIndex = cart.products.findIndex(p => p.productId == productId);
+
+            if (itemIndex > -1) {
+                //product exists in the cart, update the quantity
+                let productItem = cart.products[itemIndex];
+                productItem.quantity = quantity;
+                cart.products[itemIndex] = productItem;
+            } else {
+                //product does not exists in cart, add new item
+                cart.products.push({ productId, title, price, img,quantity ,Amount });
+            }
+            cart = await cart.save();
+            return res.status(201).send(cart);
+        } else {
+            //no cart for user, create new cart
+            const newCart = await CartModel.create({
+                userId,
+                products: [{ productId, title, price, img,quantity ,Amount }]
+            });
+
+            return res.status(201).send(newCart);
         }
-    }else {
-        dataUpdate.$push ={
-            products:{
-              productId :productId,
-              title:req.body.title,
-              price:req.body.price,
-              img:req.body.img,
-              quantity:req.body.quantity,
-              Amount:req.body.Amount
-          }
-        };
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Something went wrong");
     }
-
-    await CartModel.updateOne({
-        _id:cart. _id,
-    },dataUpdate);
-    console.log(cart._id);
-    return res.json({success:true,dataUpdate});
 }
+
+
 // get all list cart by userID
 exports.getAllCartByUserID = async (req,res)=>{
 const user =req.user
