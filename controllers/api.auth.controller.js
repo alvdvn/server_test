@@ -52,7 +52,7 @@ exports.postLogout = async  (req,res,next)=>{
             return token.token != req.token
         })
         await req.user.save()
-        res.send()
+        res.send("Logout thanh cong")
     } catch (error) {
         res.status(500).send(error)
     }
