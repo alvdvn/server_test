@@ -13,7 +13,7 @@ exports.getFormUpload = async (req,res,next)=>{
     if (Book==null){
         res.send('Khong tim thay')
     }
-    res.render('./banners/upload',{Book:Book})
+    res.render('./products/upload',{Book:Book})
 }
 exports.postUpload= async (req,res,next)=>{
     function removeVietnameseTones(str) {
