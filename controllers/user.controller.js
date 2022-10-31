@@ -28,7 +28,7 @@ exports.postAddUser= async (req,res,next)=>{
     }catch (err){
         return res.render('./users/add',{msg:"Vui lòng thêm ảnh"})
     }
-    const filename = 'http://localhost:3000/uploads/'+req.file.originalname;
+    const filename = 'https://mofshop.shop/uploads/'+req.file.originalname;
 
  const newUser = new UserModel({
      email:req.body.user_email,
@@ -78,7 +78,7 @@ exports.getPostEditUser=(req,res,next)=>{
     }catch (err){
         return res.render('./User/update-User',{msg:"Vui lòng thêm ảnh"})
     }
-    const filename = 'http://localhost:3000/uploads/'+req.file.originalname;
+    const filename = 'https://mofshop.shop/uploads/'+req.file.originalname;
 
     let du_lieu = {
         email:req.body.user_email,

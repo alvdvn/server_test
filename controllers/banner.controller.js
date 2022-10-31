@@ -69,7 +69,7 @@ exports.postEdit=(req,res,next)=>{
     }catch (err){
         return res.render('./banners/edit',{msg:"Vui lòng thêm ảnh"})
     }
-    const filename = 'http://localhost:3000/uploads/'+req.file.originalname;
+    const filename = 'https://mofshop.shop/uploads/'+req.file.originalname;
 
     let du_lieu = {
         destination:req.body.destination,

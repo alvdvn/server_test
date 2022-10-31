@@ -52,7 +52,9 @@ exports.postLogout = async  (req,res,next)=>{
             return token.token != req.token
         })
         await req.user.save()
-        res.send("Logout thanh cong")
+        // res.send("Logout thanh cong")
+        console.log("logout thanh cong")
+        return res.json({ success: true });
     } catch (error) {
         res.status(500).send(error)
     }

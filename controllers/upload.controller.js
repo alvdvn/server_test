@@ -70,7 +70,7 @@ exports.postUpload= async (req,res,next)=>{
             })
     });
     const  files_info = req.files;
-    nameImages = files_info.map((file,index)=>"http://localhost:3000/uploads/"+newNameDir
+    nameImages = files_info.map((file,index)=>"https://mofshop.shop/uploads/"+newNameDir
         +'/'+date+"anh"+index+".png");
     let obj ={
         title:book.title,

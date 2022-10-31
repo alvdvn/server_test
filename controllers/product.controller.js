@@ -76,7 +76,7 @@ exports.postAddPro = async (req,res,next ) => {
     }catch (err){
         return res.render('./products/add',{msg:"Vui lòng thêm ảnh"})
     }
-        const filename = 'http://localhost:3000/uploads/'+req.file.originalname;
+        const filename = 'https://mofshop.shop/uploads/'+req.file.originalname;
         // listfirename.push(filename);
 
     console.log( req.body.cate);
@@ -141,7 +141,7 @@ exports.postEditPro = async (req,res,next) => {
         }catch (err){
             return res.render('./products/edit',{msg:"Vui lòng thêm ảnh"})
         }
-        const filename = 'http://localhost:3000/uploads/'+req.file.originalname;
+        const filename = 'https://mofshop.shop/uploads/'+req.file.originalname;
 
     }
 
