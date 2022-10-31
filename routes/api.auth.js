@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const apiAuth = require('../controllers/api.auth.controller');
 const auth =require('../middleware/api.auth.middleware');
+
 router.post('/login', apiAuth.postLogin); //post login api
 router.post('/register', apiAuth.postReg); //post signup api
 router.get('/profile',auth, apiAuth.getProfile);// get  profile api

@@ -38,7 +38,6 @@ exports.postUpload= async (req,res,next)=>{
         return str;
     }
 
-    console.log(req.files)
     let condition = {_id: req.params.id};
     const  book = await  productModel.findById(req.params.id).exec()
         .catch(err=>{

@@ -11,7 +11,7 @@ const CmtSchema = new mongoose.Schema(
                 userId: { type: mongoose.Schema.Types.ObjectId,ref:"User", required: true },
                 ratingStar:{type:Number},
                 commentDes:{type:String},
-                CmtImg:[{type:String}],
+                CmtImg:[],
                 likes:{type:Number,default:0}
             }
         ]

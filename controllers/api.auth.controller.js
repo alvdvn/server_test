@@ -122,7 +122,7 @@ try {
         })
     }
     const token =await user.generateAuthToken();
-    const emailTemplate =restPassword(user.email,token);
+    const emailTemplate =restPassword(user.email,user._id,token);
     sendEmail(emailTemplate)
     res.status(200).json({
         status:true,

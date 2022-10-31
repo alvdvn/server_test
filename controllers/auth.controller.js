@@ -27,3 +27,8 @@ if (user.role === "User"){
     }
 }
 }
+exports.postResetPassword=(req,res)=>{
+    const {token}= req.params;
+
+    res.render('./User/reset-password');
+}
