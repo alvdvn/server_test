@@ -2,7 +2,7 @@ const CartModel =require('../models/cart.model');
 
 
 exports.postAddCart = async (req,res)=> {
-    const { productId, title, price, img,quantity ,Amount} = req.body;
+    const { productId, color, size,quantity ,amount} = req.body;
 
     const userId = req.user._id;
 
@@ -20,7 +20,7 @@ exports.postAddCart = async (req,res)=> {
                 cart.products[itemIndex] = productItem;
             } else {
                 //product does not exists in cart, add new item
-                cart.products.push({ productId, title, price, img,quantity ,Amount });
+                cart.products.push({ productId, color, size,quantity ,amount });
             }
             cart = await cart.save();
             return res.status(201).send(cart);
@@ -28,7 +28,7 @@ exports.postAddCart = async (req,res)=> {
             //no cart for user, create new cart
             const newCart = await CartModel.create({
                 userId,
-                products: [{ productId, title, price, img,quantity ,Amount }]
+                products: [{ productId, color, size,quantity ,amount }]
             });
 
             return res.status(201).send(newCart);
