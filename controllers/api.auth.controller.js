@@ -3,16 +3,31 @@ const bcrypt =require('bcrypt');
 const jwt =require('jsonwebtoken');
 const {restPassword} =require('../utils/emailTemplates');
 const {sendEmail} =require('../utils/sendEmail');
+const fs = require("fs");
 
 
 
 
 exports.postReg= async (req,res)=>{
     try {
+        fs.rename(req.file.destination + req.file.filename,
+            './public/uploads/' + req.file.originalname,
+            function (err){
+                if(err){
+                    console.log(err)
+                }
+            }
+        )
+    }catch (err){
+        return res.render('./users/add',{msg:"Vui lòng thêm ảnh"})
+    }
+    const filename = 'https://mofshop.shop/uploads/'+req.file.originalname;
+    try {
         const salt = await bcrypt.genSalt(10);
         const userReg = new UserModel(req.body);
 
         userReg.password =await bcrypt.hash(req.body.password,salt);
+        userReg.avatar =filename
 
         await userReg.save()
         const token =await userReg.generateAuthToken();

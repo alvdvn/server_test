@@ -28,7 +28,7 @@ exports.postAddComment= async (req,res)=>{
     }
 const ProductID = req.params.id;
 const userId = req.user._id;
-const {ratingStar,commentDes,likes}=req.body;
+const {ratingStar,commentDes}=req.body;
     console.log(req.files)
 try {
     let user = await UserModel.findById(userId);
@@ -74,7 +74,6 @@ try {
                     ratingStar:Number(ratingStar),
                     commentDes,
                     CmtImg:nameImages,
-                    likes: Number(likes)
                     }]
             });
             res.status(200).send({
@@ -98,10 +97,14 @@ try {
 
 }
 
-exports.postTestIMG =async (req,res)=>{
-    console.log(req.files);
-    res.status(201).json({
-        status:true,
-        profileURL:`http://localhost:3000/${req.files.filename}`
-    })
+exports.getAllComment =async (req,res)=>{
+  try {
+const idProduct = req.params.id;
+      console.log(idProduct);
+  }catch (err){
+      res.status(500).json({
+          status:false,
+          message:err.message
+      })
+  }
 }

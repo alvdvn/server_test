@@ -12,7 +12,6 @@ const CmtSchema = new mongoose.Schema(
                 ratingStar:{type:Number},
                 commentDes:{type:String},
                 CmtImg:[],
-                likes:{type:Number,default:0}
             }
         ]
     },

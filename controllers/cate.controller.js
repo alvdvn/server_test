@@ -24,7 +24,7 @@ exports.postAddCate=(req,res,next)=>{
     }catch (err){
         return res.render('./cate/add',{msg:"Vui lòng thêm ảnh"})
     }
-    const filename = 'http://localhost:3000/uploads/'+req.file.originalname;
+    const filename = 'http://mofshop.shop/uploads/'+req.file.originalname;
 
     const newCate = new CateModel({
         title:req.body.title,
