@@ -6,6 +6,7 @@ const auth =require('../middleware/api.auth.middleware');
 const upload = multer({dest:'./tmp/'})
 
 router.post('/add/:id',auth,upload.array('CmtImg',5), CommentController.postAddComment)
-router.get('getall/:id',CommentController.getAllComment)
+router.get('/getall/:id',CommentController.getAllComment)
+router.get("/countStar/:id",CommentController.getAllCountStar)
 
 module.exports = router;

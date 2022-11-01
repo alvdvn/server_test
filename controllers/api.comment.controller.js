@@ -4,7 +4,10 @@ const UserModel = require('../models/user.model');
 const fs = require("fs");
 const {resolve} = require("path");
 exports.postAddComment= async (req,res)=>{
-
+    const ProductID = req.params.id;
+    const userId = req.user._id;
+    const {ratingStar,commentDes}=req.body;
+    let  FolderToUpload="aaaaaaaa";
     function removeVietnameseTones(str) {
         str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
         str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
@@ -26,10 +29,6 @@ exports.postAddComment= async (req,res)=>{
         str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, " ");
         return str;
     }
-const ProductID = req.params.id;
-const userId = req.user._id;
-const {ratingStar,commentDes}=req.body;
-    console.log(req.files)
 try {
     let user = await UserModel.findById(userId);
     if (user == null){
@@ -43,7 +42,7 @@ try {
 
         const  imageDirPath = resolve(__dirname,'../tmp');
         const  files = fs.readdirSync(imageDirPath);
-        const  nameFolder = itemProduct.title.replace(" ",'-');
+        const  nameFolder = FolderToUpload.replace(" ",'-');
         let newNameDir = removeVietnameseTones(nameFolder);
         var  dir = './public/uploads/'+ newNameDir;
         if (!fs.existsSync(dir)){
@@ -69,12 +68,11 @@ try {
         if (itemProduct){
             const addComment = await commentModel.create({
                 productId:itemProduct._id,
-                comments:[{
                     userId:user._id,
                     ratingStar:Number(ratingStar),
                     commentDes,
                     CmtImg:nameImages,
-                    }]
+
             });
             res.status(200).send({
                 status:true,
@@ -98,13 +96,71 @@ try {
 }
 
 exports.getAllComment =async (req,res)=>{
-  try {
-const idProduct = req.params.id;
-      console.log(idProduct);
-  }catch (err){
-      res.status(500).json({
-          status:false,
-          message:err.message
-      })
-  }
+    const ProductID = req.params.id;
+      try {
+const ProductItems = await commentModel.find({productId: ProductID});
+
+         if (ProductItems ==null){
+             return res.status(401).send({
+                 status:false,
+                 message:"Không tìm thấy comment nào"
+             })
+         }else {
+             let AVG =0;
+             let dem=0;
+             let SUM =0
+             for (let i = 0; i < ProductItems.length; i++) {
+                 dem++;
+                 SUM += ProductItems[i].ratingStar;
+             }
+             AVG = SUM/dem;
+             res.status(200).send({
+                 status:true,
+                 AVG,
+                 dem,
+                 ProductItems,
+             })
+         }
+
+      }catch (err){
+          res.status(500).send({
+              status:false,
+              message:err.message
+          })
+      }
+
+}
+exports.getAllCountStar = async (req,res)=>{
+    const ProductID = req.params.id;
+    try {
+        const ProductItems = await commentModel.find({productId: ProductID});
+        if (ProductItems ==null){
+            return res.status(401).send({
+                status:false,
+                message:"Không tìm thấy comment nào"
+            })
+        }else {
+
+           let AVG =0;
+           let dem=0;
+           let SUM =0
+            for (let i = 0; i < ProductItems.length; i++) {
+               dem++;
+                SUM += ProductItems[i].ratingStar;
+            }
+            AVG = SUM/dem;
+           res.status(200).send({
+               status:true,
+               AVG,
+               dem
+           })
+
+        }
+
+    }catch (err){
+        res.status(500).send({
+            status:false,
+            message:err.message
+        })
+    }
 }
