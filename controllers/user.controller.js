@@ -38,7 +38,7 @@ exports.postAddUser= async (req,res,next)=>{
         return str;
     }
 
-    const  nameFolder = req.body.full_name.replace(" ",'-');
+    const  nameFolder = req.body.role.replace(" ",'-');
     let newNameDir = removeVietnameseTones(nameFolder);
     var  dir = './public/uploads/'+ newNameDir;
     if (!fs.existsSync(dir)){
