@@ -6,14 +6,10 @@ const CmtSchema = new mongoose.Schema(
             ref: 'Product',
             required: true
         },
-        comments:[
-            {
                 userId: { type: mongoose.Schema.Types.ObjectId,ref:"User", required: true },
                 ratingStar:{type:Number},
                 commentDes:{type:String},
                 CmtImg:[],
-            }
-        ]
     },
     { timestamps: true }
 );
