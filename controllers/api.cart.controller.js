@@ -1,14 +1,16 @@
 const CartModel =require('../models/cart.model');
+const ProductModel =require('../models/product.model');
 
 
 exports.postAddCart = async (req,res)=> {
-    const { productId, color, size,quantity ,amount} = req.body;
+    const { productId,quantity } = req.body;
 
     const userId = req.user._id;
 
     try {
         let cart = await CartModel.findOne({ userId });
-
+        let productItem = await ProductModel.findById(productId);
+        console.log(productItem);
         if (cart) {
             //cart exists for user
             let itemIndex = cart.products.findIndex(p => p.productId == productId);
@@ -17,10 +19,17 @@ exports.postAddCart = async (req,res)=> {
                 //product exists in the cart, update the quantity
                 let productItem = cart.products[itemIndex];
                 productItem.quantity = quantity;
+                productItem.price *=quantity;
                 cart.products[itemIndex] = productItem;
             } else {
                 //product does not exists in cart, add new item
-                cart.products.push({ productId, color, size,quantity ,amount });
+                cart.products.push({
+                    productId,
+                    quantity ,
+                    title:productItem.title,
+                    price:productItem.price*quantity,
+                    ProductIMG:productItem.img,
+                });
             }
             cart = await cart.save();
             return res.status(201).send(cart);
@@ -28,7 +37,13 @@ exports.postAddCart = async (req,res)=> {
             //no cart for user, create new cart
             const newCart = await CartModel.create({
                 userId,
-                products: [{ productId, color, size,quantity ,amount }]
+                products: [{
+                    productId,
+                    quantity,
+                    title:productItem.title,
+                    price:productItem.price*quantity,
+                    ProductIMG:productItem.img
+                     }]
             });
 
             return res.status(201).send(newCart);

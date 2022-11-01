@@ -8,17 +8,18 @@ const CartSchema = new mongoose.Schema(
                     type: mongoose.Schema.Types.ObjectId,
                     ref: 'Product'
                 },
-                color:"String",
-                size:"String",
+                title:{type:String},
+                ProductIMG:{type:String},
+                price:{type:Number},
                 quantity: {
                     type: Number,
                     default: 1,
                 },
-                amount:{
-                    type:Number
-                }
             },
         ],
+        Total:{
+            type:Number
+        }
     },
     { timestamps: true }
 );
