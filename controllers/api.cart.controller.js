@@ -1,7 +1,5 @@
 const CartModel =require('../models/cart.model');
 const ProductModel =require('../models/product.model');
-const {save} = require("debug");
-const {create} = require("hbs");
 
 
 exports.postAddCart = async (req,res)=> {

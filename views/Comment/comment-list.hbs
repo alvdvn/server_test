@@ -1,0 +1,47 @@
+<div class="datalist">
+
+    <div class="tables">
+        <h3>Danh sách Bình luận</h3>
+        <input class="form-control" id="myInput" type="text" placeholder="Tìm kiếm.."
+               style="margin-bottom: 10px">
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>product Id</th>
+                <th>user Id</th>
+                <th>rating Star</th>
+                <th>Bình luận</th>
+                <th>ảnh bình luận</th>
+            </tr>
+            </thead>
+            <tbody id="myTableComment">
+            {{#each itemList}}
+                <tr>
+                    <td scope="row">{{this.productId}}</td>
+                    <td scope="row">{{this.userId}}</td>
+                    <td scope="row">{{this.ratingStar}}</td>
+                    <td scope="row">{{this.commentDes}}</td>
+
+                    <td><img src="{{this.CmtImg.[0]}}" width="100px" style="vertical-align: center" class="img-rounded"></td>
+
+                    <td>
+                        <a href="/comment/delete/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')"
+                           id="btnAction" class="btn btn-danger">Xóa</a>
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTableComment tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
