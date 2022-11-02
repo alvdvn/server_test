@@ -1,8 +1,9 @@
 var express = require('express');
 const  CommentController = require("../controllers/comment.controller");
+const auth = require("../middleware/auth.middleware");
 var router = express.Router();
 
-router.get('/list',CommentController.getFormComment);
+router.get('/list',auth.YeuCauDangNhap,CommentController.getFormComment);
 router.get('/delete/:id',CommentController.postDel);
 
 module.exports = router;

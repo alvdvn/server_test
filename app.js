@@ -7,7 +7,10 @@ var logger = require('morgan');
 var mongoose =require('mongoose');
 var dotenv =require('dotenv');
 var multer =require('multer');
+var session = require('express-session');
+
 dotenv.config();
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var proRouter = require('./routes/product');
@@ -27,7 +30,12 @@ mongoose
     .connect(process.env.MONGO_URL)
     .then(() => console.log("BD connection Successfull !"))
     .catch((err) => console.log(err));
-
+//session
+app.use(session({
+  secret:'fksdfn24235bdInfsdHSNF9999',
+  resave:true,
+  saveUninitialized:true,
+}))
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');

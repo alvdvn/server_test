@@ -15,6 +15,4 @@ router.get('/edit/:id',authC.YeuCauDangNhap, bannerC.getFormEditBanner);
 router.post('/edit/:id',authC.YeuCauDangNhap,upload.single("anhbanner"), bannerC.postEdit);
 router.get('/delete/:id',authC.YeuCauDangNhap, bannerC.postDel);
 
-
-
 module.exports = router;

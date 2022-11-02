@@ -18,9 +18,12 @@ body {
   font-weight: bold;
   color: brown;
   width: 100%;
+  margin-top: 100px;
 
 }
-
+li {
+  list-style-type: none;
+}
 .nav-link {
   color: brown;
 }

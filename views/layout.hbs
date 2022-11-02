@@ -57,9 +57,17 @@
                                     <a class="nav-link" href="#">Thống kê <span class="sr-only"></span></a>
                                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+            <form class="form-inline">
+                <li class="nav-item dropdown mr-5">
+                    <a class="p-5" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 50px;"
+                             alt="Avatar" />
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="/account">Thông tin cá nhân</a>
+                        <a class="dropdown-item" href="/logout">Đăng xuất</a>
+                    </div>
+                </li>
             </form>
         </div>
     </nav>

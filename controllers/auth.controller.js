@@ -27,8 +27,15 @@ if (user.role === "User"){
     }
 }
 }
+exports.getProfileUser=(req,res)=>{
+    res.render('account',{users:req.session.user});
+}
 exports.postResetPassword=(req,res)=>{
     const {token}= req.params;
 
     res.render('./User/reset-password');
+}
+exports.getLogOut=(req,res)=>{
+    req.session.destroy();
+    res.redirect('/');
 }

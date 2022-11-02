@@ -1,11 +1,12 @@
 var express = require('express');
-const auth = require("../controllers/auth.controller");
-const apiAuth = require("../controllers/api.auth.controller");
+const authController = require("../controllers/auth.controller");
+const auth =require('../middleware/auth.middleware');
 var router = express.Router();
 
-/* GET home page. */
 
-router.get('/',auth.getFormLogin);
-router.post('/',auth.postLogin);
-router.get("/reset-password/:token",auth.postResetPassword)
+router.get('/',auth.ChuaDangNhap,authController.getFormLogin);
+router.post('/',auth.ChuaDangNhap,authController.postLogin);
+router.get('/account',auth.ChuaDangNhap,authController.getProfileUser);
+router.get('/logout',authController.getLogOut);
+router.get("/reset-password/:token",authController.postResetPassword)
 module.exports = router;
