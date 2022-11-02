@@ -1,14 +1,18 @@
 const CartModel =require('../models/cart.model');
+const ProductModel =require('../models/product.model');
+const {save} = require("debug");
+const {create} = require("hbs");
 
 
 exports.postAddCart = async (req,res)=> {
-    const { productId, color, size,quantity ,amount} = req.body;
+    const { productId,quantity } = req.body;
 
     const userId = req.user._id;
 
     try {
         let cart = await CartModel.findOne({ userId });
-
+        let productItem = await ProductModel.findById(productId);
+        console.log(productItem);
         if (cart) {
             //cart exists for user
             let itemIndex = cart.products.findIndex(p => p.productId == productId);
@@ -17,10 +21,19 @@ exports.postAddCart = async (req,res)=> {
                 //product exists in the cart, update the quantity
                 let productItem = cart.products[itemIndex];
                 productItem.quantity = quantity;
+                productItem.price *=quantity;
                 cart.products[itemIndex] = productItem;
+                cart.Total = cart.products.map(item =>item.price).reduce((acc, next) => acc + next);
             } else {
                 //product does not exists in cart, add new item
-                cart.products.push({ productId, color, size,quantity ,amount });
+                cart.products.push({
+                    productId,
+                    quantity ,
+                    title:productItem.title,
+                    price:productItem.price*quantity,
+                    ProductIMG:productItem.img,
+                });
+                cart.Total = cart.products.map(item =>item.price).reduce((acc, next) => acc + next);
             }
             cart = await cart.save();
             return res.status(201).send(cart);
@@ -28,7 +41,14 @@ exports.postAddCart = async (req,res)=> {
             //no cart for user, create new cart
             const newCart = await CartModel.create({
                 userId,
-                products: [{ productId, color, size,quantity ,amount }]
+                products: [{
+                    productId,
+                    quantity,
+                    title:productItem.title,
+                    price:productItem.price*quantity,
+                    ProductIMG:productItem.img
+                     }],
+                Total:productItem.price*quantity
             });
 
             return res.status(201).send(newCart);
@@ -44,8 +64,7 @@ exports.postAddCart = async (req,res)=> {
 exports.getAllCartByUserID = async (req,res)=>{
 const user =req.user
     let cart =await CartModel.findOne({userId:user._id})
-    res.send(cart);
-    console.log(cart);
+    res.status(200).send(cart);
 }
 exports.DeleteCartItem =async (req,res)=>{
     const user = req.user
