@@ -6,6 +6,9 @@
     </div>
     <div class="tables">
         <h3>Danh sách</h3>
+        <input class="form-control" id="myInput" type="text" placeholder="Tìm kiếm.."
+        style="margin-bottom: 10px">
+
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -15,12 +18,12 @@
                 <th>Hành động</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="myTableBanner">
             {{#each itemList}}
                 <tr>
                     <td scope="row">{{this._id}}</td>
                     <td scope="row">{{this.description}}</td>
-                    <td><img src="{{this.anh}}" width="100px" style="vertical-align: center"></td>
+                    <td><img src="{{this.anh}}" width="100px" style="vertical-align: center" class="img-rounded"></td>
                     <td>
                         <a href="/banners/edit/{{this._id}}" class="btn btn-primary" id="btnAction">Sửa</a>
                         <a href="/banners/delete/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')"
@@ -32,3 +35,13 @@
         </table>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTableBanner tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
