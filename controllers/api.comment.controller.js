@@ -130,37 +130,3 @@ const ProductItems = await commentModel.find({productId: ProductID});
       }
 
 }
-exports.getAllCountStar = async (req,res)=>{
-    const ProductID = req.params.id;
-    try {
-        const ProductItems = await commentModel.find({productId: ProductID});
-        if (ProductItems ==null){
-            return res.status(401).send({
-                status:false,
-                message:"Không tìm thấy comment nào"
-            })
-        }else {
-
-           let AVG =0;
-           let dem=0;
-           let SUM =0
-            for (let i = 0; i < ProductItems.length; i++) {
-               dem++;
-                SUM += ProductItems[i].ratingStar;
-            }
-            AVG = SUM/dem;
-           res.status(200).send({
-               status:true,
-               AVG,
-               dem
-           })
-
-        }
-
-    }catch (err){
-        res.status(500).send({
-            status:false,
-            message:err.message
-        })
-    }
-}
