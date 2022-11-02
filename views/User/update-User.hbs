@@ -1,24 +1,20 @@
 
-<form class="adddata" method="post" action="" enctype="multipart/form-data" >
-    <h1>Add User</h1>
+<form class="adddata" method="POST" action="" enctype="multipart/form-data" >
+    <h1>Update User</h1>
     <div class="mb-3">
-        <label htmlFor="inputEmail" class="form-label">Email</label>
+        <label class="form-label">Email</label>
         <input type="text" value={{UserData.email}} class="form-control" name="user_email">
     </div>
     <div class="mb-3">
-        <label htmlFor="input_password" class="form-label">Password</label>
-        <input type="text" value={{UserData.password}} class="form-control" name="user_password">
-    </div>
-    <div class="mb-3">
-        <label htmlFor="input_full_name" class="form-label">Full name</label>
+        <label  class="form-label">Full name</label>
         <input type="text" value={{UserData.full_name}} class="form-control" name="user_full_name">
     </div>
     <div class="mb-3">
-        <label htmlFor="input_phone_number" class="form-label">phone_number</label>
+        <label class="form-label">phone_number</label>
         <input type="Number" value={{UserData.phone_number}} class="form-control" name="user_phone_number" rows="4">
     </div>
     <div class="mb-3">
-        <label htmlFor="input_phone_number" class="form-label">address</label>
+        <label class="form-label">address</label>
         <input type="text" value={{UserData.address}} class="form-control" name="user_address" rows="4">
     </div>
     <div class="form-check">
@@ -43,6 +39,9 @@
         <label for="image" class="form-label">chọn File</label>
         <input type="file" name="avatar" class="form-control form-control-lg">
     </div>
+    {{#if msg}}
+        <p class="text-danger">{{{msg}}}</p>
+    {{/if}}
     <button type="submit" class="btn btn-primary">Submit</button>
 
 

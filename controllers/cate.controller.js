@@ -101,7 +101,7 @@ exports.postUpdateCate=(req,res,next)=>{
     }catch (err){
         return res.render('./Category/update-Cate',{msg:"Vui lòng thêm ảnh"})
     }
-    const filename = 'http://localhost:3000/uploads/'+req.file.originalname;
+    const filename = 'https://mofshop.shop/uploads/'+req.file.originalname;
 
     let du_lieu = {
         title:req.body.title,
