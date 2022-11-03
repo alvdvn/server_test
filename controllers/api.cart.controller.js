@@ -3,7 +3,7 @@ const ProductModel =require('../models/product.model');
 
 
 exports.postAddCart = async (req,res)=> {
-    const { productId,quantity } = req.body;
+    const { productId,quantity ,size,color} = req.body;
 
     const userId = req.user._id;
 
@@ -30,6 +30,8 @@ exports.postAddCart = async (req,res)=> {
                     title:productItem.title,
                     price:productItem.price*quantity,
                     ProductIMG:productItem.img,
+                    size,
+                    color,
                 });
                 cart.Total = cart.products.map(item =>item.price).reduce((acc, next) => acc + next);
             }
@@ -44,7 +46,9 @@ exports.postAddCart = async (req,res)=> {
                     quantity,
                     title:productItem.title,
                     price:productItem.price*quantity,
-                    ProductIMG:productItem.img
+                    ProductIMG:productItem.img,
+                    size,
+                    color,
                      }],
                 Total:productItem.price*quantity
             });
