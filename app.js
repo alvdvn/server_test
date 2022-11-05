@@ -8,7 +8,6 @@ var mongoose =require('mongoose');
 var dotenv =require('dotenv');
 var multer =require('multer');
 var session = require('express-session');
-
 dotenv.config();
 
 var indexRouter = require('./routes/index');
@@ -36,6 +35,8 @@ app.use(session({
   resave:true,
   saveUninitialized:true,
 }))
+//cloudinary
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
