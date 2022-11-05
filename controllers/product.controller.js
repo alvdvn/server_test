@@ -1,5 +1,6 @@
 const productModel = require('../models/product.model');
 // const  bcrypt = require('bcrypt');
+const cateModel = require('../models/category.model');
 const {streamUpload} =require('../utils/UploadIMG');
 const fs = require('fs')
 
