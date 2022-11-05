@@ -2,11 +2,11 @@ var express = require('express');
 var router = express.Router();
 const apiAuth = require('../controllers/api.auth.controller');
 const auth =require('../middleware/api.auth.middleware');
-var multer = require('multer');
-const upload = multer({dest:'./tmp/'})
+const multer = require('multer');
+const fileUpload = multer();
 
 router.post('/login', apiAuth.postLogin); //post login api
-router.post('/register',upload.single('avatar'), apiAuth.postReg); //post signup api
+router.post('/register',fileUpload.single('avatar'), apiAuth.postReg); //post signup api
 router.get('/profile',auth, apiAuth.getProfile);// get  profile api
 router.post('/logout',auth,apiAuth.postLogout ) ;// logout: đăng xuất
 router.post('/logout-all',auth,apiAuth.postLogoutAll ) ;// logout: đăng xuất

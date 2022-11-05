@@ -4,24 +4,13 @@ const jwt =require('jsonwebtoken');
 const {restPassword} =require('../utils/emailTemplates');
 const {sendEmail} =require('../utils/sendEmail');
 const fs = require("fs");
-
+const {streamUpload} =require('../utils/UploadIMG');
 
 
 
 exports.postReg= async (req,res)=>{
-    try {
-        fs.rename(req.file.destination + req.file.filename,
-            './public/uploads/' + req.file.originalname,
-            function (err){
-                if(err){
-                    console.log(err)
-                }
-            }
-        )
-    }catch (err){
-        return res.render('./users/add',{msg:"Vui lòng thêm ảnh"})
-    }
-    const filename = 'https://mofshop.shop/uploads/'+req.file.originalname;
+    let result = await streamUpload(req);
+    let filename = result.url;
     try {
         const salt = await bcrypt.genSalt(10);
         const userReg = new UserModel(req.body);
