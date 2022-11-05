@@ -9,9 +9,7 @@ const ProductSchema = new mongoose.Schema(
         color: {type: String},
         stock: {type: Number, required: true},
         img: {type: String, required: true},
-        img_product: [
-
-        ]
+        img_product: []
 
     },
     {timestamps: true}

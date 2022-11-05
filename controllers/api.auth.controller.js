@@ -1,23 +1,32 @@
 const UserModel = require('../models/user.model');
+const IMGModel = require('../models/Img.model');
 const bcrypt =require('bcrypt');
 const jwt =require('jsonwebtoken');
 const {restPassword} =require('../utils/emailTemplates');
 const {sendEmail} =require('../utils/sendEmail');
-const fs = require("fs");
-const {streamUpload} =require('../utils/UploadIMG');
+const {streamUploadAPI} =require('../utils/UploadIMG');
+const cloudinary = require("cloudinary").v2;
 
 
 
 exports.postReg= async (req,res)=>{
-    let result = await streamUpload(req);
-    let filename = result.url;
+    let result;
+    let filename
+    if (req.file){
+        result = await streamUploadAPI(req);
+        filename=result.url
+    }else {
+      const Avatar = await IMGModel.findById({_id:"6366274f29d343cc922c5946"});
+      result = Avatar.IMG;
+        filename=result;
+    }
+
     try {
         const salt = await bcrypt.genSalt(10);
         const userReg = new UserModel(req.body);
 
         userReg.password =await bcrypt.hash(req.body.password,salt);
-        userReg.avatar =filename
-
+        userReg.avatar =await filename;
         await userReg.save()
         const token =await userReg.generateAuthToken();
 
