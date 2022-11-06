@@ -22,6 +22,7 @@ var apiCategoryRouter = require('./routes/api.categorys');
 var apiProductRouter = require('./routes/api.product');
 var apiCartRouter =require('./routes/api.cart');
 var apiCommentRouter =require('./routes/api.comment');
+var thongkeRouter =require('./routes/thongke');
 
 var app = express();
 //ket noi voi database
@@ -59,6 +60,8 @@ app.use('/api/categorys',apiCategoryRouter);
 app.use('/api/products',apiProductRouter);
 app.use('/api/cart',apiCartRouter);
 app.use('/api/comment',apiCommentRouter);
+app.use('/thongke',thongkeRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

@@ -4,7 +4,7 @@ const bcrypt =require('bcrypt');
 const jwt =require('jsonwebtoken');
 const {restPassword} =require('../utils/emailTemplates');
 const {sendEmail} =require('../utils/sendEmail');
-const {streamUploadAPI} =require('../utils/UploadIMG');
+const {streamUploadAPI, streamUpload} =require('../utils/UploadIMG');
 const cloudinary = require("cloudinary").v2;
 
 
@@ -178,5 +178,81 @@ exports.putResetPassword =async (req,res)=>{
             message:e,
         })
     }
+}
+//update profile
+exports.putEdit = async (req,res,next)=>{
+    const user = req.user
+    // console.log(user)
+    let dieu_kien ={
+        _id : user._id // id user
+    }
+    console.log(dieu_kien)
+    let du_lieu;
+    if (req.file!=null){
+        let result = await streamUpload(req);
+        let filename = result.url;
+         du_lieu = {
+            email:req.body.email,
+            full_name:req.body.full_name,
+            address:req.body.address,
+            phone_number:req.body.phone_number,
+            avatar:filename
+        }
+    }else {
+         du_lieu = {
+            email:req.body.email,
+            full_name:req.body.full_name,
+            address:req.body.address,
+            phone_number:req.body.phone_number,
+            // avatar:filename
+        }
+    }
+
+    // let du_lieu = {
+    //     email:req.body.user_email,
+    //     full_name:req.body.user_full_name,
+    //     address:req.body.user_address,
+    //     phone_number:Number(req.body.user_phone_number),
+    //     role:req.body.role,
+    //     avatar:filename
+    // }
+    // console.log(du_lieu)
+    //goi lenh update
+    UserModel.updateOne(dieu_kien,du_lieu,function (err,res){
+        if (err)
+        {
+            console.log("Loi update"+err.message,{msg:'Lỗi update'})
+        }else {
+            console.log("update oke")
+        }
+    })
+    return res.json({ success: true });
+}
+//update sdt
+exports.putEditPhone = async (req,res,next)=>{
+    const user = req.user
+    let dieu_kien ={
+        _id : user._id // id user
+    }
+    console.log(dieu_kien)
+    let du_lieu = {
+        // email:req.body.user_email,
+        // full_name:req.body.user_full_name,
+        // address:req.body.user_address,
+        phone_number:req.body.phone_number,
+        // role:req.body.role,
+        // avatar:filename
+    }
+    console.log(du_lieu)
+    //goi lenh update
+    UserModel.updateOne(dieu_kien,du_lieu,function (err,res){
+        if (err)
+        {
+            console.log("Loi update"+err.message,{msg:'Lỗi update'})
+        }else {
+            console.log("update oke")
+        }
+    })
+    return res.json({ success: true });
 }
 

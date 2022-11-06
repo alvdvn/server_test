@@ -1,0 +1,99 @@
+<div style="margin-top: 20px">
+    <h3>Thống kê</h3>
+    <div class="row">
+        <div class="col-lg-3 col-6 text-center">
+            <div class="border-dashed border-1 border-secondary border-radius-md py-3">
+                <h6 class="text-primary text-gradient mb-0">Earnings</h6>
+                <h4 class="font-weight-bolder"><span class="small">$ </span><span id="state1" countTo="23980"></span></h4>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6 text-center">
+            <div class="border-dashed border-1 border-secondary border-radius-md py-3">
+                <h6 class="text-primary text-gradient mb-0">Customers</h6>
+                <h4 class="font-weight-bolder"><span class="small">$ </span><span id="state2" countTo="2400"></span></h4>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6 text-center mt-4 mt-lg-0">
+            <div class="border-dashed border-1 border-secondary border-radius-md py-3">
+                <h6 class="text-primary text-gradient mb-0">Avg. Value</h6>
+                <h4 class="font-weight-bolder"><span class="small">$ </span><span id="state3" countTo="48"></span></h4>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6 text-center mt-4 mt-lg-0">
+            <div class="border-dashed border-1 border-secondary border-radius-md py-3">
+                <h6 class="text-primary text-gradient mb-0">Refund Rate</h6>
+                <h4 class="font-weight-bolder"><span id="state4" countTo="4"></span><span class="small"> %</span></h4>
+            </div>
+        </div>
+    </div>
+    <div style="height: 400px;width: 800px">
+        <canvas id="myChart" width="200" height="100"></canvas>
+<script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    if (document.getElementById('state1')) {
+        const countUp = new CountUp('state1', document.getElementById("state1").getAttribute("countTo"));
+        if (!countUp.error) {
+            countUp.start();
+        } else {
+            console.error(countUp.error);
+        }
+    }
+    if (document.getElementById('state2')) {
+        const countUp = new CountUp('state2', document.getElementById("state2").getAttribute("countTo"));
+        if (!countUp.error) {
+            countUp.start();
+        } else {
+            console.error(countUp.error);
+        }
+    }
+    if (document.getElementById('state3')) {
+        const countUp = new CountUp('state3', document.getElementById("state3").getAttribute("countTo"));
+        if (!countUp.error) {
+            countUp.start();
+        } else {
+            console.error(countUp.error);
+        }
+    }
+    if (document.getElementById('state4')) {
+        const countUp = new CountUp('state4', document.getElementById("state4").getAttribute("countTo"));
+        if (!countUp.error) {
+            countUp.start();
+        } else {
+            console.error(countUp.error);
+        }
+    }
+</script>

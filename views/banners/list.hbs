@@ -9,39 +9,42 @@
         <input class="form-control" id="myInput" type="text" placeholder="Tìm kiếm.."
         style="margin-bottom: 10px">
 
-        <table class="table table-bordered">
+        <table class="table table-bordered" style="text-align: center">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Mô tả</th>
+<!--                <th>ID</th>-->
                 <th>Ảnh</th>
+                <th>Mô tả</th>
+<!--                <th>Ảnh</th>-->
                 <th>Hành động</th>
             </tr>
             </thead>
             <tbody id="myTableBanner">
-            {{#each itemList}}
+                    {{#each itemList}}
                 <tr>
-                    <td scope="row">{{this._id}}</td>
+                    <td><img src="https://bucket.nhanh.vn/store/662/bn/opt_6.png" width="100px" style="vertical-align: center" class="img-rounded"></td>
+                    <!--                    <td scope="row">{{this._id}}</td>-->
                     <td scope="row">{{this.description}}</td>
-                    <td><img src="{{this.anh}}" width="100px" style="vertical-align: center" class="img-rounded"></td>
+<!--                    <td><img src="https://bucket.nhanh.vn/store/662/bn/opt_6.png" width="100px" style="vertical-align: center" class="img-rounded"></td>-->
+<!--                    class="avatar avatar-sm rounded-circle me-2"-->
                     <td>
                         <a href="/banners/edit/{{this._id}}" class="btn btn-primary" id="btnAction">Sửa</a>
                         <a href="/banners/delete/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')"
                            id="btnAction" class="btn btn-danger">Xóa</a>
                     </td>
                 </tr>
-            {{/each}}
+                    {{/each}}
             </tbody>
         </table>
     </div>
 </div>
-<script>
-    $(document).ready(function(){
-        $("#myInput").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $("#myTableBanner tr").filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTableBanner tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
             });
         });
-    });
-</script>
+    </script>
