@@ -1,6 +1,14 @@
 const CartModel =require('../models/cart.model');
 const ProductModel =require('../models/product.model');
 
+const calcTotalCartPrice = (cart) => {
+    let totalPrice = 0;
+    cart.products.forEach((item) => {
+        totalPrice += item.quantity * item.price;
+    });
+    cart.Total = totalPrice;
+    return totalPrice;
+};
 
 exports.postAddCart = async (req,res)=> {
     const { productId,quantity ,size,color} = req.body;
@@ -68,28 +76,59 @@ const user =req.user
     let cart =await CartModel.findOne({userId:user._id})
     res.status(200).send(cart);
 }
+
+exports.updateCartItemQuantity= async (req,res)=>{
+    const itemId = req.params.itemId;
+    const user = req.user;
+    const {quantity} =req.body;
+//check xem có giỏ hàng của người dùng này không
+ const cart =await  CartModel.findOne({userId:user._id});
+ //check và trả về nếu không có người dùng
+if (!cart){
+    return res.status(404).json({
+        status:false,
+        message:"giỏ hàng người dùng này không tồn tại"
+    });
+}
+    const itemIndex = cart.products.findIndex(
+        (item) => item._id.toString() === itemId
+    );
+ //check xem ở vị trí itemIndex xem có data ko neu co thi su li khong thi tra ve loi
+    if (itemIndex >-1){
+        const cartItem =cart.products[itemIndex];
+        cartItem.quantity =quantity;
+        cart.products[itemIndex]=cartItem;
+    }else {
+        return res.status(404).json({
+            status:false,
+            message:"không có item nào đúng với cái id này"
+        })
+    }
+    calcTotalCartPrice(cart);
+    await cart.save();
+    res.status(200).json({
+        status:true,
+        numOfCartItems: cart.products.length,
+        data:cart
+    });
+}
+
 exports.DeleteCartItem =async (req,res)=>{
     const user = req.user
-    const { productId } = req.body
-    const cart = await CartModel.findOne({
-        userId: user._id
-    })
-    if (!cart) {
-        res.json({ success: true });
-    }
-    const productIndex = cart.products.findIndex(item => String(item.productId) === productId )
-    if (productIndex < 0) {
-        return res.json({ success: true });
-    }
-    const newItems = cart
-        .products
-        .splice(productIndex, 1);
-    await CartModel.updateOne({
-        _id: cart._id
-    }, {
-        $set: {
-            products: newItems
-        }
-    })
-    return res.json({ success: true });
+
+    const {ItemId} = req.body
+    const cart = await CartModel.findOneAndUpdate(
+        { userId: user._id },
+        {
+            $pull: { products: { _id: ItemId} },
+        },
+        { new: true }
+    );
+    calcTotalCartPrice(cart)
+    cart.save();
+    res.status(200).json({
+        status: 'success',
+        numOfCartItems: cart.products.length,
+        data: cart,
+    });
 }

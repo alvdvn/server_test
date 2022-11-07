@@ -28,6 +28,7 @@
     "randomstring": "^1.2.3",
     "strapi-provider-email-nodemailer": "^3.6.10",
     "streamifier": "^0.1.1",
+    "twilio": "^3.83.1",
     "util": "^0.12.5",
     "uuidv4": "^6.2.13"
   }
