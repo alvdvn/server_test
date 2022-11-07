@@ -27,21 +27,21 @@ exports.postAddCart = async (req,res)=> {
                 //product exists in the cart, update the quantity
                 let productItem = cart.products[itemIndex];
                 productItem.quantity = quantity;
-                productItem.price *=quantity;
+                productItem.price ;
                 cart.products[itemIndex] = productItem;
-                cart.Total = cart.products.map(item =>item.price).reduce((acc, next) => acc + next);
+                cart.Total = calcTotalCartPrice(cart)
             } else {
                 //product does not exists in cart, add new item
                 cart.products.push({
                     productId,
                     quantity ,
                     title:productItem.title,
-                    price:productItem.price*quantity,
+                    price:productItem.price,
                     ProductIMG:productItem.img,
                     size,
                     color,
                 });
-                cart.Total = cart.products.map(item =>item.price).reduce((acc, next) => acc + next);
+                cart.Total = calcTotalCartPrice(cart)
             }
             cart = await cart.save();
             return res.status(201).send(cart);
@@ -53,7 +53,7 @@ exports.postAddCart = async (req,res)=> {
                     productId,
                     quantity,
                     title:productItem.title,
-                    price:productItem.price*quantity,
+                    price:productItem.price,
                     ProductIMG:productItem.img,
                     size,
                     color,
