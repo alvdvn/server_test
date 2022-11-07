@@ -5,6 +5,6 @@ var auth = require('../middleware/api.auth.middleware');
 
  router.post('/add',auth, apiCartController.postAddCart);
  router.get('/list',auth, apiCartController.getAllCartByUserID);
- router.delete('/delete', auth, apiCartController.DeleteCartItem);
+ router.post('/delete', auth, apiCartController.DeleteCartItem);
  router.put('/update/:itemId',auth,apiCartController.updateCartItemQuantity);
 module.exports = router;

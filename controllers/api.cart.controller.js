@@ -115,7 +115,6 @@ if (!cart){
 
 exports.DeleteCartItem =async (req,res)=>{
     const user = req.user
-
     const {ItemId} = req.body
     const cart = await CartModel.findOneAndUpdate(
         { userId: user._id },
