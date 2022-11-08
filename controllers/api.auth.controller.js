@@ -255,5 +255,18 @@ exports.putEditPhone = async (req,res,next)=>{
     })
     return res.json({ success: true });
 }
+//update adress
+exports.putChangeAddress = async (req,res,next)=>{
+   const user = req.user._id;
+   const {address}=req.body;
+   const addressUpdate = await UserModel.updateOne(
+       {_id:user},
+       {$set:{address:address}}
+   );
+   res.status(200).json({
+       status:true,
+       message:"Update địa chỉ thành công"
+   })
+}
 
 

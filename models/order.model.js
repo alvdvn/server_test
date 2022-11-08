@@ -4,32 +4,38 @@ const OrderSchema = new mongoose.Schema(
         userId: { type: mongoose.Schema.Types.ObjectId,ref:"User", required: true },
         name:'String',
         phoneNumber:'String',
-
-        purDate:'String',
-        soLuong:{
-            type: Number
-        },
         products: [
             {
                 productId: {
                     type: String,
                 },
-                    quantity: {
-                    type: Number,
-                    default: 1,
-                },
-                price:{type:Number, required:true},
+                title:{type:String},
+                ProductIMG:{type:String},
+                price:{type:Number},
+                size:{type:String},
+                color:{type:String},
             },
         ],
         address: {
             type: String,
             required: true,
         },
-        amount: {
+        Total: {
             type: Number,
             require: true,
         },
-        status: { type: String, default: "pending" },
+        paymentMethodType: {
+            type: String,
+            enum: ['card', 'cash'],
+            default: 'cash',
+        },
+        isPaid: {
+            type: Boolean,
+            default: false,
+        },
+        status: { type: String,enum:['pending','Confirmed'], default: "pending" },
+        paidAt: Date,
+        ConfirmedAt:Date
     },
     { timestamps: true }
 );

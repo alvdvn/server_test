@@ -13,8 +13,7 @@ router.post('/logout-all',auth,apiAuth.postLogoutAll ) ;// logout: đăng xuất
 router.put('/change-password',auth,apiAuth.putChangePassword); //change password api
 router.post('/forgot-password',apiAuth.postForgotPassword);//sent forgot user link to rest password
 router.put('/reset-password/:token',apiAuth.putResetPassword); //
-
+router.put('/change-address',auth,apiAuth.putChangeAddress);//change address
 router.put('/edits',auth,fileUpload.single('avatar') ,apiAuth.putEdit);
 router.put('/edit-phone-number',auth,apiAuth.putEditPhone);
-
 module.exports = router;
