@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const {types} = require("util");
 const OrderSchema = new mongoose.Schema(
     {
         userId: { type: mongoose.Schema.Types.ObjectId,ref:"User", required: true },
@@ -12,6 +13,11 @@ const OrderSchema = new mongoose.Schema(
                 title:{type:String},
                 ProductIMG:{type:String},
                 price:{type:Number},
+                quantity: {
+                    type: Number,
+                    default: 1,
+                    min:[1]
+                },
                 size:{type:String},
                 color:{type:String},
             },
@@ -35,8 +41,9 @@ const OrderSchema = new mongoose.Schema(
         },
         status: { type: String,enum:['pending','Confirmed'], default: "pending" },
         paidAt: Date,
-        ConfirmedAt:Date
+        ConfirmedAt: String,
+        CreatedAt:String
     },
-    { timestamps: true }
+
 );
 module.exports = mongoose.model("Order", OrderSchema);

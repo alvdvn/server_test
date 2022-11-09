@@ -22,8 +22,8 @@
                 <td>{{this.Total}}</td>
                 <td>{{this.status}}</td>
                 <td>
-                    <a href="/orders/detail/{{this._id}}" class="btn btn-primary" id="btnAction">chi tiết order</a>
-                    <a href="/orders/delete/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')" id="btnAction" class="btn btn-danger">Del</a>
+                    <a href="/order/detail/{{this._id}}" class="btn btn-primary" id="btnAction">chi tiết order</a>
+                    <a href="/order/delete/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')" id="btnAction" class="btn btn-danger">Del</a>
                 </td>
             </tr>
         {{/each}}

@@ -2,9 +2,12 @@ const CartModel =require('../models/cart.model');
 const OrderModel =require('../models/order.model');
 const ProductModel =require('../models/product.model');
 exports.PostCashOrder= async(req, res)=>{
+    //conver time to viet nam time
+    const nDate = new Date().toLocaleString('en-US', {
+        timeZone: 'Asia/Ho_Chi_Minh'
+    })
     const cartId = req.params.cartId;
     const user = req.user;
-    console.log(user);
     //get cart == cartId
     const cart = await CartModel.findById(cartId);
     if (!cart){
@@ -21,7 +24,8 @@ exports.PostCashOrder= async(req, res)=>{
         phoneNumber:user.phone_number,
         products:cart.products,
         address:user.address,
-        Total:cart.Total
+        Total:cart.Total,
+        CreatedAt:nDate
     });
     // nếu order thành công thì tiến hàng trừ stock = quanty
     if (Order){
@@ -32,7 +36,7 @@ exports.PostCashOrder= async(req, res)=>{
             },
         }));
         await ProductModel.bulkWrite(bulkoption,{});
-        await CartModel.findByIdAndDelete(cartId);
+        // await CartModel.findByIdAndDelete(cartId);
     }
     res.status(201).json({
         status:true,

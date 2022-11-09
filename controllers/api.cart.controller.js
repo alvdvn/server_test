@@ -117,7 +117,6 @@ exports.DeleteCartItem =async (req,res)=>{
     const user = req.user
 
     const itemId = req.params.itemId;
-    console.log(itemId)
     const cart = await CartModel.findOneAndUpdate(
         { userId: user._id },
         {
@@ -129,7 +128,5 @@ exports.DeleteCartItem =async (req,res)=>{
     cart.save();
     res.status(200).json({
         status: 'success',
-        numOfCartItems: cart.products.length,
-        data: cart,
     });
 }

@@ -16,6 +16,7 @@ var proRouter = require('./routes/product');
 var bannerRouter = require('./routes/banner');
 var cateRouter =require('./routes/cate');
 var thongkeRouter =require('./routes/thongke');
+var OroderRouter =require('./routes/order');
 var CommentRouter =require('./routes/Comment');
 //api router
 var apiAuthRouter =require('./routes/api.auth');
@@ -57,6 +58,7 @@ app.use('/pro',proRouter);
 app.use('/banners',bannerRouter);
 app.use('/cate',cateRouter);
 app.use('/comment',CommentRouter);
+app.use('/order',OroderRouter);
 app.use('/thongke',thongkeRouter);
 //api router
 app.use('/api/auth',apiAuthRouter);

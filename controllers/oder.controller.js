@@ -1,12 +1,24 @@
 const orderModel = require("../models/order.model");
 const userModel = require("../models/user.model");
-const fs = require("fs");
-const {lstat} = require("fs");
 
 exports.getFormlistOrder = async (req, res, next)=>{
     const listOrder = await orderModel.find();
-    // const  listUser = await  userModel.find()
     res.render('./orders/orderList',{listOrder:listOrder});
+}
+
+exports.getFormDetaiOrder =async (req,res)=>{
+let UserOderData =await orderModel.findById(req.params.id).exec().
+catch(function (err) {
+    console.log(err);
+});
+const userItems =UserOderData.products.map( function (item) {
+    return item;
+} )
+    console.log(UserOderData);
+    if (UserOderData ==null){
+        res.send('Không tìm thấy bản ghi');
+    }
+    res.render('./orders/detailOrder',{UserOderData:UserOderData});
 }
 
 //get form list
