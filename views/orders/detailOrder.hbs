@@ -51,17 +51,25 @@
             </div>
         </div>
         <div class="card-footer">
-            <div class="jumbotron-fluid">
-                <div class="row justify-content-between ">
-                    <div class="col-auto my-auto "><h2 class="mb-0 font-weight-bold text-white">TOTAL PAID</h2></div>
-                    <div class="col-auto my-auto ml-auto"><h1 class="display-3 text-white ">&#8377; 5,528</h1></div>
-                </div>
-                <div class="row mb-3 mt-3 mt-md-0">
-                    <div class="col-auto border-line"> <small class="text-white">PAN:AA02hDW7E</small></div>
-                    <div class="col-auto border-line"> <small class="text-white">CIN:UMMC20PTC </small></div>
-                    <div class="col-auto "><small class="text-white">GSTN:268FD07EXX </small> </div>
-                </div>
-            </div>
+          <form method="post">
+              <div class="jumbotron-fluid">
+                  <div class="row align-items: start ">
+                      <p class=" mr-3 mt-1 "><span class="font-weight-bold">Cập nhật trạng thái :</span></p>
+                      <div class="form-check form-check-inline pb-2 mr-5">
+                          <input class="form-check-input" type="radio" id="inlineCheckbox1" name="status" value="pending" checked>
+                          <label class="form-check-label" for="inlineCheckbox1">pending</label>
+                      </div>
+                      <div class="form-check form-check-inline pb-2">
+                          <input class="form-check-input" type="radio" id="inlineCheckbox2" name="status" value="Confirmed" >
+                          <label class="form-check-label" for="inlineCheckbox2">Confirmed</label>
+                      </div>
+                  </div>
+                  <div class="row justify-content-between mb-3 mt-3 mt-md-0 ">
+                      <div class="col-auto border-line ml-5"> <button type="submit" class="btn btn-success">Cập nhật</button></div>
+                      <div class="col-auto border-line  mr-5"> <a href="/order/listorder"><button class="btn btn-success">Hủy Bỏ</button></a>  </div>
+                  </div>
+              </div>
+          </form>
         </div>
     </div>
 </div></div>

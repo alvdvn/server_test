@@ -32,7 +32,7 @@ exports.PostCashOrder= async(req, res)=>{
         const bulkoption = cart.products.map((item)=>({
             updateOne: {
                 filter:{_id:item.productId},
-                update:{$inc:{stock:-item.quantity}},
+                update:{$inc:{stock:-item.quantity,sold: +item.quantity}},
             },
         }));
         await ProductModel.bulkWrite(bulkoption,{});

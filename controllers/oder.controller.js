@@ -20,20 +20,22 @@ const userItems =UserOderData.products.map( function (item) {
     }
     res.render('./orders/detailOrder',{UserOderData:UserOderData});
 }
-
-//get form list
-exports.getFormEditOrder = async (req,res,next)=>{
-    let itemOrder = await orderModel.findById(req.params.id)
-        .exec()
-        .catch(function (err){
-            console.log(err)
-        });
-    console.log(itemOrder);
-    if (itemOrder==null){
-        res.send('Khong tim thay')
+//edit detail order
+exports.PostDetailOrder = (req,res)=>{
+    let dieu_kien ={
+        _id: req.params.id
     }
-    res.render('./orders/editorder',{itemOrder:itemOrder})
+    let du_lieu ={
+        status :req.body.status
+    }
+    orderModel.updateOne(dieu_kien,du_lieu,function (err,res){
+        if (err){
+            console.log("Loi update"+err.message,{msg:'Lỗi update'})
+        }
+    });
+    res.redirect('/order/listorder');
 }
+//get form list
 exports.postEdit=(req,res,next)=>{
     console.log(req.params);
     let dieu_kien ={
