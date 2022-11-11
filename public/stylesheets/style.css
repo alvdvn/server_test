@@ -1,187 +1,188 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  /*background: url("../image/bg.jpg");*/
   background-color: white;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
-
+.link-dark {
+  color: #212529!important;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  color: var(--bs-nav-pills-link-active-color);
+  background-color: var(--bs-nav-pills-link-active-bg);
+}
 /*a {*/
 /*  color: #00B7FF;*/
 /*}*/
-.bg-login {
+/*.bg-login {*/
 
-  background-image: url('../image/bg1.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  font-weight: bold;
-  color: brown;
-  width: 100%;
-  margin-top: 100px;
+/*  background-image: url('../image/bg1.png');*/
+/*  background-repeat: no-repeat;*/
+/*  background-size: cover;*/
+/*  font-weight: bold;*/
+/*  color: brown;*/
+/*  width: 100%;*/
+/*  margin-top: 100px;*/
 
-}
-li {
-  list-style-type: none;
-}
-.nav-link {
-  color: brown;
-}
+/*}*/
+/*li {*/
+/*  list-style-type: none;*/
+/*}*/
+/*.nav-link {*/
+/*  color: brown;*/
+/*}*/
 /*layout*/
-html {
-  position: relative;
-  min-height: 100%;
-}
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
-.jumbotron {
-  background-image: url("https://www.smak.co.za/images/bg.jpg");
-  background-size: 100% 100%;
-  color: #b0bec5;
-  margin-bottom: 0;
-}
-.navbar-scroll {
-  background-color: rgba(0,123,255,0.4);
-  transition: background-color 0.5s;
-}
-@media(max-width: 768px){
-  .navbar {background-color: #007bff !important; }
-}
-/* ============================================================
-  PRIMARY STRUCTURE
-============================================================ */
-.parallax-container {
-  max-width: 960px;
-  margin: 0 auto;
-}
+/*html {*/
+/*  position: relative;*/
+/*  min-height: 100%;*/
+/*}*/
+/*body {*/
+/*  !* Margin bottom by footer height *!*/
+/*  margin-bottom: 60px;*/
+/*}*/
+/*.jumbotron {*/
+/*  background-image: url("https://www.smak.co.za/images/bg.jpg");*/
+/*  background-size: 100% 100%;*/
+/*  color: #b0bec5;*/
+/*  margin-bottom: 0;*/
+/*}*/
+/*.navbar-scroll {*/
+/*  background-color: rgba(0,123,255,0.4);*/
+/*  transition: background-color 0.5s;*/
+/*}*/
+/*@media(max-width: 768px){*/
+/*  .navbar {background-color: #007bff !important; }*/
+/*}*/
+/*!* ============================================================*/
+/*  PRIMARY STRUCTURE*/
+/*============================================================ *!*/
+/*.parallax-container {*/
+/*  max-width: 960px;*/
+/*  margin: 0 auto;*/
+/*}*/
 
-/* ============================================================
-  SECTIONS
-============================================================ */
-section.module:last-child {
-  margin-bottom: 0;
-}
-section.module h2 {
-  margin-bottom: 40px;
-  font-family: "Roboto Slab", serif;
-  font-size: 30px;
-}
-section.module p {
-  margin-bottom: 40px;
-  font-size: 16px;
-  font-weight: 300;
-}
-section.module p:last-child {
-  margin-bottom: 0;
-}
-section.module.content {
-  padding: 40px 0;
-  background-color: rgba(207,216,220,0.5);
-}
-section.module.content:last-child {
-  margin-bottom: 60px;
-}
-section.module.parallax {
-  padding: 240px 0;
-  background-position: 0 0;
-}
-section.module.parallax h1 {
-  color: #1e1e1e;
-  font-size: 48px;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-  text-transform: uppercase;
-  text-shadow: 0 0 10px white;
-}
-section.module.parallax-1 {
-  background-image: url("https://i.ytimg.com/vi/SwOaV-pzGcA/maxresdefault.jpg");
-  background-position: 50% 0;
-  background-repeat: repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  background-color: rgba(0,123,255,0.4);
-  background-blend-mode: screen;
-}
-section.module.parallax-2 {
-  background-image: url("http://www.planwallpaper.com/static/images/Fall-Nature-Background-Pictures.jpg");
-  background-position: 50% 0;
-  background-repeat: repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  background-color: rgba(0,123,255,0.4);
-  background-blend-mode: screen;
-}
-section.module.parallax-3 {
-  background-image: url("http://www.psd-dude.com/tutorials/resources-images/free-rain-and-raindrop-textures-for-photoshop/raindrops-window-background.jpg");
-  background-position: 50% 0;
-  background-repeat: repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  background-color: rgba(0,123,255,0.4);
-  background-blend-mode: screen;
-}
+/*!* ============================================================*/
+/*  SECTIONS*/
+/*============================================================ *!*/
+/*section.module:last-child {*/
+/*  margin-bottom: 0;*/
+/*}*/
+/*section.module h2 {*/
+/*  margin-bottom: 40px;*/
+/*  font-family: "Roboto Slab", serif;*/
+/*  font-size: 30px;*/
+/*}*/
+/*section.module p {*/
+/*  margin-bottom: 40px;*/
+/*  font-size: 16px;*/
+/*  font-weight: 300;*/
+/*}*/
+/*section.module p:last-child {*/
+/*  margin-bottom: 0;*/
+/*}*/
+/*section.module.content {*/
+/*  padding: 40px 0;*/
+/*  background-color: rgba(207,216,220,0.5);*/
+/*}*/
+/*section.module.content:last-child {*/
+/*  margin-bottom: 60px;*/
+/*}*/
+/*section.module.parallax {*/
+/*  padding: 240px 0;*/
+/*  background-position: 0 0;*/
+/*}*/
+/*section.module.parallax h1 {*/
+/*  color: #1e1e1e;*/
+/*  font-size: 48px;*/
+/*  line-height: 1;*/
+/*  font-weight: 700;*/
+/*  text-align: center;*/
+/*  text-transform: uppercase;*/
+/*  text-shadow: 0 0 10px white;*/
+/*}*/
+/*section.module.parallax-1 {*/
+/*  background-image: url("https://i.ytimg.com/vi/SwOaV-pzGcA/maxresdefault.jpg");*/
+/*  background-position: 50% 0;*/
+/*  background-repeat: repeat;*/
+/*  background-attachment: fixed;*/
+/*  background-size: cover;*/
+/*  background-color: rgba(0,123,255,0.4);*/
+/*  background-blend-mode: screen;*/
+/*}*/
+/*section.module.parallax-2 {*/
+/*  background-image: url("http://www.planwallpaper.com/static/images/Fall-Nature-Background-Pictures.jpg");*/
+/*  background-position: 50% 0;*/
+/*  background-repeat: repeat;*/
+/*  background-attachment: fixed;*/
+/*  background-size: cover;*/
+/*  background-color: rgba(0,123,255,0.4);*/
+/*  background-blend-mode: screen;*/
+/*}*/
+/*section.module.parallax-3 {*/
+/*  background-image: url("http://www.psd-dude.com/tutorials/resources-images/free-rain-and-raindrop-textures-for-photoshop/raindrops-window-background.jpg");*/
+/*  background-position: 50% 0;*/
+/*  background-repeat: repeat;*/
+/*  background-attachment: fixed;*/
+/*  background-size: cover;*/
+/*  background-color: rgba(0,123,255,0.4);*/
+/*  background-blend-mode: screen;*/
+/*}*/
 
-@media all and (min-width: 600px) {
-  section.module h2 {
-    font-size: 42px;
-  }
-  section.module p {
-    font-size: 20px;
-  }
-  section.module.parallax {
-    padding: 300px 0;
-  }
-  section.module.parallax h1 {
-    font-size: 96px;
-  }
-}
-@media all and (min-width: 960px) {
-  section.module.parallax h1 {
-    font-size: 160px;
-  }
-}
-/*footer*/
-.footer .container-fluid {
-  height: auto;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  line-height: 60px;
-}
-footer .container-fluid a {
-  display: inline-block;
-  color: #ddd;
-  padding-left: 1em;
+/*@media all and (min-width: 600px) {*/
+/*  section.module h2 {*/
+/*    font-size: 42px;*/
+/*  }*/
+/*  section.module p {*/
+/*    font-size: 20px;*/
+/*  }*/
+/*  section.module.parallax {*/
+/*    padding: 300px 0;*/
+/*  }*/
+/*  section.module.parallax h1 {*/
+/*    font-size: 96px;*/
+/*  }*/
+/*}*/
+/*@media all and (min-width: 960px) {*/
+/*  section.module.parallax h1 {*/
+/*    font-size: 160px;*/
+/*  }*/
+/*}*/
+/*!*footer*!*/
+/*.footer .container-fluid {*/
+/*  height: auto;*/
+/*}*/
+/*.footer {*/
+/*  position: absolute;*/
+/*  bottom: 0;*/
+/*  width: 100%;*/
+/*  !* Set the fixed height of the footer here *!*/
+/*  height: 60px;*/
+/*  line-height: 60px;*/
+/*}*/
+/*footer .container-fluid a {*/
+/*  display: inline-block;*/
+/*  color: #ddd;*/
+/*  padding-left: 1em;*/
 
-}
-footer .container-fluid p {
-  display: inline-block;
-  color: #ddd;
-  padding-left: 1em;
-  padding-right: 2em;
-}
-@media(max-width: 768px){
-  .col-md-4 {
-    text-align: center;
-    line-height: 30px;
-  }
-}
-.right {
-  text-align: right;
-}
-.center {
-  text-align: center;
-}
-.left {
-  text-align: left;
-}
+/*}*/
+/*footer .container-fluid p {*/
+/*  display: inline-block;*/
+/*  color: #ddd;*/
+/*  padding-left: 1em;*/
+/*  padding-right: 2em;*/
+/*}*/
+/*@media(max-width: 768px){*/
+/*  .col-md-4 {*/
+/*    text-align: center;*/
+/*    line-height: 30px;*/
+/*  }*/
+/*}*/
+/*.right {*/
+/*  text-align: right;*/
+/*}*/
+/*.center {*/
+/*  text-align: center;*/
+/*}*/
+/*.left {*/
+/*  text-align: left;*/
+/*}*/
 .adddata{
   width: 1000px;
   background-color: rgb(255, 255, 255);
@@ -214,3 +215,4 @@ footer .container-fluid p {
   margin-bottom: 10px;
   margin-left: -10px;
 }
+

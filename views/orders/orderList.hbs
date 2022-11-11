@@ -1,33 +1,60 @@
-<div class="datalist">
-    <h3>Danh sách</h3>
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Tên khánh hàng</th>
-            <th>Số điện thoại</th>
-            <th>Địa chỉ</th>
-            <th>Tổng tiền</th>
-            <th>Trạng thái</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#each listOrder}}
-            <tr>
-                <td scope="row">{{this._id}}</td>
-                <td>{{this.name}}</td>
-                <td>{{this.phoneNumber}}</td>
-                <td>{{this.address}}</td>
-                <td>{{this.Total}}</td>
-                <td>{{this.status}}</td>
-                <td>
-                    <a href="/order/detail/{{this._id}}" class="btn btn-primary" id="btnAction">chi tiết order</a>
-                    <a href="/order/delete/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')" id="btnAction" class="btn btn-danger">Del</a>
-                </td>
-            </tr>
-        {{/each}}
-        </tbody>
-    </table>
-</div>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-9 ms-sm-auto col-lg-12 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Đơn hàng</h1>
+            </div>
+            <input class="form-control" id="myInput" type="text" placeholder="Tìm kiếm.."
+                   style="margin-bottom: 10px">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên khánh hàng</th>
+                    <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng thái</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody id="myTableOrder">
+                {{#each listOrder}}
+                    <tr>
+                        <td scope="row">{{this._id}}</td>
+                        <td>{{this.name}}</td>
+                        <td>{{this.phoneNumber}}</td>
+                        <td>{{this.address}}</td>
+                        <td>{{this.Total}}</td>
+                        <td>{{this.status}}</td>
+                        <td>
+                            <a href="/order/detail/{{this._id}}" class="btn btn-primary" id="btnAction">
+                                <svg class="bi pe-none me-2" width="16" height="16">
+                                    <use xlink:href="#chitiet"/>
+                                </svg>
+                            </a>
+                            <a href="/order/delete/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')"
+                               id="btnAction" class="btn btn-danger">
+                                <svg class="bi pe-none me-2" width="16" height="16">
+                                    <use xlink:href="#delete"/>
+                                </svg>
+                                </a>
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $("#myInput").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTableOrder tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+        </script>
+    </div>
 </div>

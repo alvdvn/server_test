@@ -1,32 +1,60 @@
-<div class="datalist">
-    <div class="col-12" id="headerlist">
-        <div class="btnaddbanner">
-            <a href="/categorys/add" class="btn btn-primary">Thêm</a>
+<div class="container-fluid">
+    <div class="col-md-9 ms-sm-auto col-lg-12 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Loại</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="col-12" id="headerlist">
+                    <div class="btnaddbanner">
+                        <a href="/categorys/add" class="btn btn-primary">Thêm loại</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="tables">
-        <h3>Danh sách</h3>
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Tên loại</th>
-                <th>Ảnh</th>
-                <th>Hành động</th>
-            </tr>
-            </thead>
-            <tbody>
-            {{#each listCate}}
+        <div class="tables">
+
+            <input class="form-control" id="myInput" type="text" placeholder="Tìm kiếm.."
+                   style="margin-bottom: 10px">
+
+            <table class="table table-bordered" style="text-align: center;">
+                <thead>
                 <tr>
-                    <td scope="row">{{this.title}}</td>
-                    <td><img src="{{this.CateImg}}" style="width: 50px;height: 50px;align-items: center"></td>
-                    <td>
-                        <a href="/cate/edit/{{this._id}}" class="btn btn-primary" id="btnAction">Sửa</a>
-                        <a href="/cate/delete/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')"
-                           id="btnAction" class="btn btn-danger">Xóa</a>
-                    </td>
+                    <th>Tên loại</th>
+                    <th>Ảnh</th>
+                    <th>Hành động</th>
                 </tr>
-            {{/each}}
-            </tbody>
-        </table>
+                </thead>
+                <tbody id="myTableCategory">
+                {{#each listCate}}
+                    <tr>
+                        <td scope="row">{{this.title}}</td>
+                        <td><img src="{{this.CateImg}}" style="width: 50px;height: 50px;align-items: center"></td>
+                        <td>
+                            <a href="/cate/edit/{{this._id}}" class="btn btn-primary" id="btnAction">
+                                <svg class="bi pe-none me-2" width="16" height="16">
+                                    <use xlink:href="#edit"/>
+                                </svg>
+                            </a>
+                            <a href="/cate/delete/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')"
+                               id="btnAction" class="btn btn-danger">
+                                <svg class="bi pe-none me-2" width="16" height="16">
+                                    <use xlink:href="#delete"/>
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $("#myInput").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTableCategory tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+        </script>
     </div>
 </div>

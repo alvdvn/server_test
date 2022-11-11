@@ -19,7 +19,4 @@ router.post('/edit/:id',fileUpload.single('avatar') ,usercontroller.getPostEditU
 router.get('/delete/:id', usercontroller.getFormDelete);
 
 
-
-
-
 module.exports = router;

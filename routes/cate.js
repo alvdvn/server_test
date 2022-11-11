@@ -13,9 +13,9 @@ router.get('/add',auth.YeuCauDangNhap,cateControlller.getFormAddCate);
 //post add cate
 router.post('/add',auth.YeuCauDangNhap,fileUpload.single('CateImg'),cateControlller.postAddCate);
 //get Form updated cate
-router.get('/edit/:id',cateControlller.getFormUpdateCate);
+router.get('/edit/:id',auth.YeuCauDangNhap, cateControlller.getFormUpdateCate);
 //post update cate
-router.post('/edit/:id',fileUpload.single('CateImg'),cateControlller.postUpdateCate);
+router.post('/edit/:id',auth.YeuCauDangNhap, fileUpload.single('CateImg'),cateControlller.postUpdateCate);
 //delete
-router.get('/delete/:id',cateControlller.getFormDelete);
+router.get('/delete/:id',auth.YeuCauDangNhap, cateControlller.getFormDelete);
 module.exports = router;

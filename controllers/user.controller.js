@@ -90,3 +90,15 @@ exports.getFormDelete = async (req,res,next)=>{
     res.redirect('/users/');
 }
 
+//get user
+exports.getUser =(req,res,next)=>{
+    res.render('account',{users:req.session.user});
+    console.log(req.session.user)
+}
+//log out
+exports.Logout = (req,res,next)=>{
+    req.session.destroy(function (){
+        console.log("Dang xuat thanh cong");
+    });
+    res.redirect('/login');
+}

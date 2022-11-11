@@ -1,50 +1,68 @@
-<div class="datalist">
-    <div class="col-12" id="headerlist">
-        <div class="btnaddbanner">
-            <a href="/banners/add" class="btn btn-primary">Thêm</a>
-        </div>
-    </div>
-    <div class="tables">
-        <h3>Danh sách</h3>
-        <input class="form-control" id="myInput" type="text" placeholder="Tìm kiếm.."
-        style="margin-bottom: 10px">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9 ms-sm-auto col-lg-12 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Banner</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="col-12" id="headerlist">
+                        <div class="btnaddbanner">
+                            <a href="/banners/add" class="btn btn-primary">Thêm</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tables">
+                <input class="form-control" id="myInput" type="text" placeholder="Tìm kiếm.."
+                       style="margin-bottom: 10px">
 
-        <table class="table table-bordered" style="text-align: center">
-            <thead>
-            <tr>
-<!--                <th>ID</th>-->
-                <th>Ảnh</th>
-                <th>Mô tả</th>
-<!--                <th>Ảnh</th>-->
-                <th>Hành động</th>
-            </tr>
-            </thead>
-            <tbody id="myTableBanner">
+                <table class="table table-bordered" style="text-align: center">
+                    <thead>
+                    <tr>
+                        <!--                <th>ID</th>-->
+                        <th>Ảnh</th>
+                        <th>Mô tả</th>
+                        <!--                <th>Ảnh</th>-->
+                        <th>Hành động</th>
+                    </tr>
+                    </thead>
+                    <tbody id="myTableBanner">
                     {{#each itemList}}
-                <tr>
-                    <td><img src="{{this.anh}}" width="100px" style="vertical-align: center" class="img-rounded"></td>
-                    <!--                    <td scope="row">{{this._id}}</td>-->
-                    <td scope="row">{{this.description}}</td>
-<!--                    <td><img src="https://bucket.nhanh.vn/store/662/bn/opt_6.png" width="100px" style="vertical-align: center" class="img-rounded"></td>-->
-<!--                    class="avatar avatar-sm rounded-circle me-2"-->
-                    <td>
-                        <a href="/banners/edit/{{this._id}}" class="btn btn-primary" id="btnAction">Sửa</a>
-                        <a href="/banners/delete/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')"
-                           id="btnAction" class="btn btn-danger">Xóa</a>
-                    </td>
-                </tr>
+                        <tr>
+                            <td><img src="{{this.anh}}" width="100px" style="vertical-align: center"
+                                     class="img-rounded"></td>
+                            <!--                    <td scope="row">{{this._id}}</td>-->
+                            <td scope="row">{{this.description}}</td>
+                            <!--                    <td><img src="https://bucket.nhanh.vn/store/662/bn/opt_6.png" width="100px" style="vertical-align: center" class="img-rounded"></td>-->
+                            <!--                    class="avatar avatar-sm rounded-circle me-2"-->
+                            <td>
+                                <a href="/banners/edit/{{this._id}}" class="btn btn-primary" id="btnAction">
+                                    <svg class="bi pe-none me-2" width="16" height="16">
+                                        <use xlink:href="#edit"/>
+                                    </svg>
+                                </a>
+                                <a href="/banners/delete/{{this._id}}"
+                                   onclick="return confirm('Bạn có muốn xóa không?')"
+                                   id="btnAction" class="btn btn-danger">
+                                    <svg class="bi pe-none me-2" width="16" height="16">
+                                        <use xlink:href="#delete"/>
+                                    </svg>
+                                </a>
+                            </td>
+                        </tr>
                     {{/each}}
-            </tbody>
-        </table>
-    </div>
-</div>
-    <script>
-        $(document).ready(function () {
-            $("#myInput").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $("#myTableBanner tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $("#myInput").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTableBanner tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
                 });
             });
-        });
-    </script>
+        </script>
+    </div>
+</div>

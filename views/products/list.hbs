@@ -1,56 +1,83 @@
-<style>
-    tr{
-        border: 1px solid black;
-    }
-    th{
-        border: 1px solid black;
-    }
-</style>
-<div class="datalist">
-    <div class="col-12" id="headerlist">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9 ms-sm-auto col-lg-12 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Sản phẩm</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="col-12" id="headerlist">
+                        <div class="btnaddbanner">
+                            <a href="/pro/add" class="btn btn-primary">Thêm</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    </div>
-    <div class="tables" style="background: #ffffff; border: 2px solid black;">
-        <h3>Danh sách</h3>
-        <table class="table table-bordered" >
-            <thead>
-            <tr>
-                <!--                <th>ID</th>-->
-                <th>title</th>
-                <th>price</th>
-                <th>desc</th>
-                <th>Image</th>
-                <th>category</th>
-                <th>size</th>
-                <th>color</th>
-                <th>stock</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-                {{#each listProduct}}
+            <input class="form-control" id="myInput" type="text" placeholder="Tìm kiếm.."
+                   style="margin-bottom: 10px">
+
+        <div class="tables" >
+            <table class="table table-bordered" style="text-align: center" >
+                <thead>
                 <tr>
-                    <td scope="row">{{this.title}}</td>
-                    <td>{{this.price}}</td>
-                    <td>{{this.desc}}</td>
-                    <td><img src="{{this.img}}" style="width: 50px;height: 50px;align-items: center"></td>
-                    <td>{{this.category}}</td>
-                    <td>{{this.sizes}}</td>
-                    <td>{{this.color}}</td>
-                    <td>{{this.stock}}</td>
-<!--                    <td><img src="" width="100px" style="vertical-align: center"></td>-->
-
-                    <td>
-                        <a href="/pro/upload/{{this._id}}" class="btn btn-primary" id="btnAction">Up ảnh</a>
-                        <a href="/pro/edit/{{this._id}}" class="btn btn-primary" id="btnAction">Edit</a>
-                        <a href="/pro/del/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')" id="btnAction" class="btn btn-danger">Del</a>
-                    </td>
-                    </td>
+                    <!--                <th>ID</th>-->
+                    <th>Tên sản phẩm</th>
+                    <th>Giá</th>
+                    <th>Mô tả</th>
+                    <th>Ảnh</th>
+                    <th>Loại</th>
+                    <th>Size</th>
+                    <th>Màu</th>
+                    <th>Stock</th>
+                    <th>Action</th>
                 </tr>
+                </thead>
+                <tbody id="myTableProduct">
+                {{#each listProduct}}
+                    <tr>
+                        <td scope="row">{{this.title}}</td>
+                        <td>{{this.price}}</td>
+                        <td>{{this.desc}}</td>
+                        <td><img src="{{this.img}}" style="width: 50px;height: 50px;align-items: center"></td>
+                        <td>{{this.category}}</td>
+                        <td>{{this.sizes}}</td>
+                        <td>{{this.color}}</td>
+                        <td>{{this.stock}}</td>
+                        <!--                    <td><img src="" width="100px" style="vertical-align: center"></td>-->
+
+                        <td>
+                            <a href="/pro/upload/{{this._id}}" class="btn btn-primary" id="btnAction">
+                                <svg class="bi pe-none me-2" width="16" height="16">
+                                    <use xlink:href="#upnhieuanh"/>
+                                </svg>
+                            </a>
+                            <a href="/pro/edit/{{this._id}}" class="btn btn-primary" id="btnAction">
+                                <svg class="bi pe-none me-2" width="16" height="16">
+                                    <use xlink:href="#edit"/>
+                                </svg>
+                            </a>
+                            <a href="/pro/del/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')" id="btnAction" class="btn btn-danger">
+                                <svg class="bi pe-none me-2" width="16" height="16">
+                                    <use xlink:href="#delete"/>
+                                </svg>
+                            </a>
+                        </td>
+                        </td>
+                    </tr>
 
 
-            {{/each}}
-            </tbody>
-        </table>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $("#myInput").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTableProduct tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+        </script>
     </div>
 </div>

@@ -6,7 +6,7 @@ var router = express.Router();
 
 router.get('/',auth.ChuaDangNhap,authController.getFormLogin);
 router.post('/',auth.ChuaDangNhap,authController.postLogin);
-router.get('/account',auth.ChuaDangNhap,authController.getProfileUser);
-router.get('/logout',authController.getLogOut);
+router.get('/account',auth.YeuCauDangNhap, authController.getProfileUser);
+router.get('/logout',auth.YeuCauDangNhap, authController.getLogOut);
 router.get("/reset-password/:token",authController.postResetPassword)
 module.exports = router;
