@@ -46,7 +46,7 @@ exports.postEdit= async (req,res,next)=>{
     }
     let result = await streamUpload(req);
     if (result ==null){
-      return res.render('./banners/edit',{msg:'chưa chọn file upload '});
+      return res.render('./banners/edit',{msg:'Chưa chọn file upload '});
     }
     let filename= result.url;
     let du_lieu = {
