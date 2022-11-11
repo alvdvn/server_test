@@ -6,6 +6,9 @@ exports.PostCashOrder= async(req, res)=>{
     const nDate = new Date().toLocaleString('en-US', {
         timeZone: 'Asia/Ho_Chi_Minh'
     })
+    console.log(nDate);
+    const StoD = new Date(nDate)
+    console.log(StoD)
     const cartId = req.params.cartId;
     const user = req.user;
     //get cart == cartId
@@ -25,7 +28,7 @@ exports.PostCashOrder= async(req, res)=>{
         products:cart.products,
         address:user.address,
         Total:cart.Total,
-        CreatedAt:nDate
+        CreatedAt:new Date(nDate)
     });
     // nếu order thành công thì tiến hàng trừ stock = quanty
     if (Order){

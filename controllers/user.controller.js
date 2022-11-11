@@ -1,7 +1,8 @@
 const UserModel = require('../models/user.model');
 const bcrypt = require("bcrypt");
 const fs = require('fs');
-const {streamUpload} =require('../utils/UploadIMG');
+const {streamUpload, streamUploadAPI} =require('../utils/UploadIMG');
+const IMGModel = require("../models/Img.model");
 //hien thi danh sach User
 exports.getListUSer=async(req,res,next)=>{
     var listUser = await UserModel.find();
@@ -17,8 +18,16 @@ exports.GetFormAddUser=(req,res,next)=>{
 //xu li them vao csdl
 exports.postAddUser= async (req,res,next)=>{
     const salt = await bcrypt.genSalt(10);
-    let result = await streamUpload(req);
-     let filename = result.url;
+    let result;
+    let filename
+    if (req.file){
+        result = await streamUploadAPI(req);
+        filename=result.url
+    }else {
+        const Avatar = await IMGModel.findById({_id:"6366274f29d343cc922c5946"});
+        result = Avatar.IMG;
+        filename=result;
+    }
  const newUser = new UserModel({
      email:req.body.user_email,
      password: await bcrypt.hash(req.body.user_password,salt),
