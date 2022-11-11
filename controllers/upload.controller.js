@@ -16,8 +16,6 @@ exports.getFormUpload = async (req,res,next)=>{
     res.render('./products/upload',{Book:Book})
 }
 exports.postUpload= async (req,res,next)=>{
-
-
     let condition = {_id: req.params.id};
     const  book = await  productModel.findById(req.params.id).exec()
         .catch(err=>{
@@ -25,6 +23,10 @@ exports.postUpload= async (req,res,next)=>{
         });
     if (book == null){
         return log("Comics not found");
+    }
+    console.log("anh: "+req.files)
+    if (req.files==""){
+        return res.render('./products/upload',{msg:'Chưa chọn file upload '});
     }
     const uploader = async (path)=> await cloudinary.uploads(path,'Comment');
     const urls =[]
@@ -57,5 +59,4 @@ exports.postUpload= async (req,res,next)=>{
         }
     });
     return res.redirect('/pro/list')
-
 }

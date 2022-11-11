@@ -14,7 +14,9 @@ res.render('./Category/add-Cate');
 
 exports.postAddCate=async (req,res,next)=>{
     let result = await streamUpload(req);
-
+    if (result ==null){
+        return res.render('./cate/edit',{msg:'Chưa chọn ảnh '});
+    }
     let filename= result.url;
     console.log(filename);
 
@@ -49,7 +51,9 @@ exports.postUpdateCate= async (req,res,next)=>{
         _id : req.params.id // lay id tren thanh dia chi
     }
     let result = await streamUpload(req);
-
+    if (result ==null){
+        return res.render('./cate/edit',{msg:'Chưa chọn ảnh'});
+    }
     let filename= result.url;
 
     let du_lieu = {
