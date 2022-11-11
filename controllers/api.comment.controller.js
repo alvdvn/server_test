@@ -19,24 +19,15 @@ try {
     }
     else { // nếu đã có user thì tiếp tục sử lý thêm cmt
         let itemProduct = await ProductModel.findById(ProductID);
-        const uploader = async (path)=> await cloudinary.uploads(path,'Comment');
-        const urls =[]
-        const files =req.files
-        for (const file of files){
-            const {path} =file
-            const newPath =await uploader(path)
-            urls.push(newPath)
-            fs.unlinkSync(path)}
-       const filename = urls.map(function (item) {
-           return item.url;
-       })
+
         if (itemProduct){
             const addComment = await commentModel.create({
                 productId:itemProduct._id,
-                    userId:user._id,
-                    ratingStar:Number(ratingStar),
-                    commentDes,
-                    CmtImg:filename,
+                userId:user._id,
+                userName:user.full_name,
+                userIMG:user.avatar,
+                ratingStar:Number(ratingStar),
+                commentDes,
             });
             res.status(200).send({
                 status:true,

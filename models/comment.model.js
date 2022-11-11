@@ -8,9 +8,11 @@ const CmtSchema = new mongoose.Schema(
             required: true
         },
                 userId: { type: mongoose.Schema.Types.ObjectId,ref:"User", required: true },
+                userName:{type:String},
+                userIMG:{type:String},
                 ratingStar:{type:Number},
                 commentDes:{type:String},
-                CmtImg:[],
+
     },
     { timestamps: true }
 );
