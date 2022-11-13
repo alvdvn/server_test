@@ -7,5 +7,4 @@ const apiOrder = require('../controllers/api.order.controller');
 router.post('/createCashOrder/:cartId',auth,apiOrder.PostCashOrder);
 
 
-
 module.exports = router;
