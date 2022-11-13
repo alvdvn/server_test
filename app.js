@@ -26,7 +26,8 @@ var apiProductRouter = require('./routes/api.product');
 var apiCartRouter =require('./routes/api.cart');
 var apiCommentRouter =require('./routes/api.comment');
 var apiOrderRouter =require('./routes/api.order');
-var apiAddressRouter =require('./routes/api.Address');
+var notiRouter =require('./routes/noti');
+var apiNotiRouter =require('./routes/api.noti');
 
 
 var app = express();
@@ -69,7 +70,10 @@ app.use('/api/products',apiProductRouter);
 app.use('/api/cart',apiCartRouter);
 app.use('/api/comment',apiCommentRouter);
 app.use('/api/order',apiOrderRouter);
-app.use('/api/address',apiAddressRouter);
+app.use('/notification',notiRouter);
+app.use('/api/notification',apiNotiRouter);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
