@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9 ms-sm-auto col-lg-12 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Thông báo</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                                        <div class="col-12" id="headerlist">
+                                            <div class="btnaddbanner">
+                                                <a href="/notification" class="btn btn-primary">Danh sách</a>
+                                            </div>
+                                        </div>
+                </div>
+            </div>
+            <form action="" method="POST">
+                {{#if msg}}
+                    <p class="text-danger">{{{msg}}}</p>
+                {{/if}}
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Tiêu đề</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="title">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Nội dung</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="body">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Link ảnh</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="image">
+                </div>
+                <!--                <div class="mb-3">-->
+                <!--                    <label for="exampleFormControlInput1" class="form-label">Ảnh</label>-->
+                <!--                    <input type="file" class="form-control2" id="exampleFormControlInput1" name="image">-->
+                <!--                </div>-->
+                <br>
+                <Button type="submit" class="btn btn-primary">Thêm</Button>
+            </form>
+            <br/>
+        </div>
+    </div>
+</div>

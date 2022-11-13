@@ -1,0 +1,88 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9 ms-sm-auto col-lg-12 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Thông báo</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="col-12" id="headerlist">
+                        <div class="btnaddbanner">
+                            <a href="/notification/add" class="btn btn-primary">Thêm</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <!--            {{#each itemList}}-->
+            <!--                <div class="list-group w-auto">-->
+            <!--                    <div href="notification/edit/{{this._id}}"-->
+            <!--                         class="list-group-item list-group-item-action d-flex gap-3 py-3"-->
+            <!--                         aria-current="true">-->
+            <!--                        <img src="{{this.image}}" alt="twbs" width="32" height="32" style="margin-right: 10px"-->
+            <!--                             class="rounded-circle flex-shrink-0">-->
+            <!--                        <div class="d-flex gap-2 w-100 justify-content-between">-->
+            <!--                            <div>-->
+            <!--                                <h6 class="mb-0">{{this.title}}</h6>-->
+            <!--                                <p class="mb-0 opacity-75">{{this.body}}</p>-->
+            <!--                            </div>-->
+            <!--                            <div class="row">-->
+            <!--                                <small class="opacity-50 text-nowrap">{{this.time}}</small>-->
+            <!--                                <a href="/notification/delete/{{this._id}}"-->
+            <!--                                   onclick="return confirm('Bạn có muốn xóa không?')"-->
+            <!--                                   style="margin-left: 10px; margin-right: 10px; margin-top: 10px">-->
+            <!--                                    <svg class="bi pe-none me-2" width="16" height="16">-->
+            <!--                                        <use xlink:href="#delete"/>-->
+            <!--                                    </svg>-->
+            <!--                                </a>-->
+            <!--                            </div>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--                <br/>-->
+                <!--            {{/each}}-->
+            <!--        </div>-->
+            <input class="form-control" id="myInput" type="text" placeholder="Tìm kiếm.."
+                   style="margin-bottom: 10px">
+            <table class="table table-striped" style="text-align: center">
+                <thead>
+                <tr>
+                    <th scope="col">Tiêu đề</th>
+                    <th scope="col">Nội dung</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody id="myTableNoti">
+                {{#each itemList}}
+                    <tr>
+                        <td>{{this.title}}</td>
+                        <td>{{this.body}}</td>
+                        <td>
+                            <a href="/notification/edit/{{this._id}}"
+                               style="margin-left: 10px; margin-right: 10px; margin-top: 10px">
+                                <svg class="bi pe-none me-2" width="16" height="16">
+                                    <use xlink:href="#edit"/>
+                                </svg>
+                            </a>
+                            <a href="/notification/delete/{{this._id}}"
+                                onclick="return confirm('Bạn có muốn xóa không?')"
+                                style="margin-left: 10px; margin-right: 10px; margin-top: 10px">
+                                <svg class="bi pe-none me-2" width="16" height="16">
+                                    <use xlink:href="#delete"/>
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTableNoti tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
