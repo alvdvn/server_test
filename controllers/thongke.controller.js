@@ -28,3 +28,16 @@ exports.getFilter = async (req,res)=>{
         });
     }
 }
+
+exports.getFilterMonthtoYear =(req,res)=>{
+    var months = ["jan", "feb", "mar", "apr", "may", "jun", "july", "aug", "sep", "oct", "nov", "dec"];
+
+    var date = new Date();
+    var month = date.getMonth(); // returns 0 - 11
+
+    var year = date.getFullYear();
+
+    console.log(months[month]);
+
+    console.log(year);
+}

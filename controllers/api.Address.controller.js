@@ -2,7 +2,7 @@ const AddressModel =require('../models/AddressModel');
 
 exports.postAddAddress = async (req,res)=>{
     //lấy thông tin nhaanpj liệu từ khách hàng
-    const {TitleAddress,DetailAddress}=req.body;
+    const {TitleAddress,DetailAddress,NumberPhone}=req.body;
     //lấy UserId từ token
     const userId = req.user._id;
     //query xem trong model đã có address hay chưa
@@ -14,6 +14,7 @@ exports.postAddAddress = async (req,res)=>{
             Findaddress.address.push({
                 TitleAddress,
                 DetailAddress,
+                NumberPhone:Number(NumberPhone)
             });
             Findaddress = await Findaddress.save();
             return res.status(201).send(Findaddress);
@@ -25,6 +26,7 @@ exports.postAddAddress = async (req,res)=>{
             address:[{
                 TitleAddress,
                 DetailAddress,
+               NumberPhone:Number(NumberPhone)
             }]
         });
         return res.status(201).json(newAddress);
