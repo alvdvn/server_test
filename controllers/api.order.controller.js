@@ -2,7 +2,6 @@ const CartModel =require('../models/cart.model');
 const OrderModel =require('../models/order.model');
 const ProductModel =require('../models/product.model');
 var FCM = require('fcm-node');
-const notiModel = require("../models/notification.model");
 var serverKey = 'AAAA4oos57k:APA91bFyYJ2fZEP7jlGULUwC0NSc4VEFk86XTIx21ZX6f13LUbI1VyYGb0vS-7_ipjyi_-tOMMuk4PwtvveR_0fjixNC3ZcLEXbyGiQVoWO3VRX0xfUJknZ6Yico7YrhbBCA6oux6RTz';
 var fcm = new FCM(serverKey);
 
@@ -45,8 +44,7 @@ exports.PostCashOrder= async(req, res)=>{
         // await CartModel.findByIdAndDelete(cartId);
     }
     var message = {
-        to:"/topics/"+user._id,
-        // to: 'cdCunu14TDe4DTYohuxS7O:APA91bEoIvYHcmClPjLPJ5Kdt3bgcDBBM8R0ZmyC1mnn8uHWDiLAGCpHFiZByz5X8pMmkX1gvHg8lKF2CiAm1xwCuYA9gbgQJ5cw-fSFcEGM26zmOqrV87_rBj0pkqlSP6kB5mGdjtiz',
+        to:"/topics/"+"63672422a32d2269e324d3ba",
         collapse_key: 'your_collapse_key',
 
         notification: {
@@ -60,10 +58,9 @@ exports.PostCashOrder= async(req, res)=>{
             my_another_key: 'my another value'
         }
     };
-    console.log(message)
     fcm.send(message, function(err, response){
         if (err) {
-            console.log("Something has gone wrong!", {msg: 'Lỗi gửi thông báo'});
+            console.log("Something has gone wrong!", err);
         } else {
             console.log("Successfully sent with response: ", response);
         }
