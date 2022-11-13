@@ -28,6 +28,7 @@ var apiCommentRouter =require('./routes/api.comment');
 var apiOrderRouter =require('./routes/api.order');
 var notiRouter =require('./routes/noti');
 var apiNotiRouter =require('./routes/api.noti');
+var apiAddressRouter =require('./routes/api.Address');
 
 
 var app = express();
@@ -70,6 +71,7 @@ app.use('/api/products',apiProductRouter);
 app.use('/api/cart',apiCartRouter);
 app.use('/api/comment',apiCommentRouter);
 app.use('/api/order',apiOrderRouter);
+app.use('/api/address',apiAddressRouter);
 app.use('/notification',notiRouter);
 app.use('/api/notification',apiNotiRouter);
 
