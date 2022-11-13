@@ -2,7 +2,7 @@ const AddressModel =require('../models/AddressModel');
 
 exports.postAddAddress = async (req,res)=>{
     //lấy thông tin nhaanpj liệu từ khách hàng
-    const {TitleAddress,DetailAddress,NumberPhone}=req.body;
+    const {Name,DetailAddress,NumberPhone}=req.body;
     //lấy UserId từ token
     const userId = req.user._id;
     //query xem trong model đã có address hay chưa
@@ -12,7 +12,7 @@ exports.postAddAddress = async (req,res)=>{
         //nếu mà trong array của address không có gì thì tiến hành thêm data
 
             Findaddress.address.push({
-                TitleAddress,
+                Name,
                 DetailAddress,
                 NumberPhone:Number(NumberPhone)
             });
@@ -24,7 +24,7 @@ exports.postAddAddress = async (req,res)=>{
         const newAddress = await AddressModel.create({
             userId,
             address:[{
-                TitleAddress,
+                Name,
                 DetailAddress,
                NumberPhone:Number(NumberPhone)
             }]

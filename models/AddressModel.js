@@ -3,7 +3,7 @@ const AddressModel = new mongoose.Schema(
     {
         userId: { type: mongoose.Schema.Types.ObjectId,ref:"User", required: true },
         address:[{
-            TitleAddress: {type: String},
+            Name: {type: String},
             DetailAddress:{type:String},
             NumberPhone:{type:Number},
         }],
