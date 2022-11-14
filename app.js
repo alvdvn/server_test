@@ -28,7 +28,7 @@ var apiCommentRouter =require('./routes/api.comment');
 var apiOrderRouter =require('./routes/api.order');
 var notiRouter =require('./routes/noti');
 var apiNotiRouter =require('./routes/api.noti');
-var apiAddressRouter =require('./routes/api.Address');
+var apiAddressRouter =require('./routes/api.address');
 
 
 var app = express();

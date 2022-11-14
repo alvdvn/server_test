@@ -25,10 +25,10 @@ exports.PostCashOrder= async(req, res)=>{
     // Create order with defau paymentType cash
     const Order =await OrderModel.create({
         userId:user._id,
-        name:user.full_name,
-        phoneNumber:user.phone_number,
+        name:req.body.name,
+        phoneNumber:req.body.phoneNumber,
         products:cart.products,
-        address:user.address,
+        address:req.body.address,
         Total:cart.Total,
         CreatedAt:nDate
     });
