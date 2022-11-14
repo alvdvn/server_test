@@ -107,6 +107,11 @@
         <script src="path/to/chartjs/dist/chart.umd.js"></script>
 
         <script>
+            let file = "https://jsonplaceholder.typicode.com/posts"
+            fetch (file)
+                    .then(x => x.text())
+                    .then(y => document.getElementById("demo").innerHTML = y
+                    );
             const ctx = document.getElementById('myChart').getContext('2d');
             var jsonfile = {
                 "jsonarray": [{
