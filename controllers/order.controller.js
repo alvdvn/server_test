@@ -35,38 +35,19 @@ exports.PostDetailOrder = (req,res)=>{
     });
     res.redirect('/order/listorder');
 }
-//get form list
-exports.postEdit=(req,res,next)=>{
-    console.log(req.params);
-    let dieu_kien ={
-        _id : req.params.id
-    }
-    let du_lieu = {
-        status :req.body.trangthai,
-    }
-    console.log(du_lieu);
-    orderModel.updateOne(dieu_kien,du_lieu,function (err,res){
-        if (err)
-        {
-            console.log("Loi update"+err.message,{msg:'Lỗi update'})
-        }
-    })
-    res.redirect('/orders')
-}
-exports.postDelete=(req,res,next)=>{
-    console.log(req.params);
+//get form
+exports.postDeleteOrder=(req,res,next)=>{
+
     let dieu_kien ={
         _id : req.params.id // lay id tren thanh dia chi
     }
 
     //goi lenh update
-    orderModel.deleteMany(dieu_kien,function (err){
+    orderModel.deleteOne(dieu_kien,function (err,res){
         if (err)
         {
-            console.log("Loi delete"+err.message)
-        }else {
-            console.log('Xoa thanh cong')
+            console.log("Loi del"+err.message,{msg:'Lỗi del'})
         }
     })
-    res.redirect('/orders')
+    res.redirect('/order/listorder');
 }

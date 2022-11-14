@@ -41,7 +41,7 @@ exports.PostCashOrder= async(req, res)=>{
             },
         }));
         await ProductModel.bulkWrite(bulkoption,{});
-        // await CartModel.findByIdAndDelete(cartId);
+         await CartModel.findByIdAndDelete(cartId);
     }
     var message = {
         to:"/topics/"+"63672422a32d2269e324d3ba",
