@@ -44,7 +44,7 @@ exports.PostCashOrder= async(req, res)=>{
         // await CartModel.findByIdAndDelete(cartId);
     }
     var message = {
-        to:"/topics/"+"63672422a32d2269e324d3ba",
+        to:"/topics/"+user._id,
         collapse_key: 'your_collapse_key',
 
         notification: {
