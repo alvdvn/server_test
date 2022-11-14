@@ -25,10 +25,10 @@ exports.PostCashOrder= async(req, res)=>{
     // Create order with defau paymentType cash
     const Order =await OrderModel.create({
         userId:user._id,
-        name:user.full_name,
-        phoneNumber:user.phone_number,
+        name:req.body.name,
+        phoneNumber:req.body.phoneNumber,
         products:cart.products,
-        address:user.address,
+        address:req.body.address,
         Total:cart.Total,
         CreatedAt:nDate
     });
@@ -44,7 +44,7 @@ exports.PostCashOrder= async(req, res)=>{
          await CartModel.findByIdAndDelete(cartId);
     }
     var message = {
-        to:"/topics/"+"63672422a32d2269e324d3ba",
+        to:"/topics/"+user._id,
         collapse_key: 'your_collapse_key',
 
         notification: {

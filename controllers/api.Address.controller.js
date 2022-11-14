@@ -1,4 +1,4 @@
-const AddressModel =require('../models/AddressModel');
+const AddressModel =require('../models/address.model');
 
 exports.postAddAddress = async (req,res)=>{
     //lấy thông tin nhaanpj liệu từ khách hàng
@@ -14,7 +14,7 @@ exports.postAddAddress = async (req,res)=>{
             Findaddress.address.push({
                 Name,
                 DetailAddress,
-                NumberPhone:Number(NumberPhone)
+                NumberPhone:NumberPhone
             });
             Findaddress = await Findaddress.save();
             return res.status(201).send(Findaddress);
@@ -26,7 +26,7 @@ exports.postAddAddress = async (req,res)=>{
             address:[{
                 Name,
                 DetailAddress,
-               NumberPhone:Number(NumberPhone)
+               NumberPhone:NumberPhone
             }]
         });
         return res.status(201).json(newAddress);
