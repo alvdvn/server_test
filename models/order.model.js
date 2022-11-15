@@ -39,7 +39,7 @@ const OrderSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
-        status: { type: String,enum:['pending','Confirmed'], default: "pending" },
+        status: { type: String,enum:['Đang chờ xác nhận','Đang chuẩn bị hàng','Đang giao hàng','Giao hàng thành công'], default: "Đang chờ xác nhận" },
         paidAt: Date,
         ConfirmedAt: String,
         CreatedAt:Date

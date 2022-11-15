@@ -57,15 +57,22 @@
           <form method="post">
               <div class="jumbotron-fluid">
                   <div class="row align-items: start ">
-                      <input name="idUser" value="{{UserOderData.userId}}" disabled hidden/>
                       <p class=" mr-3 mt-1 "><span class="font-weight-bold">Cập nhật trạng thái :</span></p>
-                      <div class="form-check form-check-inline pb-2 mr-5">
-                          <input class="form-check-input" type="radio" id="inlineCheckbox1" name="status" value="pending" checked>
-                          <label class="form-check-label" for="inlineCheckbox1">pending</label>
+                      <div class="form-check form-check-inline pb-2 ">
+                          <input class="form-check-input" type="radio" id="inlineCheckbox1" name="status" value="Đang chờ xác nhận" checked>
+                          <label class="form-check-label" for="inlineCheckbox1">Đang chờ xác nhận</label>
                       </div>
                       <div class="form-check form-check-inline pb-2">
-                          <input class="form-check-input" type="radio" id="inlineCheckbox2" name="status" value="Confirmed" >
-                          <label class="form-check-label" for="inlineCheckbox2">Confirmed</label>
+                          <input class="form-check-input" type="radio" id="inlineCheckbox2" name="status" value="Đang chuẩn bị hàng" >
+                          <label class="form-check-label" for="inlineCheckbox2">Đang chuẩn bị hàng</label>
+                      </div>
+                      <div class="form-check form-check-inline pb-2">
+                          <input class="form-check-input" type="radio" id="inlineCheckbox2" name="status" value="Đang giao hàng" >
+                          <label class="form-check-label" for="inlineCheckbox2">Đang giao hàng</label>
+                      </div>
+                      <div class="form-check form-check-inline pb-2">
+                          <input class="form-check-input" type="radio" id="inlineCheckbox2" name="status" value="Giao hàng thành công" >
+                          <label class="form-check-label" for="inlineCheckbox2">Giao hàng thành công</label>
                       </div>
                   </div>
                   <div class="row justify-content-between mb-3 mt-3 mt-md-0 ">
