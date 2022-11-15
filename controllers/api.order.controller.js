@@ -88,9 +88,9 @@ const user = req.user._id;
 }
 
 exports.GetDetailOrder=async (req,res)=>{
-    const orderId = req.params;
+    const orderId = req.params.orderId;
     console.log(orderId);
-    let FindOrderById = await OrderModel.findOne(orderId);
+    let FindOrderById = await OrderModel.findOne({_id:orderId});
     console.log(FindOrderById);
     if (FindOrderById ==null){
         return res.status(404).json({message:"Không tìm thấy đơn hàng nào"});
