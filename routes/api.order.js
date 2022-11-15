@@ -5,6 +5,8 @@ const apiOrder = require('../controllers/api.order.controller');
 
 
 router.post('/createCashOrder/:cartId',auth,apiOrder.PostCashOrder);
+router.get('/getallOrderByuser',auth,apiOrder.GetAllOrderByUser);
+router.get('/getDetailOrder/:orderId',apiOrder.GetDetailOrder);
 
 
 module.exports = router;
