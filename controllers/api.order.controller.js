@@ -43,6 +43,7 @@ exports.PostCashOrder= async(req, res)=>{
         await ProductModel.bulkWrite(bulkoption,{});
          await CartModel.findByIdAndDelete(cartId);
     }
+
     var message = {
         to:"/topics/"+user._id,
         collapse_key: 'your_collapse_key',

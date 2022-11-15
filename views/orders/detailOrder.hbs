@@ -11,6 +11,9 @@
             <div class="row justify-content-between mb-3">
                 <div class="col-auto"> <h6 class="color-1 mb-0 change-color">các sản phẩm</h6> </div>
                 <div class="col-auto  "> <small>Order ID : {{UserOderData._id}}</small> </div>
+                <div class="col-auto  ">
+                </div>
+
             </div>
             {{#each UserOderData.products}}
             <div class="row">
@@ -54,6 +57,7 @@
           <form method="post">
               <div class="jumbotron-fluid">
                   <div class="row align-items: start ">
+                      <input name="idUser" value="{{UserOderData.userId}}" disabled hidden/>
                       <p class=" mr-3 mt-1 "><span class="font-weight-bold">Cập nhật trạng thái :</span></p>
                       <div class="form-check form-check-inline pb-2 mr-5">
                           <input class="form-check-input" type="radio" id="inlineCheckbox1" name="status" value="pending" checked>
