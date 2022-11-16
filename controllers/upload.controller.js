@@ -28,7 +28,7 @@ exports.postUpload= async (req,res,next)=>{
     if (req.files==""){
         return res.render('./products/upload',{msg:'Chưa chọn file upload '});
     }
-    const uploader = async (path)=> await cloudinary.uploads(path,'Comment');
+    const uploader = async (path)=> await cloudinary.uploads(path,'Products');
     const urls =[]
     const files =req.files
     for (const file of files){
@@ -41,22 +41,16 @@ exports.postUpload= async (req,res,next)=>{
     })
 
     let obj ={
-        title:book.title,
-        price:book.price,
-        desc:book.desc,
-        category:book.category,
-        sizes:book.sizes,
-        color:book.color,
-        stock:book.stock,
-        img:book.img,
         img_product:filename,
     }
-    productModel.updateOne(condition,obj,function (err,result){
+   await productModel.updateOne(condition,obj).then(function (err,result){
         if (err){
-            console.log(err);
+            // return res.status(500).render('./products/upload',{msg:' da xay ra loi'})
+            console.log(err)
         }else {
-            console.log("Thêm thành công")
+            return res.status(200).render('./products/upload',{msg:' đã thành công'})
         }
-    });
-    return res.redirect('/pro/list')
+    })
+
+    return res.redirect('/pro/list');
 }
