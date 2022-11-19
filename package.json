@@ -32,6 +32,7 @@
     "path": "^0.12.7",
     "strapi-provider-email-nodemailer": "^3.6.10",
     "streamifier": "^0.1.1",
+    "stripe": "^11.1.0",
     "util": "^0.12.5",
     "uuidv4": "^6.2.13"
   }
