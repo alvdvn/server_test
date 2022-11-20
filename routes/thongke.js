@@ -5,14 +5,15 @@ const thongKeController = require('../controllers/thongke.controller');
 router.get('/',thongKeController.getFormAdd);
 //get day
 router.get('/filterAmountByDay',thongKeController.getFilter);
+//get week
+router.get('/filterAmountByWeek',thongKeController.getFilterWeek);
 //get month
-router.get('/filterAmountByMonth',thongKeController.getFilterMonth);
+router.get('/filterAmountByMonth',thongKeController.getDaysinmonht);
 //get year (not done)
-router.get('/filterAmountMonthtoYear',thongKeController.getFilterMonthtoYear);
-//get all status order
-router.get('/filterPendingOrder',thongKeController.getfilterStatusOrder);
-//get all income order
-router.get('/filterIncome',thongKeController.getfilterIncome);
+router.get('/filterAmountMonthtoYear',thongKeController.getMonthsInYear);
+
+router.get('/tong',thongKeController.getfilterIncome);
+
 
 
 
