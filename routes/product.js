@@ -16,7 +16,7 @@ router.get('/edit/:id',auth.YeuCauDangNhap, ProC.getFormEditPro);
 router.post('/edit/:id',auth.YeuCauDangNhap, fileUpload.single('img'),ProC.postEditPro);
 router.get('/del/:id',auth.YeuCauDangNhap, ProC.postDelPro);
 router.get('/upload/:id',auth.YeuCauDangNhap, uploadC.getFormUpload);
-router.post('/upload/:id',auth.YeuCauDangNhap, upload.array('anh_product',10),uploadC.postUpload);
+router.put('/upload/:id',auth.YeuCauDangNhap, upload.array('anh_product',10),uploadC.postUpload);
 
 
 

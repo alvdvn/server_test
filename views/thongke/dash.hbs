@@ -1,3 +1,37 @@
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+    }
+    .chartMenu {
+        width: 100vw;
+        height: 40px;
+        background: #1A1A1A;
+        color: rgba(255, 26, 104, 1);
+    }
+    .chartMenu p {
+        padding: 10px;
+        font-size: 20px;
+    }
+    .chartCard {
+        width: 100vw;
+        height: calc(100vh - 40px);
+        background: rgba(255, 26, 104, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .chartBox {
+        width: 700px;
+        padding: 20px;
+        border-radius: 20px;
+        border: solid 3px rgba(255, 26, 104, 1);
+        background: white;
+    }
+</style>
+
+
 <div class="container-fluid" style="padding-bottom: 100px">
     <div class="row">
         <main class="col-md-12 ms-sm-auto col-lg-12 px-md-4">
@@ -5,13 +39,10 @@
                 <h1 class="h2">Dashboard</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group me-2">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                        <button type="button" onclick="updateChartWeek()" class="btn btn-sm btn-outline-secondary">Tuần này</button>
+                        <button type="button" onclick="updateChart()" class="btn btn-sm btn-outline-secondary">Tháng này</button>
+                        <button type="button" onclick="updateChartYear()" class="btn btn-sm btn-outline-secondary">Năm này</button>
                     </div>
-                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                        <span data-feather="calendar" class="align-text-bottom"></span>
-                        This week
-                    </button>
                 </div>
             </div>
             <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
@@ -23,7 +54,7 @@
                     <div class="app-card app-card-stat shadow-sm h-100">
                         <div class="app-card-body p-3 p-lg-4">
                             <h5 class="stats-type mb-1">Tổng doanh thu</h5>
-                            <div class="stats-figure">$12,628</div>
+                            <div class="stats-figure">{{objStatus.formatIncome}}</div>
                             <div class="stats-meta text-success">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
@@ -50,7 +81,7 @@
                     <div class="app-card app-card-stat shadow-sm h-100">
                         <div class="app-card-body p-3 p-lg-4">
                             <h5 class="stats-type mb-1">Tổng đơn hàng</h5>
-                            <div class="stats-figure">23</div>
+                            <div class="stats-figure">{{objStatus.AllOrder}}</div>
                             <div class="stats-meta">
                                 Open</div>
                         </div>
@@ -76,24 +107,42 @@
                             Trạng thái đơn hàng
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item bg-danger text-bg-light">Đang xử lý: 100</li>
-                            <li class="list-group-item bg-warning">Đang giao hàng: 999</li>
-                            <li class="list-group-item bg-success text-bg-success">Giao hàng thành công: 999</li>
+                            <li class="list-group-item bg-danger text-bg-light">Đang chờ xác nhận: {{objStatus.AllPendingOrder}}</li>
+                            <li class="list-group-item bg-primary text-bg-light">Đang xử lý: {{objStatus.AllConfirmedOrder}}</li>
+                            <li class="list-group-item bg-warning">Đang giao hàng: {{objStatus.AllDeliverOrder}}</li>
+                            <li class="list-group-item bg-success text-bg-success">Giao hàng thành công: {{objStatus.AllSuccessOrder}}</li>
                         </ul>
                     </div>
                 </div>
-                <div class="col">
 
-                </div>
             </div>
+            <h3 class="text-left mt-3 mb-3">Top 10 sản phẩm bán nhiều nhất</h3>
 
-            <div class="row">
-                <div class="col">
-                    
-                </div>
-                <div class="col">
+            <table class="table table-hover">
+                <thead>
 
-                </div>
+                <tr>
+                    <th scope="col">Tên sản phẩm</th>
+                    <th scope="col">Giá</th>
+                    <th scope="col">Ảnh</th>
+                    <th scope="col">Loại</th>
+                    <th scope="col">Đã bán</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each objTop10Product}}
+                <tr>
+                    <th >{{this.title}}</th>
+                    <td>{{this.price}}</td>
+                    <td><img src="{{this.img}}" style="width: 50px;height: 50px;align-items: center"></td>
+                    <td>{{this.category}}</td>
+                    <td>{{this.sold}}</td>
+                </tr>
+
+                {{/each}}
+                </tbody>
+            </table>
+
             </div>
 
 
@@ -103,73 +152,138 @@
 
         <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
-        <script src="/stylesheets/dashboard.js"></script>
-        <script src="path/to/chartjs/dist/chart.umd.js"></script>
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                //fetch data year
+                function updateChartYear(){
 
-        <script>
-            let file = "https://jsonplaceholder.typicode.com/posts"
-            fetch (file)
-                    .then(x => x.text())
-                    .then(y => document.getElementById("demo").innerHTML = y
-                    );
-            const ctx = document.getElementById('myChart').getContext('2d');
-            var jsonfile = {
-                "jsonarray": [{
-                    "name": "Joe",
-                    "age": 18
-                }, {
-                    "name": "Tom",
-                    "age": 16
-                }, {
-                    "name": "Tony",
-                    "age": 30
-                }, {
-                    "name": "Mikey",
-                    "age": 20
-                }]
-            };
+                    async function fetchData (){
+                        const url = 'http://localhost:3000/thongke/filterAmountMonthtoYear'
+                        const response = await fetch(url);
+                        // chờ khi req completed
+                        const datapoints =await response.json();
+                        // kiểm tra
+                        console.log(datapoints);
+                        return datapoints;
+                    }
+                    fetchData().then(datapoints=>{
+                        const date = datapoints.MonthOfYear.map(function (index){
+                            return "tháng "+index._id.month
+                        });
+                        const date1 = datapoints.MonthOfYear.map(function (index){
+                            return index.count[0].total
+                        });
 
-            var labels = jsonfile.jsonarray.map(function(e) {
-                return e.name;
-            });
-            var datas = jsonfile.jsonarray.map(function(e) {
-                return e.age;
-            });
+                        myChart.config.data.labels = date;
+                        myChart.config.data.datasets[0].data = date1;
+                        myChart.config.data.datasets[0].label = "Thống kê theo tháng trong năm ";
+                        myChart.update();
+                    })
 
-            const myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
+                }
+                //fetch Data month
+                function updateChart(){
+
+                    async function fetchData (){
+                        const url = 'http://localhost:3000/thongke/filterAmountByMonth'
+                        const response = await fetch(url);
+                        // chờ khi req completed
+                        const datapoints =await response.json();
+                        // kiểm tra
+                        console.log(datapoints);
+                        return datapoints;
+                    }
+                    fetchData().then(datapoints=>{
+                        const date = datapoints.DaysOfMonth.map(function (index){
+                            const date =  index._id;
+                            const newDate = new Date(date);
+                            return newDate.toLocaleDateString('en-GB');
+                        });
+                        const date1 = datapoints.DaysOfMonth.map(function (index){
+                            return index.count[0].total
+                        });
+                        console.log(date);
+                        console.log(date1);
+                        myChart.config.data.labels = date;
+                        myChart.config.data.datasets[0].data = date1;
+                        myChart.config.data.datasets[0].label = "Thống kê theo từng ngày trong tháng ";
+                        myChart.update();
+                    })
+
+                }
+                //fetch Data week
+                function updateChartWeek(){
+
+                    async function fetchData (){
+                        const url = 'http://localhost:3000/thongke/filterAmountByWeek'
+                        const response = await fetch(url);
+                        // chờ khi req completed
+                        const datapoints =await response.json();
+                        // kiểm tra
+                        console.log(datapoints);
+                        return datapoints;
+                    }
+                    fetchData().then(datapoints=>{
+
+                        const date1 = datapoints.dayofweek.map(function (index){
+                            return index.count[0].total
+                        });
+
+                        myChart.config.data.labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+                        myChart.config.data.datasets[0].data = date1;
+                        myChart.config.data.datasets[0].label = "Thống kê theo tuần ";
+                        myChart.update();
+                    })
+
+                }
+
+                // setup
+                const data = {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
                     datasets: [{
-                        label: '# Thống kê',
-                        data: datas,
+                        label: 'Thống kê theo từng ngày trong tháng',
+                        data: [18, 12, 6, 9, 12, 3, 9],
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 26, 104, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
                             'rgba(255, 206, 86, 0.2)',
                             'rgba(75, 192, 192, 0.2)',
                             'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(0, 0, 0, 0.2)'
                         ],
                         borderColor: [
-                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 26, 104, 1)',
                             'rgba(54, 162, 235, 1)',
                             'rgba(255, 206, 86, 1)',
                             'rgba(75, 192, 192, 1)',
                             'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(0, 0, 0, 1)'
                         ],
                         borderWidth: 1
                     }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
+                };
+
+                // config
+                const config = {
+                    type: 'bar',
+                    data,
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
                         }
                     }
-                }
-            });
-        </script>
+                };
+
+                // render init block
+                const myChart = new Chart(
+                        document.getElementById('myChart'),
+                        config
+                );
+            </script>
     </div>
+</div>
 </div>
