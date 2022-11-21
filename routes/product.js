@@ -10,6 +10,7 @@ const fileUpload = multer();
 
 
 router.get('/list',auth.YeuCauDangNhap,ProC.getListProduct);
+router.get('/listempty',auth.YeuCauDangNhap,ProC.getListProductEmpty);
 router.get('/add',auth.YeuCauDangNhap,ProC.getFormAddPro);
 router.post('/add',auth.YeuCauDangNhap,fileUpload.single("img"), ProC.postAddPro);
 router.get('/edit/:id',auth.YeuCauDangNhap, ProC.getFormEditPro);

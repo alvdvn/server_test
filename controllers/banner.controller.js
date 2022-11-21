@@ -45,14 +45,19 @@ exports.postEdit= async (req,res,next)=>{
         _id : req.params.id // lay id tren thanh dia chi
     }
     let result = await streamUpload(req);
+    let du_lieu;
     if (result ==null){
-      return res.render('./banners/edit',{msg:'Chưa chọn file upload '});
+        du_lieu = {
+            description:req.body.description,
+        }
+    }else {
+        du_lieu = {
+            description:req.body.description,
+            anh : result.url,
+        }
     }
-    let filename= result.url;
-    let du_lieu = {
-        destination:req.body.destination,
-        anh : filename,
-    }
+    console.log(du_lieu);
+
 
     //goi lenh update
     bannerModel.updateOne(dieu_kien,du_lieu,function (err,res){

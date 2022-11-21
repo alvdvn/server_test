@@ -7,6 +7,7 @@ const fileUpload = multer();
 
 //list
 router.get('/',auth.YeuCauDangNhap,usercontroller.getListUSer);
+router.get('/listAdmin',auth.YeuCauDangNhap,usercontroller.getListAdmin);
 //get form add
 router.get('/add',auth.YeuCauDangNhap,usercontroller.GetFormAddUser);
 //get post add

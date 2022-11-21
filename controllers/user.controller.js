@@ -1,12 +1,17 @@
 const UserModel = require('../models/user.model');
 const bcrypt = require("bcrypt");
 const fs = require('fs');
-const {streamUpload, streamUploadAPI} =require('../utils/UploadIMG');
+const {streamUpload} =require('../utils/UploadIMG');
 const IMGModel = require("../models/Img.model");
 //hien thi danh sach User
 exports.getListUSer=async(req,res,next)=>{
-    var listUser = await UserModel.find();
+    var listUser = await UserModel.find({role:"User"});
     res.render('./User/list-User',{listUser:listUser});
+}
+//list admin
+exports.getListAdmin=async(req,res,next)=>{
+    var ListAdmin = await UserModel.find({role:"Admin"});
+    res.render('./User/list-Admin',{ListAdmin:ListAdmin});
 }
 exports.getFormLogin =  (req,res,next)=>{
     res.render('./User/login');
@@ -21,7 +26,7 @@ exports.postAddUser= async (req,res,next)=>{
     let result;
     let filename
     if (req.file){
-        result = await streamUploadAPI(req);
+        result = await streamUpload(req);
         filename=result.url
     }else {
         const Avatar = await IMGModel.findById({_id:"6366274f29d343cc922c5946"});
@@ -64,16 +69,26 @@ exports.getPostEditUser= async (req,res,next)=>{
         _id : req.params.id // lay id tren thanh dia chi
     }
     let result = await streamUpload(req);
-    let filename = result.url;
-
-    let du_lieu = {
+    let du_lieu={};
+if (result == null){
+    du_lieu = {
         email:req.body.user_email,
         full_name:req.body.user_full_name,
         address:req.body.user_address,
         phone_number:Number(req.body.user_phone_number),
         role:req.body.role,
-        avatar:filename
     }
+}else {
+    du_lieu = {
+        email:req.body.user_email,
+        full_name:req.body.user_full_name,
+        address:req.body.user_address,
+        phone_number:Number(req.body.user_phone_number),
+        role:req.body.role,
+        avatar:result.url
+    }
+}
+
 
     //goi lenh update
     UserModel.updateOne(condition,du_lieu,function (err,res){
@@ -96,7 +111,7 @@ exports.getFormDelete = async (req,res,next)=>{
             console.log("Loi del"+err.message,{msg:'Lỗi del'})
         }
     })
-    res.redirect('/users/');
+    res.redirect('back');
 }
 
 //get user

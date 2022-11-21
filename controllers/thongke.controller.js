@@ -33,16 +33,25 @@ exports.getFormAdd =async (req,res)=>{
     let formatIncome= format2(Allincome,' vnd');
     //find top 10 product sold
     let Top10Product =  await ProductModel.find().sort({"sold":-1}).limit(10)
+    //find all stock left
+    let AllStockProducts = await ProductModel.find();
+    console.log(AllStockProducts);
+    let StockLeft =0;
+    for (let i=0;i<AllStockProducts.length;i++){
+        let StockIn = AllStockProducts[i].stock;
+      if ( StockIn>=0){
+          StockLeft +=StockIn;
+      }
+    }
    let objStatus = {
         AllOrder,
         AllPendingOrder,
         AllConfirmedOrder,
         AllDeliverOrder,
         AllSuccessOrder,
-       formatIncome
+       formatIncome,
+       StockLeft
     }
-    let abc = "abc";
-    let objTest={abc}
         res.render('./thongke/dash',{objStatus:objStatus,objTop10Product:Top10Product});
 }
 exports.getFilter = async (req,res)=>{
@@ -101,10 +110,11 @@ exports.getFilterWeek = async (req,res)=>{
 }
 
 exports.getDaysinmonht = async (req,res)=>{
-const momentDay =moment().startOf('day').subtract(30, 'day').toDate();
-    console.log(momentDay)
+    const startOfMonth = moment().startOf('month').subtract(-1, 'day').toDate();
+    const endOfMonth   = moment().endOf('month').toDate();
+
     let days = await OrderModel.aggregate([
-        { $match: { createdAt: { $gt: momentDay } } },
+        { $match: { createdAt: { $gt: startOfMonth ,$lt:endOfMonth } } },
 
         {
             $group: {
@@ -129,13 +139,12 @@ res.json({DaysOfMonth: days});
 }
 //test year
 exports.getMonthsInYear = async (req,res)=>{
-    // const momentDay =moment().startOf('day').subtract(30, 'day').toDate();
-    const startOfMonth = moment().startOf('year').toDate();
+    const startOfYear = moment().startOf('year').toDate();
     const lastDayOfYear = moment().endOf('year').toDate()
-    console.log(startOfMonth)
+    console.log(startOfYear)
     console.log(lastDayOfYear)
     let days = await OrderModel.aggregate([
-        { $match: { createdAt: { $gt: startOfMonth,$lt:lastDayOfYear } } },
+        { $match: { createdAt: { $gt: startOfYear,$lt:lastDayOfYear } } },
         {
             $group: {
                 _id: {
@@ -157,7 +166,7 @@ exports.getMonthsInYear = async (req,res)=>{
     res.json({MonthOfYear: days});
 }
 
-exports.getFilterMonthtoYear =(req,res)=>{
+exports.getFilterMonthtoYear =async (req,res)=>{
     var months = ["jan", "feb", "mar", "apr", "may", "jun", "july", "aug", "sep", "oct", "nov", "dec"];
 
     var date = new Date();
@@ -168,6 +177,26 @@ exports.getFilterMonthtoYear =(req,res)=>{
     console.log(months[month]);
 
     console.log(year);
+    let days = await OrderModel.aggregate([
+        { $match: { createdAt: { $gt: months[0],$lt:months[11] } } },
+        {
+            $group: {
+                _id: {
+                    month: { $month: {date:"$createdAt"} },
+                },
+                total: {$sum:"$Total"}
+            }
+        },
+        {
+            $group: {
+                _id: "$_id",
+                count: { $push: { total: "$total" } }
+            }
+        },
+        {$sort:{_id:1}}
+    ])
+    console.log(days);
+    res.json(days)
 }
 
 
