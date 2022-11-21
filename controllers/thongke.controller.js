@@ -71,13 +71,15 @@ exports.getFilter = async (req,res)=>{
 }
 
 exports.getFilterWeek = async (req,res)=>{
-    const today = moment();
-    const from_date = today.startOf('week').toDate();
-    console.log(from_date);
-    const to_date = today.endOf('week').toDate();
-    console.log(to_date);
+    var now = moment();
+    const hours = 0;
+    const minutes = 0;
+    var monday = now.clone().weekday(1).set("hour", hours).set("minute", minutes).toDate();
+    var sunday = now.clone().weekday(7).set("hour", hours).set("minute", minutes).toDate();
+    console.log(monday)
+    console.log(sunday)
     let weeks = await OrderModel.aggregate([
-        {$match: {createdAt:{$gt: from_date, $lt: to_date}}},
+        {$match: {createdAt:{$gt: monday, $lt: sunday}}},
         {
             $group: {
                 _id: {
