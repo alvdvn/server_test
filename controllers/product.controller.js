@@ -10,6 +10,17 @@ exports.getListProduct = async (req, res, next) => {
     res.render('./products/list', {listProduct: listProduct});
 
 }
+
+//get list emtySTock
+exports.getListProductEmpty =async (req,res)=>{
+    const listEmtyProduct = await productModel.find({stock:0})
+    if (listEmtyProduct ==null){
+        return  res.send('khong tim thay');
+    }
+    res.render('./products/listEmty', {listEmtyProduct: listEmtyProduct});
+
+}
+
 exports.getFormAddPro = async (req, res, next) => {
     const listCate = await cateModel.find().exec();
     const listSize = new Array("S", "M", "L", "XL", "XXl", "XXXl")
@@ -68,17 +79,28 @@ exports.postEditPro = async (req, res, next) => {
 
     let result = await streamUpload(req);
     console.log(result);
-    let filename= result.url;
-
-    let du_lieu = {
+    let du_lieu={};
+if (result == null){
+    du_lieu = {
         title: req.body.title,
         price: req.body.price,
         desc: req.body.desc,
         sizes: req.body.sizes,
         color: req.body.color,
         stock: req.body.stock,
-        img: filename
     }
+}else {
+        du_lieu = {
+            title: req.body.title,
+            price: req.body.price,
+            desc: req.body.desc,
+            sizes: req.body.sizes,
+            color: req.body.color,
+            stock: req.body.stock,
+            img: result.url
+        }
+    }
+
 
     //goi lenh update
     productModel.updateOne(dieu_kien, du_lieu, function (err, res) {

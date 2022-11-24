@@ -51,15 +51,19 @@ exports.postUpdateCate= async (req,res,next)=>{
         _id : req.params.id // lay id tren thanh dia chi
     }
     let result = await streamUpload(req);
-    if (result ==null){
-        return res.render('./cate/edit',{msg:'Chưa chọn ảnh'});
-    }
-    let filename= result.url;
+    let du_lieu={};
+    if (result == null){
+        du_lieu = {
+            title:req.body.title,
+        }
+   }else {
+        du_lieu = {
+            title:req.body.title,
+            CateImg:result.url
+        }
+   }
 
-    let du_lieu = {
-        title:req.body.title,
-        CateImg:filename
-    }
+
 
     //goi lenh update
     CateModel.updateOne(condition1,du_lieu,function (err,res){

@@ -86,7 +86,6 @@ const user = req.user._id;
     res.status(200).json(FindOrderbyUser);
 
 }
-
 exports.GetDetailOrder=async (req,res)=>{
     const orderId = req.params.orderId;
     console.log(orderId);
@@ -97,4 +96,72 @@ exports.GetDetailOrder=async (req,res)=>{
     }
     res.status(200).json(FindOrderById);
 
+}
+exports.PostCardOrder= async(req, res)=>{
+    //conver time to viet nam time
+    const nDate = new Date().toLocaleString('en-US', {
+        timeZone: 'Asia/Ho_Chi_Minh'
+    })
+
+    const cartId = req.params.cartId;
+    const user = req.user;
+    //get cart == cartId
+    const cart = await CartModel.findById(cartId);
+    if (!cart){
+        return res.status(404).json({
+            status:false,
+            message:"Không tìm thấy giỏ hàng với id như thế"
+        });
+    }
+
+    // Create order with defau paymentType cash
+    const Order =await OrderModel.create({
+        userId:user._id,
+        name:req.body.name,
+        phoneNumber:req.body.phoneNumber,
+        products:cart.products,
+        address:req.body.address,
+        Total:cart.Total,
+        CreatedAt:nDate,
+        paymentMethodType:"card",
+        isPaid:true
+    });
+    // nếu order thành công thì tiến hàng trừ stock = quanty
+    if (Order){
+        const bulkoption = cart.products.map((item)=>({
+            updateOne: {
+                filter:{_id:item.productId},
+                update:{$inc:{stock:-item.quantity,sold: +item.quantity}},
+            },
+        }));
+        await ProductModel.bulkWrite(bulkoption,{});
+        await CartModel.findByIdAndDelete(cartId);
+    }
+
+    var message = {
+        to:"/topics/"+user._id,
+        collapse_key: 'your_collapse_key',
+
+        notification: {
+            title: "Đặt hàng thành công",
+            body: "Cảm ơn bạn đã mua sắm tại app",
+            image: "https://blog.abit.vn/wp-content/uploads/2020/12/giao-hang-lazada-3-compressed.jpg"
+        },
+
+        data: {
+            my_key: 'my value',
+            my_another_key: 'my another value'
+        }
+    };
+    fcm.send(message, function(err, response){
+        if (err) {
+            console.log("Something has gone wrong!", err);
+        } else {
+            console.log("Successfully sent with response: ", response);
+        }
+    });
+    res.status(201).json({
+        status:true,
+        Order
+    });
 }
