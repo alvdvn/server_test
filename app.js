@@ -29,6 +29,7 @@ var apiOrderRouter =require('./routes/api.order');
 var notiRouter =require('./routes/noti');
 var apiNotiRouter =require('./routes/api.noti');
 var apiAddressRouter =require('./routes/api.address');
+var apiFavoriteRouter =require('./routes/api.Favorite');
 
 
 var app = express();
@@ -74,6 +75,7 @@ app.use('/api/order',apiOrderRouter);
 app.use('/api/address',apiAddressRouter);
 app.use('/notification',notiRouter);
 app.use('/api/notification',apiNotiRouter);
+app.use('/api/favorite',apiFavoriteRouter);
 
 
 

@@ -6,11 +6,11 @@ const FavoriteSchema = new mongoose.Schema(
             {
                 productId: {
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: 'Product'
+                    ref: 'Product',
                 },
                 title:{type:String},
                 price:{type:Number},
-                img:{type:String},
+                img:{type:String}
             },
         ],
     },
