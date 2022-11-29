@@ -37,6 +37,7 @@ exports.PostAddFavorite=async (req,res)=>{
              price:productItem.price,
              img:productItem.img
          });
+               FindFavotiteByuser = await FindFavotiteByuser.save();
            return res.status(201).json(FindFavotiteByuser);
            }
         }else {
