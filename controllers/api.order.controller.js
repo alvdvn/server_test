@@ -79,10 +79,12 @@ const user = req.user._id;
             message:"Không tìm thấy user"
         });
     }
+
     let FindOrderbyUser = await OrderModel.find({userId: user});
     if (FindOrderbyUser ==null){
         return res.status(404).json({message:"người dùng không đơn đặt hàng nào"});
     }
+
     res.status(200).json(FindOrderbyUser);
 
 }
@@ -95,6 +97,7 @@ exports.GetDetailOrder=async (req,res)=>{
         return res.status(404).json({message:"Không tìm thấy đơn hàng nào"});
     }
     res.status(200).json(FindOrderById);
+
 
 }
 exports.PostCardOrder= async(req, res)=>{

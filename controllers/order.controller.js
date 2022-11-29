@@ -7,6 +7,7 @@ var fcm = new FCM(serverKey);
 exports.getFormlistOrder = async (req, res, next)=>{
     const listOrder = await orderModel.find();
     res.render('./orders/orderList',{listOrder:listOrder});
+
 }
 
 exports.getFormDetaiOrder =async (req,res)=>{
