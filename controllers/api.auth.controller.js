@@ -8,7 +8,6 @@ const {streamUploadAPI, streamUpload} =require('../utils/UploadIMG');
 const cloudinary = require("cloudinary").v2;
 
 
-
 exports.postReg= async (req,res)=>{
     let result;
     let filename
@@ -24,7 +23,6 @@ exports.postReg= async (req,res)=>{
     try {
         const salt = await bcrypt.genSalt(10);
         const userReg = new UserModel(req.body);
-
         userReg.password =await bcrypt.hash(req.body.password,salt);
         userReg.avatar =await filename;
         await userReg.save()

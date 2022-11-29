@@ -35,7 +35,7 @@ exports.PostAddFavorite=async (req,res)=>{
              productId:ProductId,
              title:productItem.title,
              price:productItem.price,
-             img:productItem.img
+             ProductIMG:productItem.img
          });
                FindFavotiteByuser = await FindFavotiteByuser.save();
            return res.status(201).json(FindFavotiteByuser);
@@ -47,7 +47,7 @@ exports.PostAddFavorite=async (req,res)=>{
                   productId:ProductId,
                   title:productItem.title,
                   price:productItem.price,
-                  img:productItem.img
+                  ProductIMG:productItem.img
               }]
            });
            return res.status(201).json(NewFavorite);

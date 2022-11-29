@@ -10,7 +10,7 @@ const FavoriteSchema = new mongoose.Schema(
                 },
                 title:{type:String},
                 price:{type:Number},
-                img:{type:String}
+                ProductIMG:{type:String}
             },
         ],
     },
