@@ -5,7 +5,7 @@ const AddressModel = new mongoose.Schema(
         address:[{
             Name: {type: String},
             DetailAddress:{type:String},
-            NumberPhone:{type:Number},
+            NumberPhone:{type:String},
         }],
     },
 );
