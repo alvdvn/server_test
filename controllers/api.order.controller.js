@@ -2,6 +2,7 @@ const CartModel =require('../models/cart.model');
 const OrderModel =require('../models/order.model');
 const ProductModel =require('../models/product.model');
 var FCM = require('fcm-node');
+const notiModel = require("../models/notification.model");
 var serverKey = 'AAAA4oos57k:APA91bFyYJ2fZEP7jlGULUwC0NSc4VEFk86XTIx21ZX6f13LUbI1VyYGb0vS-7_ipjyi_-tOMMuk4PwtvveR_0fjixNC3ZcLEXbyGiQVoWO3VRX0xfUJknZ6Yico7YrhbBCA6oux6RTz';
 var fcm = new FCM(serverKey);
 
@@ -59,11 +60,27 @@ exports.PostCashOrder= async(req, res)=>{
             my_another_key: 'my another value'
         }
     };
+    const d = new Date();
+    let timenow = d.getHours()+":"+d.getMinutes();;
     fcm.send(message, function(err, response){
         if (err) {
             console.log("Something has gone wrong!", err);
         } else {
             console.log("Successfully sent with response: ", response);
+            const banner = new notiModel({
+                idUser: user._id,
+                title: req.body.title,
+                body: req.body.body,
+                image: "https://blog.abit.vn/wp-content/uploads/2020/12/giao-hang-lazada-3-compressed.jpg",
+                time: timenow
+            });
+            banner.save((err)=>{
+                if (err){
+                    console.log("Loi add")
+                } else {
+                    console.log("add succes")
+                }
+            })
         }
     });
     res.status(201).json({
