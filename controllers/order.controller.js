@@ -1,6 +1,8 @@
 const orderModel = require("../models/order.model");
 const userModel = require("../models/user.model");
 var FCM = require('fcm-node');
+const notiModel = require("../models/notification.model");
+const CartModel = require("../models/cart.model");
 var serverKey = 'AAAA4oos57k:APA91bFyYJ2fZEP7jlGULUwC0NSc4VEFk86XTIx21ZX6f13LUbI1VyYGb0vS-7_ipjyi_-tOMMuk4PwtvveR_0fjixNC3ZcLEXbyGiQVoWO3VRX0xfUJknZ6Yico7YrhbBCA6oux6RTz';
 var fcm = new FCM(serverKey);
 
@@ -52,7 +54,7 @@ exports.PostDetailOrder = async (req,res)=>{
         notification: {
             title: "Trạng thái đơn hàng",
             body: "Đơn hàng id: "+idOrder+" đã chuyển thành "+trangthai,
-            image: "https://blog.abit.vn/wp-content/uploads/2020/12/giao-hang-lazada-3-compressed.jpg"
+            image: getIdOrder.products[0].ProductIMG
         },
 
         data: {
@@ -60,12 +62,29 @@ exports.PostDetailOrder = async (req,res)=>{
             my_another_key: 'my another value'
         }
     };
-    console.log(message)
-    fcm.send(message, function(err, response){
+    const d = new Date();
+    let timenow = d.getHours()+":"+d.getMinutes();;
+    fcm.send(message, async function (err, response) {
         if (err) {
             console.log("Something has gone wrong!", err);
         } else {
             console.log("Successfully sent with response: ", response);
+
+            const noti = new notiModel({
+                userId: id,
+                title: trangthai,
+                body: "Đơn hàng id: " + idOrder + " đã chuyển trang thái thành " + trangthai,
+                image: getIdOrder.products[0].ProductIMG,
+                time: timenow,
+                typenotificaton: "user"
+            });
+            noti.save((err) => {
+                if (err) {
+                    console.log("err add")
+                } else {
+                    console.log("add succes")
+                }
+            })
         }
     });
     res.redirect('/order/listorder');
