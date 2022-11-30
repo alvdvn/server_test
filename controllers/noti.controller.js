@@ -6,6 +6,7 @@ const notiModel = require('../models/notification.model');
 
 const {streamUpload} =require('../utils/UploadIMG');
 const bannerModel = require("../models/banner.model");
+const OrderModel = require("../models/order.model");
 
 
 
@@ -59,7 +60,8 @@ exports.sendNoti = async (req,res,next) => {
                 title: req.body.title,
                 body: req.body.body,
                 image: anhnoti,
-                time: timenow
+                time: timenow,
+                typenotification:"all"
             });
             banner.save((err)=>{
                 if (err){

@@ -4,6 +4,7 @@ const notiC = require('../controllers/noti.controller');
 const authC = require('../middleware/auth.middleware');
 const multer = require('multer');
 const fileUpload = multer();
+const auth =require('../middleware/api.auth.middleware');
 
 router.get('/',authC.YeuCauDangNhap,notiC.getNoti);
 router.get('/add',authC.YeuCauDangNhap,notiC.getAddNoti);

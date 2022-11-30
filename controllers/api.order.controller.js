@@ -51,7 +51,7 @@ exports.PostCashOrder= async(req, res)=>{
 
         notification: {
             title: "Đặt hàng thành công",
-            body: "Cảm ơn bạn đã mua sắm tại app",
+            body: "Đơn hàng "+req.params.cartId+" đã đặt hàng thành công.",
             image: "https://blog.abit.vn/wp-content/uploads/2020/12/giao-hang-lazada-3-compressed.jpg"
         },
 
@@ -67,16 +67,17 @@ exports.PostCashOrder= async(req, res)=>{
             console.log("Something has gone wrong!", err);
         } else {
             console.log("Successfully sent with response: ", response);
-            const banner = new notiModel({
-                idUser: user._id,
-                title: req.body.title,
-                body: req.body.body,
-                image: "https://blog.abit.vn/wp-content/uploads/2020/12/giao-hang-lazada-3-compressed.jpg",
-                time: timenow
+            const noti = new notiModel({
+                userId:user._id,
+                title: "Đặt hàng thành công",
+                body: "Đơn hàng "+req.params.cartId+" đã đặt hàng thành công.",
+                image: cart.products[0].ProductIMG,
+                time: timenow,
+                typenotificaton:"user"
             });
-            banner.save((err)=>{
+            noti.save((err)=>{
                 if (err){
-                    console.log("Loi add")
+                    console.log("err add")
                 } else {
                     console.log("add succes")
                 }
