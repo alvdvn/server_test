@@ -1,10 +1,7 @@
-const UserModel = require('../models/user.model');
 const ProductModel =require('../models/product.model');
 const FavoriteModel =require('../models/favorite.model');
-const CartModel = require("../models/cart.model");
 exports.GetListFavorite =async (req,res)=>{
 const userId= req.user._id;
-    console.log(userId);
     try {
         let FindFavotiteByuser= await FavoriteModel.findOne({userId:userId});
         if (FindFavotiteByuser ==null){
@@ -85,4 +82,30 @@ exports.DeleteFavorite =async (req,res)=>{
         })
     }
 
+}
+
+exports.DeleteFavoriteByItemProduct =async (req,res)=>{
+    const itemProId = req.params.itemProductId;
+    const UserId = req.user._id;
+    try {
+        let FindFavorite =await FavoriteModel.findOne({userId:UserId});
+        if (FindFavorite.products.length >0) {
+            const FavoriteDel = await FavoriteModel.findOneAndUpdate(
+                {userId: UserId},
+                {
+                    $pull: {products: {productId: itemProId}},
+                },
+                {new: true}
+            );
+            if (FavoriteDel.products.length == 0) {
+                await FavoriteDel.deleteOne();
+                return res.status(200).json({message: "xóa bản ghi thành công (xóa hết)"})
+            }
+            return res.status(200).json({message: "xóa bản ghi thành công"})
+        }
+    }catch (error){
+        return res.status(500).json({
+            message:error.message
+        })
+    }
 }
