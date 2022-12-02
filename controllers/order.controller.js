@@ -11,15 +11,19 @@ exports.getFormlistOrder = async (req, res, next)=>{
     res.render('./orders/orderList',{listOrder:listOrder});
 
 }
+exports.getFormlistOrderByStatus = async (req, res)=>{
+
+    const listOrder = await orderModel.find({status:req.params.status});
+    res.render('./orders/orderListByStatus',{listOrder:listOrder});
+
+}
 
 exports.getFormDetaiOrder =async (req,res)=>{
 let UserOderData =await orderModel.findById(req.params.id).exec().
 catch(function (err) {
     console.log(err);
 });
-const userItems =UserOderData.products.map( function (item) {
-    return item;
-} )
+
     console.log(UserOderData);
     if (UserOderData ==null){
         res.send('Không tìm thấy bản ghi');
@@ -28,66 +32,79 @@ const userItems =UserOderData.products.map( function (item) {
 }
 //edit detail order
 exports.PostDetailOrder = async (req,res)=>{
-    let dieu_kien ={
-        _id: req.params.id
-    }
+   try {
+       const {status} = req.body;
+       let dieu_kien ={
+           _id: req.params.id
+       }
+       let du_lieu ={};
 
+       if (status === "Giao hàng thành công"){
+           du_lieu={
+               status,
+               isPaid:true
+           }
+       }else {
+           du_lieu={
+               status,
+           }
 
-    let du_lieu ={
-        status :req.body.status
-    }
-    //id user
-    orderModel.updateOne(dieu_kien,du_lieu,function (err,res){
-        if (err){
-            console.log("Loi update"+err.message,{msg:'Lỗi update'})
-        }
-    });
-    const getIdOrder = await orderModel.findById({_id:req.params.id});
-    let id = getIdOrder.userId;
-    let idOrder = getIdOrder._id;
-    let trangthai = getIdOrder.status;
+       }
+       //id user
+       orderModel.updateOne(dieu_kien,du_lieu,function (err,res){
+           if (err){
+               console.log("Loi update"+err.message,{msg:'Lỗi update'})
+           }
+       });
+       const getIdOrder = await orderModel.findById({_id:req.params.id});
+       let id = getIdOrder.userId;
+       let idOrder = getIdOrder._id;
+       let trangthai = getIdOrder.status;
 
-    var message = {
-        to:"/topics/"+id,
-        collapse_key: 'your_collapse_key',
+       var message = {
+           to:"/topics/"+id,
+           collapse_key: 'your_collapse_key',
 
-        notification: {
-            title: "Trạng thái đơn hàng",
-            body: "Đơn hàng id: "+idOrder+" đã chuyển thành "+trangthai,
-            image: getIdOrder.products[0].ProductIMG
-        },
+           notification: {
+               title: "Trạng thái đơn hàng",
+               body: "Đơn hàng id: "+idOrder+" đã chuyển thành "+trangthai,
+               image: getIdOrder.products[0].ProductIMG
+           },
 
-        data: {
-            my_key: 'my value',
-            my_another_key: 'my another value'
-        }
-    };
-    const d = new Date();
-    let timenow = d.getHours()+":"+d.getMinutes();;
-    fcm.send(message, async function (err, response) {
-        if (err) {
-            console.log("Something has gone wrong!", err);
-        } else {
-            console.log("Successfully sent with response: ", response);
+           data: {
+               my_key: 'my value',
+               my_another_key: 'my another value'
+           }
+       };
+       const d = new Date();
+       let timenow = d.getHours()+":"+d.getMinutes();;
+       fcm.send(message, async function (err, response) {
+           if (err) {
+               console.log("Something has gone wrong!", err);
+           } else {
+               console.log("Successfully sent with response: ", response);
 
-            const noti = new notiModel({
-                userId: id,
-                title: trangthai,
-                body: "Đơn hàng id: " + idOrder + " đã chuyển trang thái thành " + trangthai,
-                image: getIdOrder.products[0].ProductIMG,
-                time: timenow,
-                typenotificaton: "user"
-            });
-            noti.save((err) => {
-                if (err) {
-                    console.log("err add")
-                } else {
-                    console.log("add succes")
-                }
-            })
-        }
-    });
-    res.redirect('/order/listorder');
+               const noti = new notiModel({
+                   userId: id,
+                   title: trangthai,
+                   body: "Đơn hàng id: " + idOrder + " đã chuyển trang thái thành " + trangthai,
+                   image: getIdOrder.products[0].ProductIMG,
+                   time: timenow,
+                   typenotificaton: "user"
+               });
+               noti.save((err) => {
+                   if (err) {
+                       console.log("err add")
+                   } else {
+                       console.log("add succes")
+                   }
+               })
+           }
+       });
+       res.redirect('/order/listorder');
+   }catch (err){
+       res.redirect('/order/listorder');
+   }
 }
 //get form
 exports.postDeleteOrder=(req,res,next)=>{

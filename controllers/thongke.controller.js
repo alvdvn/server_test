@@ -35,7 +35,6 @@ exports.getFormAdd =async (req,res)=>{
     let Top10Product =  await ProductModel.find().sort({"sold":-1}).limit(10)
     //find all stock left
     let AllStockProducts = await ProductModel.find();
-    console.log(AllStockProducts);
     let StockLeft =0;
     for (let i=0;i<AllStockProducts.length;i++){
         let StockIn = AllStockProducts[i].stock;
