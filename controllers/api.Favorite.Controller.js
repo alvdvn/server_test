@@ -32,7 +32,9 @@ exports.PostAddFavorite=async (req,res)=>{
              productId:ProductId,
              title:productItem.title,
              price:productItem.price,
-             ProductIMG:productItem.img
+             ProductIMG:productItem.img,
+             isFavorite:true
+
          });
                FindFavotiteByuser = await FindFavotiteByuser.save();
            return res.status(201).json(FindFavotiteByuser);
@@ -44,7 +46,8 @@ exports.PostAddFavorite=async (req,res)=>{
                   productId:ProductId,
                   title:productItem.title,
                   price:productItem.price,
-                  ProductIMG:productItem.img
+                  ProductIMG:productItem.img,
+                  isFavorite:true
               }]
            });
            return res.status(201).json(NewFavorite);
@@ -65,7 +68,7 @@ exports.DeleteFavorite =async (req,res)=>{
             const FavoriteDel = await FavoriteModel.findOneAndUpdate(
                 {userId: UserId},
                 {
-                    $pull: {products: {_id: itemId}},
+                    $pull: {products: {_id: itemId,isFavorite:false}},
                 },
                 {new: true}
             );

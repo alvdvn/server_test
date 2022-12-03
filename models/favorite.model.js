@@ -10,9 +10,11 @@ const FavoriteSchema = new mongoose.Schema(
                 },
                 title:{type:String},
                 price:{type:Number},
-                ProductIMG:{type:String}
+                ProductIMG:{type:String},
+                isFavorite:{type:Boolean,default:false}
             },
         ],
+
     },
     { timestamps: true }
 );
