@@ -84,15 +84,16 @@ exports.PostDetailOrder = async (req,res)=>{
            } else {
                console.log("Successfully sent with response: ", response);
 
-               const noti = new notiModel({
-                   userId: id,
+               let dieukien = {
+                   _id:"638a0f18e0bd4d2fb064e1a8"
+               }
+
+               const dulieu = {
                    title: trangthai,
                    body: "Đơn hàng id: " + idOrder + " đã chuyển trang thái thành " + trangthai,
-                   image: getIdOrder.products[0].ProductIMG,
                    time: timenow,
-                   typenotificaton: "user"
-               });
-               noti.save((err) => {
+               };
+               notiModel.updateOne(dieukien,dulieu,(err) => {
                    if (err) {
                        console.log("err add")
                    } else {
