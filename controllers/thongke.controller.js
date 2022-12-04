@@ -202,24 +202,3 @@ exports.getFilterMonthtoYear =async (req,res)=>{
 
 
 
-exports.getfilterIncome =async (req,res)=>{
-    let Allincome =0;
-    try {
-        const getAllOrder = await OrderModel.find();
-        console.log(getAllOrder);
-        if (getAllOrder.length ==null){
-            return res.status.json({message:"không tìm thấy bản ghi nào"});
-        }
-            for (let i=0;i<getAllOrder.length;i++){
-                Allincome += getAllOrder[i].Total;
-            }
-
-        res.status(200).json({
-            Income:Allincome
-        });
-    }catch (err){
-        return res.status(500).json({
-            message:err.message
-        })
-    }
-}
