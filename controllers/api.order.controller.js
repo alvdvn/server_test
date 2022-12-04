@@ -186,3 +186,43 @@ exports.PostCardOrder= async(req, res)=>{
         Order
     });
 }
+
+exports.PostChangeToCancel =async (req,res)=>{
+const orderId = req.params.orderId;
+if (orderId == undefined){
+    return res.status(404).json({
+        message:"Không tìm thấy order này"
+    });
+}
+    try {
+    const FindByOrderId = await OrderModel.findById(orderId);
+
+    if (FindByOrderId.status =="Đang chờ xác nhận"){
+        const Find= await OrderModel.findByIdAndUpdate(orderId,{
+            status:"người dùng đã hủy đơn hàng"
+        });
+        if (Find){
+            const bulkoption = Find.products.map((item)=>({
+                updateOne: {
+                    filter:{_id:item.productId},
+                    update:{$inc:{stock:+item.quantity,sold: -item.quantity}},
+                },
+            }));
+            await ProductModel.bulkWrite(bulkoption,{});
+        }
+        return  res.status(200).json({
+            message:"Đã hủy thành công đơn hàng"
+        });
+    }else {
+        return res.status(403).json({
+            message:"không thể hủy đơn hàng"
+        })
+    }
+
+    }catch (error){
+        return res.status(500).json({
+            message:error.message
+            }
+        )
+    }
+}

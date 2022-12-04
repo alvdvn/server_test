@@ -8,6 +8,7 @@ router.post('/createCashOrder/:cartId',auth,apiOrder.PostCashOrder);
 router.post('/createCardOrder/:cartId',auth,apiOrder.PostCardOrder);
 router.get('/getallOrderByuser',auth,apiOrder.GetAllOrderByUser);
 router.get('/getDetailOrder/:orderId',apiOrder.GetDetailOrder);
+router.post('/changeStatusToCancel/:orderId',apiOrder.PostChangeToCancel);
 router.post('/create-payment-intent',apiPay.postPay);
 
 

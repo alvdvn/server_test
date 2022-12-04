@@ -1,4 +1,3 @@
-
 const jwt = require('jsonwebtoken')
 const User = require('../models/user.model')
 require('dotenv').config(); // su dung thu vien doc file env

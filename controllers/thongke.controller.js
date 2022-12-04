@@ -10,6 +10,7 @@ exports.getFormAdd =async (req,res)=>{
     let AllConfirmedOrder =0;
     let AllDeliverOrder =0;
     let AllSuccessOrder =0;
+    let AllCancelOrder = 0;
     let AllOrder =0;
      //find all status
     const FindAllOrder= await OrderModel.find();
@@ -17,17 +18,23 @@ exports.getFormAdd =async (req,res)=>{
         return res.status(404).json({message:"không tìm thấy bản ghi nào"});
     }
     for(let i =0;i<FindAllOrder.length;i++){
-        Allincome += FindAllOrder[i].Total;
         AllOrder++
         if (FindAllOrder[i].status ==='Đang chờ xác nhận'){
             AllPendingOrder++
+            Allincome += FindAllOrder[i].Total
         }else if (FindAllOrder[i].status ==="Đang chuẩn bị hàng"){
             AllConfirmedOrder++
+            Allincome += FindAllOrder[i].Total
         }else if (FindAllOrder[i].status ==='Đang giao hàng'){
             AllDeliverOrder++
+            Allincome += FindAllOrder[i].Total
         }
         else if (FindAllOrder[i].status ==='Giao hàng thành công'){
             AllSuccessOrder++
+            Allincome += FindAllOrder[i].Total
+        }
+        else if (FindAllOrder[i].status ==='người dùng đã hủy đơn hàng'){
+            AllCancelOrder++
         }
     }
     let formatIncome= format2(Allincome,' vnd');
@@ -48,6 +55,7 @@ exports.getFormAdd =async (req,res)=>{
         AllConfirmedOrder,
         AllDeliverOrder,
         AllSuccessOrder,
+       AllCancelOrder,
        formatIncome,
        StockLeft
     }
@@ -87,7 +95,14 @@ exports.getFilterWeek = async (req,res)=>{
     console.log(monday)
     console.log(sunday)
     let weeks = await OrderModel.aggregate([
-        {$match: {createdAt:{$gt: monday, $lt: sunday}}},
+        {
+            $match:
+                {
+                    createdAt:{$gt: monday, $lt: sunday},
+                    status: {$ne:'người dùng đã hủy đơn hàng'}
+                }
+
+                },
         {
             $group: {
                 _id: {
@@ -113,8 +128,14 @@ exports.getDaysinmonht = async (req,res)=>{
     const endOfMonth   = moment().endOf('month').toDate();
 
     let days = await OrderModel.aggregate([
-        { $match: { createdAt: { $gt: startOfMonth ,$lt:endOfMonth } } },
+        {
+            $match:
+                {
+                createdAt: {$gt: startOfMonth, $lt: endOfMonth},
+                status: {$ne:'người dùng đã hủy đơn hàng'},
 
+                },
+        },
         {
             $group: {
                 _id: {
@@ -140,10 +161,13 @@ res.json({DaysOfMonth: days});
 exports.getMonthsInYear = async (req,res)=>{
     const startOfYear = moment().startOf('year').toDate();
     const lastDayOfYear = moment().endOf('year').toDate()
-    console.log(startOfYear)
-    console.log(lastDayOfYear)
     let days = await OrderModel.aggregate([
-        { $match: { createdAt: { $gt: startOfYear,$lt:lastDayOfYear } } },
+        {
+            $match:
+                {
+                    createdAt: { $gt: startOfYear,$lt:lastDayOfYear },
+                    status: {$ne:'người dùng đã hủy đơn hàng'}
+                } },
         {
             $group: {
                 _id: {
