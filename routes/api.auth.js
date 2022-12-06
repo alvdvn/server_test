@@ -8,6 +8,7 @@ const fileUpload = multer();
 router.post('/login', apiAuth.postLogin); //post login api
 router.post('/register',fileUpload.single('avatar'), apiAuth.postReg); //post signup api
 router.get('/profile',auth, apiAuth.getProfile);// get  profile api
+router.get('/profileAdmin', apiAuth.getAdminProfile);// get  profile api
 router.post('/logout',auth,apiAuth.postLogout ) ;// logout: đăng xuất
 router.post('/logout-all',auth,apiAuth.postLogoutAll ) ;// logout: đăng xuất
 router.put('/change-password',auth,apiAuth.putChangePassword); //change password api
