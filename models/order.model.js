@@ -39,7 +39,11 @@ const OrderSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
-        status: { type: String,enum:['Đang chờ xác nhận','Đang chuẩn bị hàng','Đang giao hàng','Giao hàng thành công','người dùng đã hủy đơn hàng'], default: "Đang chờ xác nhận" },
+        status: {
+            type: String,
+            enum:['Đang chờ xác nhận','Đang chuẩn bị hàng','Đang giao hàng','Giao hàng thành công','người dùng đã hủy đơn hàng'],
+            default: "Đang chờ xác nhận"
+        },
 
     },{timestamps:true}
 

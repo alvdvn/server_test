@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const {types} = require("util");
 const CmtSchema = new mongoose.Schema(
     {
         productId: {

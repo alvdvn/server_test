@@ -6,6 +6,7 @@ const IMGModel = require("../models/Img.model");
 //hien thi danh sach User
 exports.getListUSer=async(req,res,next)=>{
     var listUser = await UserModel.find({role:"User"});
+
     res.render('./User/list-User',{listUser:listUser});
 }
 //list admin
@@ -38,7 +39,7 @@ exports.postAddUser= async (req,res,next)=>{
      password: await bcrypt.hash(req.body.user_password,salt),
      full_name:req.body.user_full_name,
      address:req.body.user_address,
-     phone_number:Number(req.body.user_phone_number),
+     phone_number:req.body.user_phone_number,
      role:req.body.role,
      avatar:filename
  });
@@ -62,6 +63,7 @@ exports.getFormEditUser=async (req,res,next)=>{
     if (UserData ==null){
         res.send('Không tìm thấy bản ghi');
     }
+    console.log(UserData);
     res.render('./User/update-User',{UserData:UserData});
 }
 exports.getPostEditUser= async (req,res,next)=>{
@@ -75,7 +77,7 @@ if (result == null){
         email:req.body.user_email,
         full_name:req.body.user_full_name,
         address:req.body.user_address,
-        phone_number:Number(req.body.user_phone_number),
+        phone_number:req.body.user_phone_number,
         role:req.body.role,
     }
 }else {
@@ -83,7 +85,7 @@ if (result == null){
         email:req.body.user_email,
         full_name:req.body.user_full_name,
         address:req.body.user_address,
-        phone_number:Number(req.body.user_phone_number),
+        phone_number:req.body.user_phone_number,
         role:req.body.role,
         avatar:result.url
     }
