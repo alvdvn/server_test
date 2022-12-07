@@ -55,6 +55,20 @@ exports.postLogin = async (req,res,next)=>{
 exports.getProfile = (req,res,next)=>{
     res.send(req.user);
 }
+exports.getAdminProfile = async (req,res)=>{
+    try {
+const AdminProfile = await UserModel.findOne({_id:'6366092dbbde5551a82a28aa'});
+        console.log(AdminProfile);
+        if (AdminProfile ==null){
+          return res.status(404).json({message:"Không tìm thấy"});
+        }
+        res.status(200).json(AdminProfile);
+    }catch (error){
+        return res.status(500).json({
+            message:"Có lỗi xảy ra"
+        })
+    }
+}
 exports.postLogout = async  (req,res,next)=>{
 
     // Log user out of the application
@@ -86,7 +100,7 @@ exports.putChangePassword =async (req,res)=>{
     const {oldPassword, newPassword} = req.body;
     const userID = req.user._id;
     console.log(userID)
-    const UserChangePass = await UserModel.findById(userID);
+    const UserChangePass =await UserModel.findById(userID);
     if(UserChangePass){
         bcrypt.compare(oldPassword, UserChangePass.password, (err, isMatch) => {
             if(err){
@@ -206,16 +220,6 @@ exports.putEdit = async (req,res,next)=>{
         }
     }
 
-    // let du_lieu = {
-    //     email:req.body.user_email,
-    //     full_name:req.body.user_full_name,
-    //     address:req.body.user_address,
-    //     phone_number:Number(req.body.user_phone_number),
-    //     role:req.body.role,
-    //     avatar:filename
-    // }
-    // console.log(du_lieu)
-    //goi lenh update
     UserModel.updateOne(dieu_kien,du_lieu,function (err,res){
         if (err)
         {
@@ -234,12 +238,7 @@ exports.putEditPhone = async (req,res,next)=>{
     }
     console.log(dieu_kien)
     let du_lieu = {
-        // email:req.body.user_email,
-        // full_name:req.body.user_full_name,
-        // address:req.body.user_address,
         phone_number:req.body.phone_number,
-        // role:req.body.role,
-        // avatar:filename
     }
     console.log(du_lieu)
     //goi lenh update
