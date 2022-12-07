@@ -8,5 +8,7 @@ router.get('/',auth.ChuaDangNhap,authController.getFormLogin);
 router.post('/',auth.ChuaDangNhap,authController.postLogin);
 router.get('/account',auth.YeuCauDangNhap, authController.getProfileUser);
 router.get('/logout',auth.YeuCauDangNhap, authController.getLogOut);
-router.get("/reset-password/:token",authController.postResetPassword)
+router.get("/reset-password/:token",authController.GetResetPassword);
+router.post("/reset-password/:token",authController.postResetPassword);
+
 module.exports = router;

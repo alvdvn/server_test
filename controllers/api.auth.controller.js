@@ -5,8 +5,6 @@ const jwt =require('jsonwebtoken');
 const {restPassword} =require('../utils/emailTemplates');
 const {sendEmail} =require('../utils/sendEmail');
 const {streamUploadAPI, streamUpload} =require('../utils/UploadIMG');
-const cloudinary = require("cloudinary").v2;
-
 
 exports.postReg= async (req,res)=>{
     let result;
@@ -148,7 +146,7 @@ try {
             data: undefined
         })
     }
-    const token =await user.generateAuthToken();
+    const token = jwt.sign({_id: user._id}, process.env.TOKEN_SEC_KEY,{expiresIn:'2m'});
     const emailTemplate =restPassword(user.email,user._id,token);
     sendEmail(emailTemplate)
     res.status(200).json({

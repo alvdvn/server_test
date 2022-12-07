@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const thongKeController = require('../controllers/thongke.controller');
+const authC = require("../middleware/auth.middleware");
 
-router.get('/',thongKeController.getFormAdd);
+router.get('/',authC.YeuCauDangNhap,thongKeController.getFormAdd);
 //get day
 router.get('/filterAmountByDay',thongKeController.getFilter);
 //get week
