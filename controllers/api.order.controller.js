@@ -196,6 +196,7 @@ if (orderId == undefined){
 }
     try {
     const FindByOrderId = await OrderModel.findById(orderId);
+    //i
 
     if (FindByOrderId.status =="Đang chờ xác nhận"){
         const Find= await OrderModel.findByIdAndUpdate(orderId,{
