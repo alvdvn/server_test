@@ -1,17 +1,15 @@
 const UserModel = require('../models/user.model');
 const bcrypt = require("bcrypt");
-const fs = require('fs');
 const {streamUpload} =require('../utils/UploadIMG');
 const IMGModel = require("../models/Img.model");
 //hien thi danh sach User
-exports.getListUSer=async(req,res,next)=>{
-    var listUser = await UserModel.find({role:"User"});
-
+exports.getListUSer=async(req,res)=>{
+    const listUser = await UserModel.find({role:"User"});
     res.render('./User/list-User',{listUser:listUser});
 }
 //list admin
-exports.getListAdmin=async(req,res,next)=>{
-    var ListAdmin = await UserModel.find({role:"Admin"});
+exports.getListAdmin=async(req,res)=>{
+    const ListAdmin = await UserModel.find({role:"Admin"});
     res.render('./User/list-Admin',{ListAdmin:ListAdmin});
 }
 exports.getFormLogin =  (req,res,next)=>{
@@ -22,7 +20,7 @@ exports.GetFormAddUser=(req,res,next)=>{
     res.render('./User/add-User');
 }
 //xu li them vao csdl
-exports.postAddUser= async (req,res,next)=>{
+exports.postAddUser= async (req,res)=>{
     const salt = await bcrypt.genSalt(10);
     let result;
     let filename
@@ -50,12 +48,10 @@ exports.postAddUser= async (req,res,next)=>{
          console.log('ghi du lieu thanh cong')
      }
  })
-
-
     res.redirect('/users/add')
 }
 //xu li lay form edit
-exports.getFormEditUser=async (req,res,next)=>{
+exports.getFormEditUser=async (req,res)=>{
     let UserData =await UserModel.findById(req.params.id).exec().
         catch(function (err) {
         console.log(err);
@@ -66,7 +62,7 @@ exports.getFormEditUser=async (req,res,next)=>{
     console.log(UserData);
     res.render('./User/update-User',{UserData:UserData});
 }
-exports.getPostEditUser= async (req,res,next)=>{
+exports.getPostEditUser= async (req,res)=>{
     let condition ={
         _id : req.params.id // lay id tren thanh dia chi
     }
@@ -90,8 +86,6 @@ if (result == null){
         avatar:result.url
     }
 }
-
-
     //goi lenh update
     UserModel.updateOne(condition,du_lieu,function (err,res){
         if (err)
@@ -102,7 +96,7 @@ if (result == null){
     res.redirect('/users/');
 }
 //xu li delete
-exports.getFormDelete = async (req,res,next)=>{
+exports.getFormDelete = async (req,res)=>{
     let dieu_kien ={
         _id : req.params.id // lay id tren thanh dia chi
     }
@@ -115,14 +109,13 @@ exports.getFormDelete = async (req,res,next)=>{
     })
     res.redirect('back');
 }
-
 //get user
-exports.getUser =(req,res,next)=>{
+exports.getUser =(req,res)=>{
     res.render('account',{users:req.session.user});
     console.log(req.session.user)
 }
 //log out
-exports.Logout = (req,res,next)=>{
+exports.Logout = (req,res)=>{
     req.session.destroy(function (){
         console.log("Dang xuat thanh cong");
     });
