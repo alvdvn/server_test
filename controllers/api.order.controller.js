@@ -142,7 +142,7 @@ exports.PostCardOrder= async(req, res)=>{
         address:req.body.address,
         Total:cart.Total,
         CreatedAt:nDate,
-        paymentMethodType:"card",
+        paymentMethodType:"Thanh toán bằng Thẻ tín dụng",
         isPaid:true
     });
     // nếu order thành công thì tiến hàng trừ stock = quanty

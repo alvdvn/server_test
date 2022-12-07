@@ -32,8 +32,8 @@ const OrderSchema = new mongoose.Schema(
         },
         paymentMethodType: {
             type: String,
-            enum: ['card', 'cash'],
-            default: 'cash',
+            enum: ['Thanh toán bằng Thẻ tín dụng', 'Thanh toán bằng tiền mặt'],
+            default: 'Thanh toán bằng tiền mặt',
         },
         isPaid: {
             type: Boolean,
