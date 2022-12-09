@@ -109,14 +109,12 @@ const user = req.user._id;
 exports.GetDetailOrder=async (req,res)=>{
     const orderId = req.params.orderId;
     console.log(orderId);
-    let FindOrderById = await OrderModel.findOne({_id:oderId});
+    let FindOrderById = await OrderModel.findOne({_id:orderId});
     console.log(FindOrderById);
     if (FindOrderById ==null){
         return res.status(404).json({message:"Không tìm thấy đơn hàng nào"});
     }
     res.status(200).json(FindOrderById);
-
-
 }
 exports.PostCardOrder= async(req, res)=>{
     //conver time to viet nam time
@@ -144,7 +142,7 @@ exports.PostCardOrder= async(req, res)=>{
         address:req.body.address,
         Total:cart.Total,
         CreatedAt:nDate,
-        paymentMethodType:"card",
+        paymentMethodType:"Thanh toán bằng Thẻ tín dụng",
         isPaid:true
     });
     // nếu order thành công thì tiến hàng trừ stock = quanty
@@ -196,7 +194,6 @@ if (orderId == undefined){
 }
     try {
     const FindByOrderId = await OrderModel.findById(orderId);
-
     if (FindByOrderId.status =="Đang chờ xác nhận"){
         const Find= await OrderModel.findByIdAndUpdate(orderId,{
             status:"người dùng đã hủy đơn hàng"
