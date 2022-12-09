@@ -1,17 +1,41 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-9 ms-sm-auto col-lg-12 px-md-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Banner</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="col-12" id="headerlist">
-                        <div class="btnaddbanner">
-                            <a href="/banners/add" class="btn btn-primary">Thêm</a>
-                        </div>
+<head>
+    <title>Danh sách nhân viên | Quản trị Admin</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel='stylesheet' href='/stylesheets/main.css'/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <!-- or -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+</head>
+<div class="app-title" style="margin-top: 25px">
+    <ul class="app-breadcrumb breadcrumb side">
+        <li class="breadcrumb-item active"><a href="#"><b>Danh sách Banner</b></a></li>
+    </ul>
+    <div id="clock"></div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            <div class="tile-body">
+                <div class="row element-button">
+                    <div class="col-sm-2">
+
+                        <a class="btn btn-add btn-sm" href="/banners/add" title="Thêm"><i class="fas fa-plus"></i>
+                            Tạo mới banner </a>
                     </div>
+
+
                 </div>
-            </div>
-            <div class="tables">
                 <input class="form-control" id="myInput" type="text" placeholder="Tìm kiếm.."
                        style="margin-bottom: 10px">
 
@@ -36,16 +60,12 @@
                             <!--                    class="avatar avatar-sm rounded-circle me-2"-->
                             <td>
                                 <a href="/banners/edit/{{this._id}}" class="btn btn-primary" id="btnAction">
-                                    <svg class="bi pe-none me-2" width="16" height="16">
-                                        <use xlink:href="#edit"/>
-                                    </svg>
+                                    <i class="fas fa-edit"></i>
                                 </a>
                                 <a href="/banners/delete/{{this._id}}"
                                    onclick="return confirm('Bạn có muốn xóa không?')"
                                    id="btnAction" class="btn btn-danger">
-                                    <svg class="bi pe-none me-2" width="16" height="16">
-                                        <use xlink:href="#delete"/>
-                                    </svg>
+                                    <i class="fas fa-trash-alt"></i>
                                 </a>
                             </td>
                         </tr>

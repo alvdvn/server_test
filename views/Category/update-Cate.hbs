@@ -1,20 +1,62 @@
+<head>
+    <title>Đăng nhập quản trị | Website quản trị v2.0</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="public/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="public/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="public/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="public/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="public/vendor/select2/select2.min.css">
+    <link rel='stylesheet' href='/stylesheets/signin.css'/>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
+<style>
+    .form-group input {
+        width: 400px;
+    }
 
-<div class="adddata">
-    <h3>Sửa loại</h3>
-    <form action="" method="POST" enctype="multipart/form-data">
-        {{#if msg}}
-            <p class="text-danger">{{{msg}}}</p>
-        {{/if}}
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Title</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" value={{CateData.title}} name="title">
-        </div>
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Ảnh</label>
-            <input type="file" class="form-control2" id="exampleFormControlInput1" name="CateImg">
-        </div>
-        <br>
-        <Button type="submit" class="btn btn-primary">Thêm</Button>
-    </form>
 
-</div>
+</style>
+<main>
+    <div class="app-title">
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item" ><a  href="/cate"> Danh sách Loại sản phẩm</a> </li>
+            <li class="breadcrumb-item"><a href="#">Sửa Loại sản phẩm  </a></li>
+        </ul>
+    </div>
+    <div >
+        <div class="col-md-12">
+
+            <div class="tile" style="width: 800px; margin: auto; ">
+
+                <h3 class="tile-title">Sửa thông tin sản phẩm</h3>
+                <div class="tile-body">
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        {{#if msg}}
+                            <p class="text-danger">{{{msg}}}</p>
+                        {{/if}}
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label" style="font-weight: bold;font-size: 20px;">Tên:</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" name="title" required="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label" style="font-weight: bold;font-size: 20px;">Ảnh:</label><br>
+                            <input type="file" class="form-control2" id="exampleFormControlInput1" name="CateImg" required="">
+                        </div>
+                        <br>
+                        <Button type="submit" class="btn btn-save">Thêm</Button>
+                    </form>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</main>

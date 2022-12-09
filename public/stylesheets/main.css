@@ -51,9 +51,7 @@ html {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-@-ms-viewport {
-    width: device-width;
-}
+
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
     display: block;
@@ -2183,7 +2181,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
 }
 
 .form-check-inline {
-    display: -webkit-inline-box;
+
     display: -ms-inline-flexbox;
     display: inline-flex;
     -webkit-box-align: center;
@@ -2570,7 +2568,7 @@ fieldset:disabled a.btn {
 .btn-primary {
     color: rgb(245 157 57);
     background-color: rgb(251 226 197);
-    border-color: none;
+
     /* border-top-left-radius: 10px !important; */
     /* border-bottom-right-radius: 10px !important; */
     border-radius: .357rem;
@@ -3476,7 +3474,7 @@ input[type="button"].btn-block {
 .btn-group,
 .btn-group-vertical {
     position: relative;
-    display: -webkit-inline-box;
+
     display: -ms-inline-flexbox;
     display: inline-flex;
     vertical-align: middle;
@@ -3781,7 +3779,7 @@ input[type="button"].btn-block {
 }
 
 .custom-control-inline {
-    display: -webkit-inline-box;
+
     display: -ms-inline-flexbox;
     display: inline-flex;
     margin-right: 1rem;
@@ -3796,11 +3794,6 @@ input[type="button"].btn-block {
 .custom-control-input:checked ~ .custom-control-label::before {
     color: #FFF;
     background-color: rgb(0, 28, 64);
-}
-
-.custom-control-input:focus ~ .custom-control-label::before {
-    -webkit-box-shadow: 0 0 0 1px #FFF, none;
-    box-shadow: 0 0 0 1px #FFF, none;
 }
 
 .custom-control-input:active ~ .custom-control-label::before {
@@ -4043,11 +4036,6 @@ input[type="button"].btn-block {
     appearance: none;
 }
 
-.custom-range::-webkit-slider-thumb:focus {
-    outline: none;
-    -webkit-box-shadow: 0 0 0 1px #FFF, none;
-    box-shadow: 0 0 0 1px #FFF, none;
-}
 
 .custom-range::-webkit-slider-thumb:active {
     background-color: #4affee;
@@ -4073,10 +4061,7 @@ input[type="button"].btn-block {
     appearance: none;
 }
 
-.custom-range::-moz-range-thumb:focus {
-    outline: none;
-    box-shadow: 0 0 0 1px #FFF, none;
-}
+
 
 .custom-range::-moz-range-thumb:active {
     background-color: #4affee;
@@ -4103,7 +4088,7 @@ input[type="button"].btn-block {
 
 .custom-range::-ms-thumb:focus {
     outline: none;
-    box-shadow: 0 0 0 1px #FFF, none;
+
 }
 
 .custom-range::-ms-thumb:active {
@@ -6682,7 +6667,7 @@ button.bg-dark:focus {
 }
 
 .d-inline-flex {
-    display: -webkit-inline-box !important;
+
     display: -ms-inline-flexbox !important;
     display: inline-flex !important;
 }
@@ -6715,7 +6700,7 @@ button.bg-dark:focus {
         display: flex !important;
     }
     .d-sm-inline-flex {
-        display: -webkit-inline-box !important;
+
         display: -ms-inline-flexbox !important;
         display: inline-flex !important;
     }
@@ -6749,7 +6734,7 @@ button.bg-dark:focus {
         display: flex !important;
     }
     .d-md-inline-flex {
-        display: -webkit-inline-box !important;
+
         display: -ms-inline-flexbox !important;
         display: inline-flex !important;
     }
@@ -6783,7 +6768,7 @@ button.bg-dark:focus {
         display: flex !important;
     }
     .d-lg-inline-flex {
-        display: -webkit-inline-box !important;
+
         display: -ms-inline-flexbox !important;
         display: inline-flex !important;
     }
@@ -6817,7 +6802,7 @@ button.bg-dark:focus {
         display: flex !important;
     }
     .d-xl-inline-flex {
-        display: -webkit-inline-box !important;
+
         display: -ms-inline-flexbox !important;
         display: inline-flex !important;
     }
@@ -6851,7 +6836,7 @@ button.bg-dark:focus {
         display: flex !important;
     }
     .d-print-inline-flex {
-        display: -webkit-inline-box !important;
+       ;
         display: -ms-inline-flexbox !important;
         display: inline-flex !important;
     }
@@ -9424,7 +9409,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .text-hide {
-    font: 0/0 a;
+
     color: transparent;
     text-shadow: none;
     background-color: transparent;
