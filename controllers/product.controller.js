@@ -80,16 +80,16 @@ exports.postEditPro = async (req, res, next) => {
     let result = await streamUpload(req);
     console.log(result);
     let du_lieu={};
-if (result == null){
-    du_lieu = {
-        title: req.body.title,
-        price: req.body.price,
-        desc: req.body.desc,
-        sizes: req.body.sizes,
-        color: req.body.color,
-        stock: req.body.stock,
-    }
-}else {
+    if (result == null){
+        du_lieu = {
+            title: req.body.title,
+            price: req.body.price,
+            desc: req.body.desc,
+            sizes: req.body.sizes,
+            color: req.body.color,
+            stock: req.body.stock,
+        }
+    }else {
         du_lieu = {
             title: req.body.title,
             price: req.body.price,
