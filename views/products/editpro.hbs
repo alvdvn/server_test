@@ -1,95 +1,110 @@
-<div class="container-fluid">
+<head>
+    <title>Sửa thông tin Sản phẩm</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="public/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="public/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="public/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="public/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="public/vendor/select2/select2.min.css">
+    <link rel='stylesheet' href='/stylesheets/signin.css'/>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
+<style>
+    .form-group input {
+        width: 400px;
+    }
+
+
+</style>
+<main>
+    <div class="app-title">
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item">Danh sách sản phẩm </li>
+            <li class="breadcrumb-item"><a href="#">Sửa sản phẩm </a></li>
+        </ul>
+    </div>
     <div class="row">
-        <div class="col-md-9 ms-sm-auto col-lg-12 px-md-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Sửa sản phẩm</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="col-12" id="headerlist">
-                        <div class="btnaddbanner">
-                            <a href="/pro/list" class="btn btn-primary">Danh sách</a>
+        <div class="col-md-12">
+
+            <div class="tile">
+
+                <h3 class="tile-title">Sưa thông tin sản phẩm</h3>
+                <div class="tile-body">
+                    {{#if msg}}
+                        <p class="text-danger">{{{msg}}}</p>
+                    {{/if}}
+                    <form class="row" method="post">
+                        <div class="form-group col-md-4">
+                            <label htmlFor="inputEmail" class="form-label">Name</label>
+                            <input type="text" class="form-control" name="title" placeholder="Tên" required=""/>
                         </div>
-                    </div>
+                        <div class="form-group col-md-4">
+                            <label htmlFor="input_password" class="form-label">Price</label>
+                            <input type="number" class="form-control" name="price" placeholder="Giá" required=""/>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label htmlFor="input_full_name" class="form-label">Mô tả</label>
+                            <input type="text" class="form-control" name="desc" placeholder="Mô tả" required=""/>
+                        </div>
+                        <div class="form-group  col-md-4">
+                            <label for="exampleFormControlInput1" class="form-label">Chọn loại</label>
+                            <select class="form-control form-control-sm" id="select_category" Name="cate"
+                                    style="width: 400px; height: 50px;" onchange="select();">
+                                <option> Chọn loại</option>
+                                {{#each listCate}}
+
+                                    <option value="{{this.title}}"> {{this.title}}  </option>
+                                {{/each}}
+                            </select>
+
+                        </div>
+
+                        <div class="form-group  col-md-4">
+                            <label for="exampleFormControlInput1" class="form-label">Chọn size</label>
+                            <select class="form-control form-control-sm" id="select_size" size="{{sizeLength}}"
+                                    Name="sizes" style="width: 400px;" onchange="select();" multiple>
+                                {{#each listSize}}
+
+                                    <option value="{{this}}"> {{this}}  </option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="form-group  col-md-4">
+                            <label htmlFor="input_phone_number" class="form-label"> chọn Màu</label>
+                            < <input type="text" class="form-control" name="color" placeholder="Màu" required=""/>
+                        </div>
+                        <div class="form-group  col-md-4">
+                            <label htmlFor="input_phone_number" class="form-label">Số lượng</label>
+
+                            <input type="text" class="form-control" name="stock" placeholder="Số lượng" required=""/>
+
+                        </div>
+                        <div class="form-group  col-md-4" style="margin-top: 30px">
+                            <input type="file" name="img" placeholder="img " required="" multiple/>
+                            <span id="status"></span>
+                        </div>
+                        <div class="clear"></div>
+
+                        <div class="form-group  col-md-4" style="margin-top: 30px">
+
+                            <button class="btn btn-save" type="submit">Lưu lại</button>
+                            <a class="btn btn-cancel" href="/pro/list">Hủy bỏ</a>
+                        </div>
+
+
+                    </form>
                 </div>
             </div>
-            {{#if msg}}
-                <p class="text-danger">{{{msg}}}</p>
-            {{/if}}
-            <form action="#" id="uploadForm" method="post" enctype="multipart/form-data" style="margin-bottom: 50px">
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Tên</label>
-                    <input type="text" class="form-control" name="title" value="{{itemPro.title}}"  placeholder="Tên" required=""/>
-
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Giá</label>
-                    <input type="number" class="form-control" name="price" value="{{itemPro.price}}" placeholder="Giá" required="" />
-
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Mô tả</label>
-                    <input type="text" class="form-control" name="desc" value="{{itemPro.desc}}" placeholder="Mô tả" required="" />
-
-                </div>
-
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Chọn loại</label>
-                    <input type="text" class="form-control" name="category" value="{{itemPro.category}}" placeholder="Màu" required="" />
-                </div>
-                <label for="exampleFormControlInput1" class="form-label">Chọn size</label>
-                <div class="mb-3">
-                    <input type="text" class="form-control" name="sizes" value="{{itemPro.sizes}}" placeholder="Màu" required="" />
-
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Màu</label>
-                    <input type="text" class="form-control" name="color" value="{{itemPro.color}}" placeholder="Màu" required="" />
-
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Số lượng</label>
-                    <input type="text" class="form-control" name="stock" value="{{itemPro.stock}}" placeholder="Số lượng" required="" />
-
-                </div>
-                <div class="form-sub-w3">
-                    <img src="{{itemPro.img}}" style="width: 100px;height: 100px;">
-                    <input type="file" name="img"  placeholder="img" id="img" accept="{{itemPro.img}}"/>
-                </div>
-                <br/>
-                    <Button type="submit" class="btn btn-primary">Sửa</Button>
-            </form>
         </div>
+
     </div>
-</div>
-</div>
-<script>
-    // $(document).ready(function() {
-    //     // Multiple images preview in browser - trungquandev.com
-    //     let imagesPreview = function(input, placeToInsertImagePreview) {
-    //         if (input.files) {
-    //             let filesAmount = input.files.length;
-    //             for (i = 0; i < filesAmount; i++) {
-    //                 let reader = new FileReader();
-    //                 reader.onload = function(event) {
-    //                     $($.parseHTML("<img>")).attr("src", event.target.result).appendTo(placeToInsertImagePreview);
-    //                 }
-    //                 reader.readAsDataURL(input.files[i]);
-    //             }
-    //         }
-    //     };
-    //     $("#input-many-files").on("change", function() {
-    //         imagesPreview(this, "div.preview-images");
-    //     });
-    // });
-    // function select() {
-    //     // let element   = $('#select_category').val();
-    //     // let value = request.form("cate").toString();
-    //     // console.log(element);
-    //     const anh_manga = document.querySelector('#select_category');
-    //     const reader = new select();
-    //     reader.addEventListener("load", function () {
-    //
-    //         preview.src = reader.result;
-    //         anh_manga.value = reader.result;
-    //     }, false);
-    // }
-</script>
+
+</main>

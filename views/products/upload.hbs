@@ -1,24 +1,59 @@
-<div class="container-fluid">
-    <div class="col-md-9 ms-sm-auto col-lg-12 px-md-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Thêm ảnh sản phẩm</h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
-                <div class="col-12" id="headerlist">
-                    <div class="btnaddbanner">
-                        <a href="/pro/list" class="btn btn-primary">Danh sách</a>
-                    </div>
+<head>
+    <title>Đăng nhập quản trị | Website quản trị v2.0</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="public/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="public/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="public/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="public/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="public/vendor/select2/select2.min.css">
+    <link rel='stylesheet' href='/stylesheets/signin.css'/>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
+<style>
+    .form-group input {
+        width: 400px;
+    }
+
+
+</style>
+<main>
+    <div class="app-title" s>
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item">Danh sách sản phẩm</li>
+            <li class="breadcrumb-item"><a href="#">Thêm ảnh sản phẩm</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="tile">
+
+                <h3 class="tile-title">Thêm Ảnh Mới</h3>
+                <div class="tile-body">
+                    {{#if msg}}
+                        <p class="text-danger">{{{msg}}}</p>
+                    {{/if}}
                 </div>
+                <form>
+                    <label>Ảnh</label>
+                    <div>
+                        <input type="file" id="image" multiple name="anh_product"/> <br><br>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Thêm ảnh</button>
+
+
+                </form>
             </div>
         </div>
-        {{#if msg}}
-            <p class="text-danger">{{{msg}}}</p>
-        {{/if}}
-    <form action="" method="post" enctype="multipart/form-data">
-        <label>Ảnh</label>
-        <div>
-            <input type="file" id="image" multiple name="anh_product" /> <br><br>
-        </div>
-        <button class="btn btn-primary" type="submit">Thêm ảnh</button>
-    </form>
-</div>
-</div>
+    </div>
+
+    </div>
+
+</main>

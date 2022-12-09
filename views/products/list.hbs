@@ -1,83 +1,111 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-9 ms-sm-auto col-lg-12 px-md-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Sản phẩm</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="col-12" id="headerlist">
-                        <div class="btnaddbanner">
-                            <a href="/pro/add" class="btn btn-primary">Thêm</a>
-                        </div>
+<head>
+    <title>Danh sách nhân viên | Quản trị Admin</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel='stylesheet' href='/stylesheets/main.css'/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <!-- or -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+</head>
+<div class="app-title" style="margin-top: 25px">
+    <ul class="app-breadcrumb breadcrumb side">
+        <li class="breadcrumb-item active"><a href="#"><b>Danh sách sản phẩm</b></a></li>
+    </ul>
+    <div id="clock"></div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            <div class="tile-body">
+                <div class="row element-button">
+                    <div class="col-sm-2">
+
+                        <a class="btn btn-add btn-sm" href="/pro/add" title="Thêm"><i class="fas fa-plus"></i>
+                            Tạo mới sản phẩm</a>
+                    </div>
+                    <div class="col-sm-2">
+                        <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i
+                                class="fas fa-file-upload"></i> Tải từ file</a>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
+                                class="fas fa-print"></i> In dữ liệu</a>
+                    </div>
+                    <div class="col-sm-2">
+                        <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button" title="Sao chép"><i
+                                class="fas fa-copy"></i> Sao chép</a>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
+                    </div>
+                    <div class="col-sm-2">
+                        <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i
+                                class="fas fa-file-pdf"></i> Xuất PDF</a>
+                    </div>
+                    <div class="col-sm-2">
+                        <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
+                                class="fas fa-trash-alt"></i> Xóa tất cả </a>
                     </div>
                 </div>
-            </div>
-
-            <input class="form-control" id="myInput" type="text" placeholder="Tìm kiếm.."
-                   style="margin-bottom: 10px">
-
-        <div class="tables" >
-            <table class="table table-bordered" style="text-align: center" >
-                <thead>
-                <tr>
-                    <!--                <th>ID</th>-->
-                    <th>Tên sản phẩm</th>
-                    <th>Giá</th>
-                    <th>Mô tả</th>
-                    <th>Ảnh</th>
-                    <th>Loại</th>
-                    <th>Size</th>
-                    <th>Màu</th>
-                    <th>Stock</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody id="myTableProduct">
-                {{#each listProduct}}
+                <table class="table table-hover table-bordered" id="sampleTable">
+                    <thead>
                     <tr>
-                        <td scope="row">{{this.title}}</td>
-                        <td>{{this.price}}</td>
-                        <td>{{this.desc}}</td>
-                        <td><img src="{{this.img}}" style="width: 50px;height: 50px;align-items: center"></td>
-                        <td>{{this.category}}</td>
-                        <td>{{this.sizes}}</td>
-                        <td>{{this.color}}</td>
-                        <td>{{this.stock}}</td>
-                        <!--                    <td><img src="" width="100px" style="vertical-align: center"></td>-->
-
-                        <td>
-                            <a href="/pro/upload/{{this._id}}" class="btn btn-primary" id="btnAction">
-                                <svg class="bi pe-none me-2" width="16" height="16">
-                                    <use xlink:href="#upnhieuanh"/>
-                                </svg>
-                            </a>
-                            <a href="/pro/edit/{{this._id}}" class="btn btn-primary" id="btnAction">
-                                <svg class="bi pe-none me-2" width="16" height="16">
-                                    <use xlink:href="#edit"/>
-                                </svg>
-                            </a>
-                            <a href="/pro/del/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')" id="btnAction" class="btn btn-danger">
-                                <svg class="bi pe-none me-2" width="16" height="16">
-                                    <use xlink:href="#delete"/>
-                                </svg>
-                            </a>
-                        </td>
-                        </td>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Mô tả</th>
+                        <th>Ảnh</th>
+                        <th>Loại</th>
+                        <th>Size</th>
+                        <th>Màu</th>
+                        <th>Stock</th>
+                        <th>Action</th>
                     </tr>
+                    </thead>
+                    <tbody>
+                    {{#each listProduct}}
+                        <tr>
+                            <td scope="row" style="width: 150px;">{{this.title}}</td>
+                            <td>{{this.price}}</td>
+                            <td>{{this.desc}}</td>
+                            <td><img src="{{this.img}}" style="width: 50px;height: 50px;align-items: center"></td>
+                            <td>{{this.category}}</td>
+                            <td>{{this.sizes}}</td>
+                            <td>{{this.color}}</td>
+                            <td>{{this.stock}}</td>
+                            <!--                    <td><img src="" width="100px" style="vertical-align: center"></td>-->
+
+                            <td>
+                                <a href="/pro/upload/{{this._id}}" class="btn btn-primary btn-sm edit" id="btnAction">
+                                    <i class="fas fa-images"></i>
+                                </a>
+                                <a href="/pro/edit/{{this._id}}" class="btn btn-primary btn-sm edit" id="btnAction">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="/pro/del/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')"
+                                   id="btnAction" class="btn btn-danger btn-sm trash">
+                                    <i class="fas fa-trash-alt"></i>
+
+                                </a>
+                            </td>
+                            </td>
+                        </tr>
 
 
-                {{/each}}
-                </tbody>
-            </table>
+                    {{/each}}
+                </table>
+            </div>
         </div>
-        <script>
-            $(document).ready(function () {
-                $("#myInput").on("keyup", function () {
-                    var value = $(this).val().toLowerCase();
-                    $("#myTableProduct tr").filter(function () {
-                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                    });
-                });
-            });
-        </script>
     </div>
 </div>

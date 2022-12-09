@@ -1,4 +1,28 @@
+<head>
+    <title>Danh sách nhân viên | Quản trị Admin</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <!-- or -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+</head>
+<div class="app-title" style="margin-top: 25px">
+    <ul class="app-breadcrumb breadcrumb side">
+        <li class="breadcrumb-item active"><a href="#"><b>Chi tiết đơn hàng</b></a></li>
+    </ul>
+    <div id="clock"></div>
+</div>
 <div class="container-fluid my-5  d-flex  justify-content-center">
     <div class="card card-1 border-success ">
         <div class="card-header bg-white">
@@ -16,71 +40,73 @@
 
             </div>
             {{#each UserOderData.products}}
-            <div class="row">
-                <div class="col">
-                    <div class="card card-2">
-                        <div class="card-body">
-                            <div class="media">
-                                <div class="sq align-self-center "> <img class="img-fluid  my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0" src="{{this.ProductIMG}}" width="135" height="135" /> </div>
-                                <div class="media-body my-auto ml-2 ">
+                <div class="row">
+                    <div class="col">
+                        <div class="card card-2">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="sq align-self-center ">
+                                        <img class="img-fluid  my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0" src="{{this.ProductIMG}}" width="135" height="135" /> </div>
+                                    <div class="media-body my-auto ml-2 ">
 
-                                    <div class="row  my-auto flex-column ">
-                                        <div class="col my-auto"> <h6 class="mb-0"> {{this.title}}</h6>  </div>
-                                        <div class="col-auto my-auto"> <small>Color:{{this.color}} </small></div>
-                                        <div class="col my-auto"> <small>Size : {{this.size}}</small></div>
-                                        <div class="col my-auto"> <small>Qty : {{this.quantity}}</small></div>
-                                        <div class="col my-auto"><h6 class="mb-0">{{this.price}} VND</h6>
+                                        <div class="  my-auto flex-column ">
+                                            <div class="col my-auto"> <h6 class="mb-0"> {{this.title}}</h6>  </div>
+                                            <div class="col-auto my-auto"> <small>Color:{{this.color}} </small></div>
+                                            <div class="col my-auto"> <small>Size : {{this.size}}</small></div>
+                                            <div class="col my-auto"> <small>Qty : {{this.quantity}}</small></div>
+                                            <div class="col my-auto"><h6 class="mb-0">{{this.price}} VND</h6>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             {{/each}}
 
             <div class="row mt-4">
                 <div class="ml-3">
+                </div>
+                <div class="row  ">
+                    <div class="col">
+                        <p class="mb-1"><span class="font-weight-bold"> thanh toán</span> : {{UserOderData.isPaid}}</p>
+                        <p class="mb-1"><span class="font-weight-bold">PT thanh toán</span> : {{UserOderData.paymentMethodType}}</p>
+                        <p class="mb-1"><span class="font-weight-bold"> Trạng thái</span> : {{UserOderData.status}}</p>
+                        <p class="mb-1"><span class="font-weight-bold"> Ngày tạo</span> : {{UserOderData.createdAt}}</p>
+                        <p class="mb-1"><span class="font-weight-bold">Tổng giá </span>: {{UserOderData.Total}} VND</p></div>
+                </div>
             </div>
-            <div class="row  ">
-                <div class="col">
-                    <p class="mb-1"><span class="font-weight-bold"> thanh toán</span> : {{UserOderData.isPaid}}</p>
-                    <p class="mb-1"><span class="font-weight-bold">PT thanh toán</span> : {{UserOderData.paymentMethodType}}</p>
-                    <p class="mb-1"><span class="font-weight-bold"> Trạng thái</span> : {{UserOderData.status}}</p>
-                    <p class="mb-1"><span class="font-weight-bold"> Ngày tạo</span> : {{UserOderData.createdAt}}</p>
-                    <p class="mb-1"><span class="font-weight-bold">Tổng giá </span>: {{UserOderData.Total}} VND</p></div>
+            <div class="card-footer">
+                <form method="post">
+                    <div class="jumbotron-fluid">
+                        <div class="row align-items: start ">
+                            <p class=" mr-3 mt-1 "><span class="font-weight-bold">Cập nhật trạng thái :</span></p>
+                            <div class="form-check form-check-inline pb-2 ">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox1" name="status" value="Đang chờ xác nhận" checked>
+                                <label class="form-check-label" for="inlineCheckbox1">Đang chờ xác nhận</label>
+                            </div>
+                            <div class="form-check form-check-inline pb-2">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="status" value="Đang chuẩn bị hàng" >
+                                <label class="form-check-label" for="inlineCheckbox2">Đang chuẩn bị hàng</label>
+                            </div>
+                            <div class="form-check form-check-inline pb-2">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="status" value="Đang giao hàng" >
+                                <label class="form-check-label" for="inlineCheckbox2">Đang giao hàng</label>
+                            </div>
+                            <div class="form-check form-check-inline pb-2">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="status" value="Giao hàng thành công" >
+                                <label class="form-check-label" for="inlineCheckbox2">Giao hàng thành công</label>
+                            </div>
+                        </div>
+                        <div class="row justify-content-between mb-3 mt-3 mt-md-0 ">
+                            <div class="col-auto border-line ml-5"> <button type="submit" class="btn btn-success">Cập nhật</button></div>
+                            <div class="col-auto border-line  mr-5"> <a href="/order/listorder"><button class="btn btn-success">Hủy Bỏ</button></a>  </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-        <div class="card-footer">
-          <form method="post">
-              <div class="jumbotron-fluid">
-                  <div class="row align-items: start ">
-                      <p class=" mr-3 mt-1 "><span class="font-weight-bold">Cập nhật trạng thái :</span></p>
-                      <div class="form-check form-check-inline pb-2 ">
-                          <input class="form-check-input" type="radio" id="inlineCheckbox1" name="status" value="Đang chờ xác nhận" checked>
-                          <label class="form-check-label" for="inlineCheckbox1">Đang chờ xác nhận</label>
-                      </div>
-                      <div class="form-check form-check-inline pb-2">
-                          <input class="form-check-input" type="radio" id="inlineCheckbox2" name="status" value="Đang chuẩn bị hàng" >
-                          <label class="form-check-label" for="inlineCheckbox2">Đang chuẩn bị hàng</label>
-                      </div>
-                      <div class="form-check form-check-inline pb-2">
-                          <input class="form-check-input" type="radio" id="inlineCheckbox2" name="status" value="Đang giao hàng" >
-                          <label class="form-check-label" for="inlineCheckbox2">Đang giao hàng</label>
-                      </div>
-                      <div class="form-check form-check-inline pb-2">
-                          <input class="form-check-input" type="radio" id="inlineCheckbox2" name="status" value="Giao hàng thành công" >
-                          <label class="form-check-label" for="inlineCheckbox2">Giao hàng thành công</label>
-                      </div>
-                  </div>
-                  <div class="row justify-content-between mb-3 mt-3 mt-md-0 ">
-                      <div class="col-auto border-line ml-5"> <button type="submit" class="btn btn-success">Cập nhật</button></div>
-                      <div class="col-auto border-line  mr-5"> <a href="/order/listorder"><button class="btn btn-success">Hủy Bỏ</button></a>  </div>
-                  </div>
-              </div>
-          </form>
-        </div>
-    </div>
-</div></div>
+    </div></div>
+
