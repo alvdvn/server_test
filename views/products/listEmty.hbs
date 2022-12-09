@@ -15,69 +15,68 @@
             <input class="form-control" id="myInput" type="text" placeholder="Tìm kiếm.."
                    style="margin-bottom: 10px">
 
-        <div class="tables" >
-            <table class="table table-bordered" style="text-align: center" >
-                <thead>
-                <tr>
-                    <!--                <th>ID</th>-->
-                    <th>Tên sản phẩm</th>
-                    <th>Giá</th>
-                    <th>Mô tả</th>
-                    <th>Ảnh</th>
-                    <th>Loại</th>
-                    <th>Size</th>
-                    <th>Màu</th>
-                    <th>Stock</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody id="myTableProduct">
-                {{#each listEmtyProduct}}
+            <div class="tables">
+                <table class="table table-bordered" style="text-align: center">
+                    <thead>
                     <tr>
-                        <td scope="row">{{this.title}}</td>
-                        <td>{{this.price}}</td>
-                        <td>{{this.desc}}</td>
-                        <td><img src="{{this.img}}" style="width: 50px;height: 50px;align-items: center"></td>
-                        <td>{{this.category}}</td>
-                        <td>{{this.sizes}}</td>
-                        <td>{{this.color}}</td>
-                        <td>{{this.stock}}</td>
-                        <!--                    <td><img src="" width="100px" style="vertical-align: center"></td>-->
-
-                        <td>
-                            <a href="/pro/upload/{{this._id}}" class="btn btn-primary" id="btnAction">
-                                <svg class="bi pe-none me-2" width="16" height="16">
-                                    <use xlink:href="#upnhieuanh"/>
-                                </svg>
-                            </a>
-                            <a href="/pro/edit/{{this._id}}" class="btn btn-primary" id="btnAction">
-                                <svg class="bi pe-none me-2" width="16" height="16">
-                                    <use xlink:href="#edit"/>
-                                </svg>
-                            </a>
-                            <a href="/pro/del/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')" id="btnAction" class="btn btn-danger">
-                                <svg class="bi pe-none me-2" width="16" height="16">
-                                    <use xlink:href="#delete"/>
-                                </svg>
-                            </a>
-                        </td>
-                        </td>
+                        <!--                <th>ID</th>-->
+                        <th>Tên sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Mô tả</th>
+                        <th>Ảnh</th>
+                        <th>Loại</th>
+                        <th>Size</th>
+                        <th>Màu</th>
+                        <th>Stock</th>
+                        <th>Action</th>
                     </tr>
+                    </thead>
+                    <tbody id="myTableProduct">
+                    {{#each listEmtyProduct}}
+                        <tr>
+                            <td scope="row">{{this.title}}</td>
+                            <td>{{this.price}}</td>
+                            <td>{{this.desc}}</td>
+                            <td><img src="{{this.img}}" style="width: 50px;height: 50px;align-items: center"></td>
+                            <td>{{this.category}}</td>
+                            <td>{{this.sizes}}</td>
+                            <td>{{this.color}}</td>
+                            <td>{{this.stock}}</td>
+                            <!--                    <td><img src="" width="100px" style="vertical-align: center"></td>-->
 
+                            <td>
 
-                {{/each}}
-                </tbody>
-            </table>
-        </div>
-        <script>
-            $(document).ready(function () {
-                $("#myInput").on("keyup", function () {
-                    var value = $(this).val().toLowerCase();
-                    $("#myTableProduct tr").filter(function () {
-                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                <a href="/pro/upload/{{this._id}}" class="btn btn-primary" id="btnAction">
+                                    <use xlink:href="#upnhieuanh"/>
+                                    <i class="fas fa-images"></i>
+                                </a>
+                                <a href="/pro/edit/{{this._id}}" class="btn btn-primary" id="btnAction">
+                                    <use xlink:href="#edit"/>
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="/pro/del/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')"
+                                   id="btnAction" class="btn btn-danger">
+                                    <use xlink:href="#delete"/>
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                            </td>
+                        </tr>
+
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <script>
+                $(document).ready(function () {
+                    $("#myInput").on("keyup", function () {
+                        var value = $(this).val().toLowerCase();
+                        $("#myTableProduct tr").filter(function () {
+                            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                        });
                     });
                 });
-            });
-        </script>
+            </script>
+        </div>
     </div>
-</div></div>
+</div>
