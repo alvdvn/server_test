@@ -185,12 +185,12 @@
                 //fetch data year
                 function updateChartYear() {
                     async function fetchData() {
-                        const url = 'https://mofshop.shop/thongke/filterAmountMonthtoYear'
+                        const url = 'http://localhost:3000/thongke/filterAmountMonthtoYear'
                         const response = await fetch(url);
                         // chờ khi req completed
                         const datapoints = await response.json();
                         // kiểm tra
-                        console.log(datapoints);
+
                         return datapoints;
                     }
                     fetchData().then(datapoints => {
@@ -221,7 +221,7 @@
 
 
                         // $('#AllIncome').text('Test message here')
-                        const url = 'http://localhost:3000/thongke/filterByDatePicker'
+                        const url = 'https://mofshop.shop/thongke/filterByDatePicker'
                         const response = await fetch(url,{
                             method:'POST',
                             body: JSON.stringify({
@@ -266,7 +266,7 @@
                 //fetch Data month
                 function updateChart() {
                     async function fetchData() {
-                        const url = 'https://mofshop.shop/thongke/filterAmountByMonth'
+                        const url = 'http://localhost:3000/thongke/filterAmountByMonth'
                         const response = await fetch(url);
                         // chờ khi req completed
                         const datapoints = await response.json();
@@ -301,7 +301,7 @@
                 function updateChartWeek() {
 
                     async function fetchData() {
-                        const url = 'https://mofshop.shop/thongke/filterAmountByWeek'
+                        const url = 'http://localhost:3000/thongke/filterAmountByWeek'
                         const response = await fetch(url);
                         // chờ khi req completed
                         const datapoints = await response.json();
