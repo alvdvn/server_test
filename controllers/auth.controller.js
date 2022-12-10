@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const {layouts} = require("chart.js");
 exports.getFormLogin = (req,res)=>{
-    res.render('login');
+    res.render('./USer/login');
 }
 exports.postLogin = async (req,res)=>{
 const body =req.body;

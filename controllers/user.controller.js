@@ -14,7 +14,7 @@ exports.getListAdmin=async(req,res)=>{
     res.render('./User/list-Admin',{ListAdmin:ListAdmin});
 }
 exports.getFormLogin =  (req,res,next)=>{
-    res.render('login')
+    res.render('./User/login')
 }
 //hien thi form add
 exports.GetFormAddUser=(req,res,next)=>{
