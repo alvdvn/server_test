@@ -39,7 +39,7 @@ exports.GetResetPassword=async (req,res)=>{
     {
         if (err){
         console.log("Auth error", err);
-            return res.render('./User/login',{msg:"link đã hết hạn"})
+            return res.render('linkexpired',{msg:"link đã hết hạn"})
         }
         console.log(result)
         res.render('./User/reset-password');
