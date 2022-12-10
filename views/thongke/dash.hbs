@@ -185,7 +185,7 @@
                 //fetch data year
                 function updateChartYear() {
                     async function fetchData() {
-                        const url = 'http://localhost:3000/thongke/filterAmountMonthtoYear'
+                        const url = 'https://mofshop.shop/thongke/filterAmountMonthtoYear'
                         const response = await fetch(url);
                         // chờ khi req completed
                         const datapoints = await response.json();
@@ -266,7 +266,7 @@
                 //fetch Data month
                 function updateChart() {
                     async function fetchData() {
-                        const url = 'http://localhost:3000/thongke/filterAmountByMonth'
+                        const url = 'https://mofshop.shop/thongke/filterAmountByMonth'
                         const response = await fetch(url);
                         // chờ khi req completed
                         const datapoints = await response.json();
@@ -301,7 +301,7 @@
                 function updateChartWeek() {
 
                     async function fetchData() {
-                        const url = 'http://localhost:3000/thongke/filterAmountByWeek'
+                        const url = 'https://mofshop.shop/thongke/filterAmountByWeek'
                         const response = await fetch(url);
                         // chờ khi req completed
                         const datapoints = await response.json();
