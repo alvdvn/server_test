@@ -59,6 +59,8 @@
                                 class="fas fa-trash-alt"></i> Xóa tất cả </a>
                     </div>
                 </div>
+                <input class="form-control" id="myInput" type="text" placeholder="Tìm kiếm.."
+                       style="margin-bottom: 10px">
                 <table class="table table-hover table-bordered" id="sampleTable">
                     <thead>
                     <tr>
@@ -73,7 +75,7 @@
                         <th>Action</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="listProduct">
                     {{#each listProduct}}
                         <tr>
                             <td scope="row" style="width: 150px;">{{this.title}}</td>
@@ -108,4 +110,14 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#listProduct tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
 </div>
