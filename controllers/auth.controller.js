@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const {layouts} = require("chart.js");
 exports.getFormLogin = (req,res)=>{
-    res.render('./USer/login');
+    res.render('./User/login');
 }
 exports.postLogin = async (req,res)=>{
 const body =req.body;
@@ -14,13 +14,13 @@ const user = await  UserModel.findOne({
        return res.render('./User/login',{msg:'Sai mật khẩu Hoặc email'});
     }
 if (user.role === "User"){
-    res.render('login',{msg:'không đủ quyền để đăng nhập '});
+    res.render('./User/login',{msg:'không đủ quyền để đăng nhập '});
 }else {
     if (user){
         const validatePass = await  bcrypt.compare(body.password,user.password);
         if (validatePass){
             //login ok
-            console.log(req.session)
+            console.log(req.session.user)
             req.session.user = user
             res.redirect('/pro/list')
         }else {
@@ -30,6 +30,7 @@ if (user.role === "User"){
 }
 }
 exports.getProfileUser=(req,res)=>{
+
     res.render('account',{users:req.session.user});
 }
 exports.GetResetPassword=async (req,res)=>{
