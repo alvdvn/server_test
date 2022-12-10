@@ -1,7 +1,8 @@
-const UserModel = require('../models/user.model');
+ const UserModel = require('../models/user.model');
 const bcrypt = require("bcrypt");
 const {streamUpload} =require('../utils/UploadIMG');
 const IMGModel = require("../models/Img.model");
+ const {layouts} = require("chart.js");
 //hien thi danh sach User
 exports.getListUSer=async(req,res)=>{
     const listUser = await UserModel.find({role:"User"});
@@ -13,7 +14,7 @@ exports.getListAdmin=async(req,res)=>{
     res.render('./User/list-Admin',{ListAdmin:ListAdmin});
 }
 exports.getFormLogin =  (req,res,next)=>{
-    res.render('./User/login');
+    res.render('login')
 }
 //hien thi form add
 exports.GetFormAddUser=(req,res,next)=>{
@@ -119,5 +120,5 @@ exports.Logout = (req,res)=>{
     req.session.destroy(function (){
         console.log("Dang xuat thanh cong");
     });
-    res.redirect('/login');
+    res('/login');
 }
