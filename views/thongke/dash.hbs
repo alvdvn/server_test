@@ -23,7 +23,7 @@
 
 
 </style>
-<main>
+
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><a href="/cate"> Thống kê doanh thu</a></li>
@@ -50,9 +50,18 @@
                     </div>
                 </div>
                 <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-            </main>
 
             <div class="container text-center">
+                <div class="tile" >
+                    <label>Start date:  </label>
+                    <input type="date" id="startdate" name="startdate"/>
+                    <label style="padding-left: 50px; padding-right: 50px;"></label>
+                    <label>End date: </label>
+                    <input type="date"  id="enddate"  name="enddate"/>
+                    <label style="padding-left: 50px; padding-right: 50px;"></label>
+                    <button type="button" onclick="updateChartWeek()" class="btn btn-sm btn-outline-secondary">
+                        Xác nhận</button>
+                </div>
                 <div class="row g-4 mb-4">
                     <div class="col-6 col-lg-3">
                         <div class="app-card app-card-stat shadow-sm h-100">
@@ -130,6 +139,7 @@
                     </div>
 
                 </div>
+
                 <h3 class="text-left mt-3 mb-3">Top 10 sản phẩm bán nhiều nhất</h3>
 
                 <table class="table table-hover">
@@ -309,4 +319,3 @@
     </div>
 
 
-</main>
