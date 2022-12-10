@@ -2,8 +2,8 @@ let restPassword = (email,token)=>{
     const mailOptions ={
         from:'nhom12ungdungquanao@gmail.com',
         to:email,
-        subject:'Password reset for '+ email,
-        text:'Password reset link:'+'https://mofshop.shop/reset-password/'+token
+        subject:'Khôi phục mật khẩu cho '+ email,
+        text:'truy cập link để đổi mật khẩu :'+'https://mofshop.shop/reset-password/'+token
     };
     return mailOptions;
 }
