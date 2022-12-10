@@ -27,7 +27,7 @@
 <div class="app-title">
     <ul class="app-breadcrumb breadcrumb">
         <li class="breadcrumb-item">Danh sách sản phẩm</li>
-        <li class="breadcrumb-item"><a href="#">Thêm san phẩm</a></li>
+        <li class="breadcrumb-item"><a href="#">Thêm sản phẩm</a></li>
     </ul>
 </div>
 <div class="row">
@@ -40,7 +40,8 @@
                 {{#if msg}}
                     <p class="text-danger">{{{msg}}}</p>
                 {{/if}}
-                <form class="row" method="post">
+            </div>
+                <form class="row" method="post" id="uploadForm"  enctype="multipart/form-data">
                     <div class="form-group col-md-4">
                         <label htmlFor="inputEmail" class="form-label">Name</label>
                         <input type="text" class="form-control" name="title" placeholder="Tên" required=""/>
@@ -87,11 +88,10 @@
                         <input type="text" class="form-control" name="stock" placeholder="Số lượng" required=""/>
 
                     </div>
-                    <div class="form-group  col-md-4" style="margin-top: 30px">
-                        <input type="file" name="img" placeholder="img " required="" multiple/>
-                        <span id="status"></span>
+                    <div class="form-group  col-md-4">
+                        <input type="file" name="img" placeholder="img" required="" style="margin-top: 30px;" multiple/>
+                        <span id = "status"></span>
                     </div>
-                    <div class="clear"></div>
 
                     <div class="form-group  col-md-4" style="margin-top: 30px">
 

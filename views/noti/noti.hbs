@@ -1,40 +1,68 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-9 ms-sm-auto col-lg-12 px-md-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Thông báo</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                                        <div class="col-12" id="headerlist">
-                                            <div class="btnaddbanner">
-                                                <a href="/notification" class="btn btn-primary">Danh sách</a>
-                                            </div>
-                                        </div>
-                </div>
+<head>
+    <title>Đăng nhập quản trị | Website quản trị v2.0</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="public/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="public/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="public/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="public/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="public/vendor/select2/select2.min.css">
+    <link rel='stylesheet' href='/stylesheets/signin.css'/>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
+<style>
+    .form-group input {
+        width: 400px;
+    }
+
+
+</style>
+
+<div class="app-title">
+    <ul class="app-breadcrumb breadcrumb">
+        <li class="breadcrumb-item" ><a  href="/notification"> Danh sách thông báo </a> </li>
+        <li class="breadcrumb-item"><a href="#">Thêm thông báo </a></li>
+    </ul>
+</div>
+<div >
+    <div class="col-md-12">
+
+        <div class="tile" style="width: 800px; margin: auto; ">
+
+            <h3 class="tile-title">Tạo mới Thông báo </h3>
+            <div class="tile-body">
+                <form action="" method="POST">
+                    {{#if msg}}
+                        <p class="text-danger">{{{msg}}}</p>
+                    {{/if}}
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Tiêu đề</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="title">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Nội dung</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="body">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Link ảnh</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="image">
+                    </div>
+                    <!--                <div class="mb-3">-->
+                    <!--                    <label for="exampleFormControlInput1" class="form-label">Ảnh</label>-->
+                    <!--                    <input type="file" class="form-control2" id="exampleFormControlInput1" name="image">-->
+                    <!--                </div>-->
+                    <br>
+                    <Button type="submit" class="btn btn-primary">Thêm</Button>
+                </form>
             </div>
-            <form action="" method="POST">
-                {{#if msg}}
-                    <p class="text-danger">{{{msg}}}</p>
-                {{/if}}
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Tiêu đề</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" name="title">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Nội dung</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" name="body">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Link ảnh</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" name="image">
-                </div>
-                <!--                <div class="mb-3">-->
-                <!--                    <label for="exampleFormControlInput1" class="form-label">Ảnh</label>-->
-                <!--                    <input type="file" class="form-control2" id="exampleFormControlInput1" name="image">-->
-                <!--                </div>-->
-                <br>
-                <Button type="submit" class="btn btn-primary">Thêm</Button>
-            </form>
-            <br/>
         </div>
     </div>
+
 </div>
+
