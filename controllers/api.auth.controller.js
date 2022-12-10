@@ -146,8 +146,8 @@ try {
             data: undefined
         })
     }
-    const token = jwt.sign({_id: user._id}, process.env.TOKEN_SEC_KEY,{expiresIn:'2m'});
-    const emailTemplate =restPassword(user.email,user._id,token);
+    const token = jwt.sign({_id: user._id}, process.env.TOKEN_SEC_KEY);
+    const emailTemplate =restPassword(user.email,token);
     sendEmail(emailTemplate)
     res.status(200).json({
         status:true,

@@ -1,4 +1,4 @@
-let restPassword = (email,id,token)=>{
+let restPassword = (email,token)=>{
     const mailOptions ={
         from:'nhom12ungdungquanao@gmail.com',
         to:email,
