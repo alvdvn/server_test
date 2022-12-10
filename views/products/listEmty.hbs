@@ -35,8 +35,7 @@
                     </div>
 
 
-                    <input class="form-control" id="myInput" type="text" placeholder="Tìm kiếm.."
-                           style="margin-bottom: 10px">
+
                     <table class="table table-hover table-bordered" id="sampleTable">
 
                         <input class="form-control" id="myInput" type="text" placeholder="Tìm kiếm.."
@@ -71,39 +70,29 @@
                                         <td>{{this.sizes}}</td>
                                         <td>{{this.color}}</td>
                                         <td>{{this.stock}}</td>
-                                        <!--                    <td><img src="" width="100px" style="vertical-align: center"></td>-->
-
-
                                         <td>
+
+
+                                            <a href="/pro/upload/{{this._id}}" class="btn btn-primary" id="btnAction">
+                                                <use xlink:href="#upnhieuanh"/>
+                                                <i class="fas fa-images"></i>
+                                            </a>
+                                            <a href="/pro/edit/{{this._id}}" class="btn btn-primary" id="btnAction">
+                                                <use xlink:href="#edit"/>
+                                                <i class="fas fa-edit"></i>
+                                            </a>
                                             <a href="/pro/del/{{this._id}}"
                                                onclick="return confirm('Bạn có muốn xóa không?')"
                                                id="btnAction" class="btn btn-danger">
+                                                <use xlink:href="#delete"/>
                                                 <i class="fas fa-trash-alt"></i>
                                             </a>
                                         </td>
-                                        </td>
+
+
                                     </tr>
 
 
-                                    <td>
-
-
-                                        <a href="/pro/upload/{{this._id}}" class="btn btn-primary" id="btnAction">
-                                            <use xlink:href="#upnhieuanh"/>
-                                            <i class="fas fa-images"></i>
-                                        </a>
-                                        <a href="/pro/edit/{{this._id}}" class="btn btn-primary" id="btnAction">
-                                            <use xlink:href="#edit"/>
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="/pro/del/{{this._id}}"
-                                           onclick="return confirm('Bạn có muốn xóa không?')"
-                                           id="btnAction" class="btn btn-danger">
-                                            <use xlink:href="#delete"/>
-                                            <i class="fas fa-trash-alt"></i>
-                                        </a>
-                                    </td>
-                                    </td>
                                     </tr>
 
 
