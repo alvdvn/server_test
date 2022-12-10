@@ -3,7 +3,7 @@ let restPassword = (email,id,token)=>{
         from:'nhom12ungdungquanao@gmail.com',
         to:email,
         subject:'Password reset for '+ email,
-        text:'Password reset link:'+'http://localhost:3000/reset-password/'+token
+        text:'Password reset link:'+'https://mofshop.shop//reset-password/'+token
     };
     return mailOptions;
 }

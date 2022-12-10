@@ -12,6 +12,8 @@ router.get('/filterAmountByWeek',thongKeController.getFilterWeek);
 router.get('/filterAmountByMonth',thongKeController.getDaysinmonht);
 //get year (not done)
 router.get('/filterAmountMonthtoYear',thongKeController.getMonthsInYear);
+//get chose Date Data
+router.post('/filterByDatePicker',thongKeController.getChoseDate);
 
 
 

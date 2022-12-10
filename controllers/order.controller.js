@@ -24,6 +24,7 @@ catch(function (err) {
     console.log(err);
 });
 
+
     console.log(UserOderData);
     if (UserOderData ==null){
         res.send('Không tìm thấy bản ghi');

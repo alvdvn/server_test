@@ -4,16 +4,15 @@ var fcm = new FCM(serverKey);
 
 const notiModel = require('../models/notification.model');
 
-const {streamUpload} =require('../utils/UploadIMG');
-const bannerModel = require("../models/banner.model");
-const OrderModel = require("../models/order.model");
-
 
 
 exports.getNoti = async (req,res,next)=>{
-    const  itemList = await notiModel.find();
-    console.log(itemList)
-    res.render('noti/list',{itemList:itemList});
+   try {
+       const  itemList = await notiModel.find({typenotificaton:'all'});
+       res.render('noti/list',{itemList:itemList});
+   }catch (error){
+       res.render('noti/list');
+   }
 }
 exports.getAddNoti = async (req,res,next)=>{
     res.render('noti/noti');

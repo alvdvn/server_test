@@ -221,6 +221,42 @@ exports.getFilterMonthtoYear =async (req,res)=>{
     console.log(days);
     res.json(days)
 }
+exports.getChoseDate = async (req,res)=>{
+    try {
+        const {startDate,endDate}= req.body;
+        console.log(startDate)
+        console.log(endDate)
+        const Start = moment(startDate, 'YYYY-MM-DD').subtract(-1,'day').toDate();
+        const End = moment(endDate, 'YYYY-MM-DD').subtract(-1,'day').toDate();
+        console.log(Start,End);
+        const GetData = await OrderModel.aggregate([
+            {
+                    $match:{createdAt:{$gt:Start,$lt:End},
+                    status: {$ne:'người dùng đã hủy đơn hàng'}}
+            },
+            {
+                $group: {
+                    _id: {
+                        day: { $dateTrunc: { date: "$createdAt", unit: "day" } }
+                    },
+                    total: {$sum:"$Total"}
+                }
+            },
+            {
+                $group: {
+                    _id: "$_id",
+                    count: { $push: { total: "$total" } }
+                }
+            },
+            {$sort:{_id:1}}
+        ]);
+        return res.status(200).json({DatetoDate: GetData})
+    }catch (error){
+        return res.status(500).json({
+            message:error.message
+        })
+    }
+}
 
 
 
