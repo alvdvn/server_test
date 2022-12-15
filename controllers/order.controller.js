@@ -89,7 +89,7 @@ exports.PostDetailOrder = async (req,res)=>{
                    title: trangthai,
                    body: "Đơn hàng id: " + idOrder + " đã chuyển trang thái thành " + trangthai,
                    image: getIdOrder.products[0].ProductIMG,
-                   time: timenow,
+                   // time: timenow,
                    typenotificaton:"user"
                });
                noti.save((err) => {

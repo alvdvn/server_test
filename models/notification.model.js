@@ -5,12 +5,12 @@ const notiSchema = new mongoose.Schema(
         title: 'String',
         body: 'String',
         image: 'String',
-        time: {type: Date},
         typenotificaton: {
             type: String,
             enum: ['all', 'user'],
             default: 'all',
         },
     },
+    {timestamps: true}
 );
 module.exports = mongoose.model("Notification", notiSchema);

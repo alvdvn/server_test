@@ -47,8 +47,8 @@ exports.sendNoti = async (req,res,next) => {
             my_another_key: 'my another value'
         }
     };
-    let d = new Date();
-    let timenow = d.toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
+    // let d = new Date();
+    // let timenow = d.toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
 
     fcm.send(message, function(err, response){
         if (err) {
@@ -59,7 +59,7 @@ exports.sendNoti = async (req,res,next) => {
                 title: req.body.title,
                 body: req.body.body,
                 image: anhnoti,
-                time: timenow,
+                // time: timenow,
                 typenotification:"all"
             });
             banner.save((err)=>{
@@ -92,8 +92,8 @@ exports.postEditNoti = async (req,res,next) => {
     }else {
         anhnoti = req.body.image
     }
-    const d = new Date();
-    let timenow = d.getHours()+":"+d.getMinutes();;
+    // const d = new Date();
+    // let timenow = d.getHours()+":"+d.getMinutes();;
     let dieu_kien ={
         _id : req.params.id // lay id tren thanh dia chi
     }
@@ -101,7 +101,7 @@ exports.postEditNoti = async (req,res,next) => {
         title: req.body.title,
         body: req.body.body,
         image: anhnoti,
-        time: timenow
+        // time: timenow
     }
     notiModel.updateOne(dieu_kien,du_lieu,function (err,res){
         if (err)

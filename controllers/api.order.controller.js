@@ -72,7 +72,7 @@ exports.PostCashOrder= async(req, res)=>{
                 title: "Đặt hàng thành công",
                 body: "Đơn hàng "+req.params.cartId+" đã đặt hàng thành công.",
                 image: cart.products[0].ProductIMG,
-                time: timenow,
+                // time: timenow,
                 typenotificaton:"user"
             });
             noti.save((err)=>{
