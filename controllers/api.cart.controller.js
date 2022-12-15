@@ -74,8 +74,8 @@ exports.postAddCart = async (req,res)=> {
 exports.getAllCartByUserID = async (req,res)=>{
 const user =req.user
     let cart =await CartModel.findOne({userId:user._id})
-    // res.status(200).send(cart);
-    return res.json({ success: true, cart })
+    res.status(200).send(cart);
+    // return res.json({ success: true, cart })
 }
 
 exports.updateCartItemQuantity= async (req,res)=>{
