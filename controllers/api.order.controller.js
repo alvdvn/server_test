@@ -60,8 +60,11 @@ exports.PostCashOrder= async(req, res)=>{
             my_another_key: 'my another value'
         }
     };
-    let d = new Date();
-    let timenow = d.toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
+    let nz_date_string = new Date().toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
+    let date_nz = new Date(nz_date_string);
+    let hours = ("0" + date_nz.getHours()).slice(-2);
+    let minutes = ("0" + date_nz.getMinutes()).slice(-2);
+    let timenow = hours + ":" + minutes;
     fcm.send(message, function(err, response){
         if (err) {
             console.log("Something has gone wrong!", err);
@@ -72,7 +75,7 @@ exports.PostCashOrder= async(req, res)=>{
                 title: "Đặt hàng thành công",
                 body: "Đơn hàng "+req.params.cartId+" đã đặt hàng thành công.",
                 image: cart.products[0].ProductIMG,
-                // time: timenow,
+                time: timenow,
                 typenotificaton:"user"
             });
             noti.save((err)=>{

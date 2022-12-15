@@ -49,6 +49,11 @@ exports.sendNoti = async (req,res,next) => {
     };
     // let d = new Date();
     // let timenow = d.toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
+    let nz_date_string = new Date().toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
+    let date_nz = new Date(nz_date_string);
+    let hours = ("0" + date_nz.getHours()).slice(-2);
+    let minutes = ("0" + date_nz.getMinutes()).slice(-2);
+    let timenow = hours + ":" + minutes;
 
     fcm.send(message, function(err, response){
         if (err) {
@@ -59,7 +64,7 @@ exports.sendNoti = async (req,res,next) => {
                 title: req.body.title,
                 body: req.body.body,
                 image: anhnoti,
-                // time: timenow,
+                time: timenow,
                 typenotification:"all"
             });
             banner.save((err)=>{
@@ -94,6 +99,12 @@ exports.postEditNoti = async (req,res,next) => {
     }
     // const d = new Date();
     // let timenow = d.getHours()+":"+d.getMinutes();;
+    let nz_date_string = new Date().toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
+    let date_nz = new Date(nz_date_string);
+    let hours = ("0" + date_nz.getHours()).slice(-2);
+    let minutes = ("0" + date_nz.getMinutes()).slice(-2);
+    let timenow = hours + ":" + minutes;
+
     let dieu_kien ={
         _id : req.params.id // lay id tren thanh dia chi
     }
@@ -101,7 +112,7 @@ exports.postEditNoti = async (req,res,next) => {
         title: req.body.title,
         body: req.body.body,
         image: anhnoti,
-        // time: timenow
+        time: timenow
     }
     notiModel.updateOne(dieu_kien,du_lieu,function (err,res){
         if (err)
