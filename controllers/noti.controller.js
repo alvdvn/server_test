@@ -47,8 +47,7 @@ exports.sendNoti = async (req,res,next) => {
             my_another_key: 'my another value'
         }
     };
-    const d = new Date();
-    let timenow = d.getHours()+":"+d.getMinutes();;
+    let timenow = new Date();
 
     fcm.send(message, function(err, response){
         if (err) {
