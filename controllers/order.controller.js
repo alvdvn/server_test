@@ -77,24 +77,22 @@ exports.PostDetailOrder = async (req,res)=>{
                my_another_key: 'my another value'
            }
        };
-       const d = new Date();
-       let timenow = d.getHours()+":"+d.getMinutes();;
-       fcm.send(message, async function (err, response) {
+       let d = new Date();
+       let timenow = d.toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });       fcm.send(message, async function (err, response) {
            if (err) {
                console.log("Something has gone wrong!", err);
            } else {
                console.log("Successfully sent with response: ", response);
 
-               let dieukien = {
-                   _id:"638a0f18e0bd4d2fb064e1a8"
-               }
-
-               const dulieu = {
+               const noti = new notiModel({
+                   userId:id,
                    title: trangthai,
                    body: "Đơn hàng id: " + idOrder + " đã chuyển trang thái thành " + trangthai,
+                   image: getIdOrder.products[0].ProductIMG,
                    time: timenow,
-               };
-               notiModel.updateOne(dieukien,dulieu,(err) => {
+                   typenotificaton:"user"
+               });
+               noti.save((err) => {
                    if (err) {
                        console.log("err add")
                    } else {

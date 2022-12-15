@@ -5,7 +5,7 @@ const notiSchema = new mongoose.Schema(
         title: 'String',
         body: 'String',
         image: 'String',
-        time: 'String',
+        time: {type: Date},
         typenotificaton: {
             type: String,
             enum: ['all', 'user'],

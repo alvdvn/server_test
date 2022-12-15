@@ -47,7 +47,8 @@ exports.sendNoti = async (req,res,next) => {
             my_another_key: 'my another value'
         }
     };
-    let timenow = new Date();
+    let d = new Date();
+    let timenow = d.toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
 
     fcm.send(message, function(err, response){
         if (err) {

@@ -60,8 +60,8 @@ exports.PostCashOrder= async(req, res)=>{
             my_another_key: 'my another value'
         }
     };
-    const d = new Date();
-    let timenow = d.getHours()+":"+d.getMinutes();;
+    let d = new Date();
+    let timenow = d.toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
     fcm.send(message, function(err, response){
         if (err) {
             console.log("Something has gone wrong!", err);
