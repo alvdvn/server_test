@@ -78,7 +78,6 @@ app.use('/api/notification',apiNotiRouter);
 app.use('/api/favorite',apiFavoriteRouter);
 
 
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -104,5 +103,6 @@ function errhandler(err,req,res,next){
   }
 }
 app.use(errhandler);
+
 
 module.exports = app;

@@ -24,33 +24,39 @@ exports.getListProductEmpty =async (req,res)=>{
 exports.getFormAddPro = async (req, res, next) => {
     const listCate = await cateModel.find().exec();
     const listSize = new Array("S", "M", "L", "XL", "XXl", "XXXl")
+    const  listColor = new Array("red","black","grey","green","yellow","pink","white","blue","lightblue")
     const sizeLength = listSize.length;
-    res.render('./products/add', {listCate: listCate, listSize: listSize, sizeLength});
+    res.render('./products/add', {listCate: listCate, listSize: listSize, sizeLength,listColor:listColor});
 }
 exports.postAddPro = async (req, res, next) => {
 
-    let result = await streamUpload(req);
-    let filename= result.url;
-    const product = new productModel({
-        title: req.body.title,
-        price: req.body.price,
-        desc: req.body.desc,
-        category: req.body.cate,
-        sizes: req.body.sizes,
-        color: req.body.color,
-        stock: req.body.stock,
-        img: filename
-    });
+    try {
+        let result = await streamUpload(req);
+        let filename= result.url
+        const product = new productModel({
+            title: req.body.title,
+            price: req.body.price,
+            desc: req.body.desc,
+            category: req.body.cate,
+            sizes: req.body.sizes,
+            color: req.body.color,
+            stock: req.body.stock,
+            img: filename
+        });
 
 
-    await product.save((err) => {
-        if (err) {
-            console.log("loi add")
-        } else {
-            console.log("success")
-        }
-    })
-    res.redirect('/pro/list');
+        await product.save((err) => {
+            if (err) {
+                console.log("loi add")
+            } else {
+                console.log("success")
+            }
+        })
+        res.redirect('/pro/list');
+    }catch (e){
+        console.log(e)
+        res.redirect('/pro/add')
+    }
 }
 exports.getFormEditPro = async (req, res, next) => {
     // console.log(req.params);

@@ -52,7 +52,9 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label htmlFor="input_full_name" class="form-label">Mô tả</label>
-                        <input type="text" class="form-control" name="desc" placeholder="Mô tả" required=""/>
+                        <textarea type="" class="form-control" name="desc" placeholder="Mô tả" required="" >
+
+                        </textarea>
                     </div>
                     <div class="form-group  col-md-4">
                         <label for="exampleFormControlInput1" class="form-label">Chọn loại</label>
@@ -69,7 +71,7 @@
 
                     <div class="form-group  col-md-4">
                         <label for="exampleFormControlInput1" class="form-label">Chọn size</label>
-                        <select class="form-control form-control-sm" id="select_size" size="{{sizeLength}}"
+                        <select  style="height: 100px" class="form-control form-control-sm" id="select_size" size="{{sizeLength}}"
                                 Name="sizes" style="width: 400px;" onchange="select();" multiple>
                             {{#each listSize}}
 
@@ -78,9 +80,14 @@
                         </select>
                     </div>
 
-                    <div class="form-group  col-md-4">
-                        <label htmlFor="input_phone_number" class="form-label"> chọn Màu</label>
-                        <input type="text" class="form-control" name="color" placeholder="Màu" required=""/>
+                    <div style="" class="form-group  col-md-4">
+                        <label for="exampleFormControlInput1" class="form-label">Chọn size</label>
+                        <select style="height: 100px" class="form-control form-control-sm" id="select_size" size="{{sizeLength}}"
+                                Name="color" style="width: 400px;" onchange="select();" multiple>
+                            {{#each listColor}}
+                                <option value="{{this}}"> {{this}}  </option>
+                            {{/each}}
+                        </select>
                     </div>
                     <div class="form-group  col-md-4">
                         <label htmlFor="input_phone_number" class="form-label">Số lượng</label>

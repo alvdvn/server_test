@@ -14,7 +14,7 @@ const user = await  UserModel.findOne({
        return res.render('./User/login',{msg:'Sai mật khẩu Hoặc email'});
     }
 if (user.role === "User"){
-    res.render('./User/login',{msg:'Không đủ quyền để đăng nhập'});
+    res.render('./User/login',{msg:'Không đủ quyền để đăng nhập'},{layouts:false});
 }else {
     if (user){
         const validatePass = await  bcrypt.compare(body.password,user.password);

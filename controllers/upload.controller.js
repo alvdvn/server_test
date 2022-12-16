@@ -1,6 +1,8 @@
 const productModel = require("../models/product.model");
 const fs = require("fs");
+
 const cloudinary = require("../utils/cloudinary");
+const {application} = require("express");
 exports.getFormUpload = async (req,res,next)=>{
     console.log(req.params)
     let Book = await productModel.findById(req.params.id)
