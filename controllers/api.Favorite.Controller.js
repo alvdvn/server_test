@@ -17,6 +17,7 @@ return res.status(200).json(GetListFavor);
 exports.GetFavoriteOne =async (req,res)=>{
     const productId =req.params.id;
     const userId = req.user._id;
+
     let dieu_kien={
         userId,
         productId
@@ -37,9 +38,17 @@ exports.PostAddFavorite=async (req,res)=>{
   const productId =req.params.id;
   const userId = req.user._id;
   try {
+      let ProductInfo = await ProductModel.findById(productId);
+      if (ProductInfo ==null){
+          return res.status(404).json({message:"Không tìm thấy bản ghi"})
+      }
       const newFavor = await FavoriteModel.create({
           userId,
           productId,
+          title:ProductInfo.title,
+          ProductIMG:ProductInfo.img,
+          price:ProductInfo.price,
+          sold:ProductInfo.sold,
           isFavorite:true
       });
       return res.status(201).json(
