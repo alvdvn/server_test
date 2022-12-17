@@ -5,6 +5,10 @@ const FavoriteSchema = new mongoose.Schema(
         productId: {
             type: String,
         },
+        title:{type:String},
+        ProductIMG:{type:String},
+        price:{type:Number},
+        sold:{type:Number},
         isFavorite:{type:Boolean,default:false}
 
     },
