@@ -1,5 +1,6 @@
 const OrderModel =require('../models/order.model');
 const ProductModel =require('../models/product.model');
+const UserModel =require('../models/user.model');
 const moment = require('moment')
 const {format2} = require('../utils/DateFormat');
 
@@ -41,6 +42,15 @@ exports.getFormAdd =async (req,res)=>{
     //find top 10 product sold
     let Top10Product =  await ProductModel.find().sort({"sold":-1}).limit(10)
     //find all stock left
+
+    //find All User
+    let AllUser = await UserModel.find({role:'User'});
+    console.log(AllUser);
+    let UserNumber = 0;
+    for (let i=0;i<AllUser.length;i++){
+        UserNumber++
+    }
+
     let AllStockProducts = await ProductModel.find();
     let StockLeft =0;
     for (let i=0;i<AllStockProducts.length;i++){
@@ -57,7 +67,8 @@ exports.getFormAdd =async (req,res)=>{
         AllSuccessOrder,
        AllCancelOrder,
        formatIncome,
-       StockLeft
+       StockLeft,
+       UserNumber
     }
         res.render('./thongke/dash',{objStatus:objStatus,objTop10Product:Top10Product});
 }
