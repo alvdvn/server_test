@@ -17,6 +17,7 @@ return res.status(200).json(GetListFavor);
 exports.GetFavoriteOne =async (req,res)=>{
     const productId =req.params.id;
     const userId = req.user._id;
+
     let dieu_kien={
         userId,
         productId
