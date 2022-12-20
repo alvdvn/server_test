@@ -159,6 +159,7 @@ res.json({DaysOfMonth: days});
 }
 //test year
 exports.getMonthsInYear = async (req,res)=>{
+
     const startOfYear = moment().startOf('year').toDate();
     const lastDayOfYear = moment().endOf('year').toDate()
     let days = await OrderModel.aggregate([
@@ -224,11 +225,8 @@ exports.getFilterMonthtoYear =async (req,res)=>{
 exports.getChoseDate = async (req,res)=>{
     try {
         const {startDate,endDate}= req.body;
-        console.log(startDate)
-        console.log(endDate)
-        const Start = moment(startDate, 'YYYY-MM-DD').subtract(-1,'day').toDate();
-        const End = moment(endDate, 'YYYY-MM-DD').subtract(-1,'day').toDate();
-        console.log(Start,End);
+        const Start = moment(startDate, 'YYYY-MM-DD').startOf('day').toDate();
+        const End = moment(endDate, 'YYYY-MM-DD').endOf('day').toDate();
         const GetData = await OrderModel.aggregate([
             {
                     $match:{createdAt:{$gt:Start,$lt:End},
