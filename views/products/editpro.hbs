@@ -35,7 +35,7 @@
 
         <div class="tile">
 
-            <h3 class="tile-title">Tạo mới sản phẩm</h3>
+            <h3 class="tile-title">Sửa sản phẩm</h3>
             <div class="tile-body">
                 {{#if msg}}
                     <p class="text-danger">{{{msg}}}</p>
@@ -44,59 +44,64 @@
             <form class="row" method="post" id="uploadForm"  enctype="multipart/form-data">
                 <div class="form-group col-md-4">
                     <label htmlFor="inputEmail" class="form-label">Name</label>
-                    <input type="text" class="form-control" name="title" placeholder="Tên" required=""/>
+                    <input type="text" class="form-control" name="title" placeholder="Tên" required=""  value="{{itemPro.title}}"/>
                 </div>
                 <div class="form-group col-md-4">
                     <label htmlFor="input_password" class="form-label">Price</label>
-                    <input type="number" class="form-control" name="price" placeholder="Giá" required=""/>
+                    <input type="number" class="form-control" name="price" placeholder="Giá" required="" value="{{itemPro.price}}"/>
                 </div>
                 <div class="form-group col-md-4">
                     <label htmlFor="input_full_name" class="form-label">Mô tả</label>
-                    <textarea type="" class="form-control" name="desc" placeholder="Mô tả" required="" >
-
-                        </textarea>
+                    <input type="text" class="form-control" name="desc" value="{{itemPro.desc}}" placeholder="Mô tả" required="" />
                 </div>
                 <div class="form-group  col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Chọn loại</label>
-                    <select class="form-control form-control-sm" id="select_category" Name="cate"
-                            style="width: 400px; height: 50px;" onchange="select();">
-                        <option> Chọn loại</option>
-                        {{#each listCate}}
+<!--                    <select class="form-control form-control-sm" id="select_category" Name="cate"-->
+<!--                            style="width: 400px; height: 50px;" onchange="select();">-->
+<!--                        <option> Chọn loại</option>-->
+<!--                        {{#each listCate}}-->
 
-                            <option value="{{this.title}}"> {{this.title}}  </option>
-                        {{/each}}
-                    </select>
+<!--                            <option value="{{itemPro.category}}"> {{this.title}}  </option>-->
+<!--                        {{/each}}-->
+<!--                    </select>-->
+                    <input type="text" class="form-control" name="category" value="{{itemPro.category}}" placeholder="Màu" required="" />
 
                 </div>
 
                 <div class="form-group  col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Chọn size</label>
-                    <select  style="height: 100px" class="form-control form-control-sm" id="select_size" size="{{sizeLength}}"
-                             Name="sizes" style="width: 400px;" onchange="select();" multiple>
-                        {{#each listSize}}
+<!--                    <select  style="height: 100px" class="form-control form-control-sm" id="select_size" size="{{sizeLength}}"-->
+<!--                             Name="sizes" style="width: 400px;" onchange="select();" multiple>-->
+<!--                        {{#each listSize}}-->
 
-                            <option value="{{this}}"> {{this}}  </option>
-                        {{/each}}
-                    </select>
+<!--                            <option value="{{this}}"> {{this}}  </option>-->
+<!--                        {{/each}}-->
+<!--                    </select>-->
+                    <input type="text" class="form-control" name="sizes" value="{{itemPro.sizes}}" placeholder="Màu" required="" />
+
                 </div>
 
                 <div style="" class="form-group  col-md-4">
-                    <label for="exampleFormControlInput1" class="form-label">Chọn size</label>
-                    <select style="height: 100px" class="form-control form-control-sm" id="select_size" size="{{sizeLength}}"
-                            Name="color" style="width: 400px;" onchange="select();" multiple>
-                        {{#each listColor}}
-                            <option value="{{this}}"> {{this}}  </option>
-                        {{/each}}
-                    </select>
+                    <label for="exampleFormControlInput1" class="form-label">Chọn colors</label>
+<!--                    <select style="height: 100px" class="form-control form-control-sm" id="select_size" size="{{sizeLength}}"-->
+<!--                            Name="color" style="width: 400px;" onchange="select();" multiple>-->
+<!--                        {{#each listColor}}-->
+<!--                            <option value="{{this}}"> {{this}}  </option>-->
+<!--                        {{/each}}-->
+<!--                    </select>-->
+                    <input type="text" class="form-control" name="color" value="{{itemPro.color}}" placeholder="Màu" required="" />
+
                 </div>
                 <div class="form-group  col-md-4">
                     <label htmlFor="input_phone_number" class="form-label">Số lượng</label>
 
-                    <input type="text" class="form-control" name="stock" placeholder="Số lượng" required=""/>
+                    <input type="text" class="form-control" name="stock" placeholder="Số lượng" required="" value="{{itemPro.stock}}"/>
 
                 </div>
                 <div class="form-group  col-md-4">
-                    <input type="file" name="img" placeholder="img" required="" style="margin-top: 30px;" multiple/>
+                    <img src="{{itemPro.img}}" style="width: 100px;height: 100px;">
+                    <span id = "status"></span>
+                    <input type="file" name="img"  placeholder="img" id="img" accept="{{itemPro.img}}"/>
                     <span id = "status"></span>
                 </div>
 
