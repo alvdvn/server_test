@@ -27,6 +27,7 @@ exports.getFormAddPro = async (req, res, next) => {
     const  listColor = new Array("red","black","grey","green","yellow","pink","white","blue","lightblue")
     const sizeLength = listSize.length;
     res.render('./products/add', {listCate: listCate, listSize: listSize, sizeLength,listColor:listColor});
+
 }
 exports.postAddPro = async (req, res, next) => {
 
@@ -59,6 +60,7 @@ exports.postAddPro = async (req, res, next) => {
     }
 }
 exports.getFormEditPro = async (req, res, next) => {
+
     // console.log(req.params);
     let itemPro = await productModel.findById(req.params.id)
         .exec()
@@ -69,8 +71,10 @@ exports.getFormEditPro = async (req, res, next) => {
     if (itemPro == null) {
         res.send('khong tim thay')
     }
-
-    res.render('./products/editpro', {itemPro: itemPro})
+    const listCate = await cateModel.find().exec();
+    const listSize = new Array("S", "M", "L", "XL", "XXl", "XXXl")
+    const  listColor = new Array("red","black","grey","green","yellow","pink","white","blue","lightblue")
+    res.render('./products/editpro', {itemPro: itemPro,listCate: listCate, listSize: listSize,listColor:listColor});
 
 }
 exports.postEditPro = async (req, res, next) => {
