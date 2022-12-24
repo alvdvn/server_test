@@ -101,7 +101,7 @@ const user = req.user._id;
         });
     }
 
-    let FindOrderbyUser = await OrderModel.find({userId: user});
+    let FindOrderbyUser = await OrderModel.find({userId: user}).sort({_id:-1});
     if (FindOrderbyUser ==null){
         return res.status(404).json({message:"người dùng không đơn đặt hàng nào"});
     }
