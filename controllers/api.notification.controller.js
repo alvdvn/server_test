@@ -14,23 +14,18 @@ exports.GetAllNotiByUser=async (req,res,next)=>{
         });
     }
 
-    let GetAllNotiByUser = await notiModel.find({userId: user});
+    let GetAllNotiByUser = await notiModel.find({userId: user}).sort({_id:-1});
     let GetAll = await notiModel.find({typenotificaton: "all"});
 
     const  abc = GetAll.map((item)=>{
         return item;
     })
+    const  UserNoti = GetAllNotiByUser.map((item)=>{
+        return item;
+    })
 
-    GetAllNotiByUser.forEach(element => abc.push(element));
+    abc.forEach(items => UserNoti.push(items));
 
-    // abc.push(GetAll);
-    // const abc = GetAll.concat(GetAllNotiByUser).reduce((ac,a) => {
-    //     let key = Object.keys("a");
-    //     ac[key] = ac[key] || [];
-    //     ac[key].push(a)
-    //     return ac;
-    // },{})
-    // console.log(abc)
-    res.status(200).json(abc);
+    res.status(200).json(UserNoti);
 
 }
