@@ -3,6 +3,8 @@ const userModel = require("../models/user.model");
 var FCM = require('fcm-node');
 const notiModel = require("../models/notification.model");
 const CartModel = require("../models/cart.model");
+const ProductModel = require("../models/product.model");
+const OrderModel = require("../models/order.model");
 var serverKey = 'AAAA4oos57k:APA91bFyYJ2fZEP7jlGULUwC0NSc4VEFk86XTIx21ZX6f13LUbI1VyYGb0vS-7_ipjyi_-tOMMuk4PwtvveR_0fjixNC3ZcLEXbyGiQVoWO3VRX0xfUJknZ6Yico7YrhbBCA6oux6RTz';
 var fcm = new FCM(serverKey);
 
@@ -45,38 +47,77 @@ exports.PostDetailOrder = async (req,res)=>{
                status,
                isPaid:true
            }
-       }else {
+       }
+       else if (status === "người dùng đã hủy đơn hàng"){
+           const FindByOrderId = await OrderModel.findById(dieu_kien);
+           const bulkoption = FindByOrderId.products.map((item)=>({
+               updateOne: {
+                   filter:{_id:item.productId},
+                   update:{$inc:{stock:+item.quantity,sold: -item.quantity}},
+               },
+           }));
+           await ProductModel.bulkWrite(bulkoption,{});
+           du_lieu={
+               status,
+           }
+       }
+       else {
            du_lieu={
                status,
            }
 
        }
        //id user
-       orderModel.updateOne(dieu_kien,du_lieu,function (err,res){
+      orderModel.updateOne(dieu_kien,du_lieu,function (err,res){
            if (err){
                console.log("Loi update"+err.message,{msg:'Lỗi update'})
            }
        });
+
+
        const getIdOrder = await orderModel.findById({_id:req.params.id});
+       console.log(getIdOrder)
        let id = getIdOrder.userId;
        let idOrder = getIdOrder._id;
-       let trangthai = getIdOrder.status;
+       let message={};
+       let trangthai ;
+       if (getIdOrder.status =="người dùng đã hủy đơn hàng"){
+           trangthai = "Đơn hàng đã hủy"
+           message = {
+               to:"/topics/"+id,
+               collapse_key: 'your_collapse_key',
 
-       var message = {
-           to:"/topics/"+id,
-           collapse_key: 'your_collapse_key',
+               notification: {
+                   title: "Trạng thái đơn hàng",
+                   body: "Đơn hàng id: "+idOrder+" đã chuyển thành "+trangthai,
+                   image: getIdOrder.products[0].ProductIMG
+               },
 
-           notification: {
-               title: "Trạng thái đơn hàng",
-               body: "Đơn hàng id: "+idOrder+" đã chuyển thành "+trangthai,
-               image: getIdOrder.products[0].ProductIMG
-           },
+               data: {
+                   my_key: 'my value',
+                   my_another_key: 'my another value'
+               }
+           };
+       }else {
+           trangthai = getIdOrder.status
+            message = {
+               to:"/topics/"+id,
+               collapse_key: 'your_collapse_key',
 
-           data: {
-               my_key: 'my value',
-               my_another_key: 'my another value'
-           }
-       };
+               notification: {
+                   title: "Trạng thái đơn hàng",
+                   body: "Đơn hàng id: "+idOrder+" đã chuyển thành "+trangthai,
+                   image: getIdOrder.products[0].ProductIMG
+               },
+
+               data: {
+                   my_key: 'my value',
+                   my_another_key: 'my another value'
+               }
+           };
+       }
+
+
        let nz_date_string = new Date().toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' });
        let date_nz = new Date(nz_date_string);
        let hours = ("0" + date_nz.getHours()).slice(-2);

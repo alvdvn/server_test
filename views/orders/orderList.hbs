@@ -1,3 +1,8 @@
+<style>
+    .available-green {
+        color: green;
+    }
+</style>
 <head>
     <title>Danh sách nhân viên | Quản trị Admin</title>
     <meta charset="utf-8">
@@ -19,7 +24,7 @@
 </head>
 <div class="app-title" style="margin-top: 25px">
     <ul class="app-breadcrumb breadcrumb side">
-        <li class="breadcrumb-item active"><a href="#"><b>Danh sách List Order</b></a></li>
+        <li class="breadcrumb-item active"><a href="#"><b>Danh sách đơn hàng</b></a></li>
     </ul>
     <div id="clock"></div>
 </div>
@@ -76,7 +81,7 @@
                             <td>{{this.phoneNumber}}</td>
                             <td>{{this.address}}</td>
                             <td>{{this.Total}}</td>
-                            <td>{{this.status}}</td>
+                            <td ><P id="myBtn">{{this.status}}</P></td>
                             <td>
                                 <a href="/order/detail/{{this._id}}" style="margin: auto;" class="btn btn-primary" id="btnAction">
                                     <i class="fas fa-edit"></i>
