@@ -43,11 +43,11 @@
             </div>
                 <form class="row" method="post" id="uploadForm"  enctype="multipart/form-data">
                     <div class="form-group col-md-4">
-                        <label htmlFor="inputEmail" class="form-label">Name</label>
+                        <label htmlFor="inputEmail" class="form-label">Tên sản phẩm</label>
                         <input type="text" class="form-control" name="title" placeholder="Tên" required=""/>
                     </div>
                     <div class="form-group col-md-4">
-                        <label htmlFor="input_password" class="form-label">Price</label>
+                        <label htmlFor="input_password" class="form-label">Giá bán</label>
                         <input type="number" class="form-control" name="price" placeholder="Giá" required=""/>
                     </div>
                     <div class="form-group col-md-4">
@@ -81,7 +81,7 @@
                     </div>
 
                     <div style="" class="form-group  col-md-4">
-                        <label for="exampleFormControlInput1" class="form-label">Chọn size</label>
+                        <label for="exampleFormControlInput1" class="form-label">Chọn màu</label>
                         <select style="height: 100px" class="form-control form-control-sm" id="select_size" size="{{sizeLength}}"
                                 Name="color" style="width: 400px;" onchange="select();" multiple>
                             {{#each listColor}}

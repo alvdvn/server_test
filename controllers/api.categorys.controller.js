@@ -13,7 +13,6 @@ exports.getAllProductByCategory =async (req,res)=>{
                     status:false,
                     message:"Không có cate nào như vậy"
                 });}
-            console.log(item.title)
             const allItemMatch = await productModel.find({category: item.title});
            res.status(200).json(allItemMatch);
         }catch (e){

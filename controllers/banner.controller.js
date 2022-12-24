@@ -9,7 +9,6 @@ exports.postAdd = async (req, res) => {
     if (result == null) {
         return res.render('./banners/edit', {msg: 'Chưa chọn file upload '});
     }
-    console.log(result)
     let filename = result.url;
     const banner = new bannerModel({
         description: req.body.description,
