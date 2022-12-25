@@ -28,12 +28,7 @@
         <div class="tile">
             <div class="tile-body">
                 <div class="row element-button">
-                    <div class="col-sm-2">
 
-                        <a class="btn btn-add btn-sm" href="/users/add" title="Thêm"><i
-                                class="fas fa-plus"></i>
-                         Thêm người dùng</a>
-                    </div>
                     <div class="col-sm-2">
                         <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập"
                            onclick="myFunction(this)"><i
@@ -86,10 +81,6 @@
                             <td scope="row">{{this.role}}</td>
                             <td><img src="{{this.avatar}}" style="width: 50px;height: 50px;align-items: center"></td>
                             <td>
-                                <a href="/users/edit/{{this._id}}" class="btn btn-primary btn-sm edit" id="btnAction">
-                                    <i class="fas fa-edit"></i>
-                                    <use xlink:href="#edit"/>
-                                </a>
                                 <a href="/users/delete/{{this._id}}" onclick="return confirm('Bạn có muốn xóa không?')"
                                    id="btnAction" class="btn btn-danger btn-sm trash">
                                     <i class="fas fa-trash-alt"></i>
