@@ -41,68 +41,74 @@
                     <p class="text-danger">{{{msg}}}</p>
                 {{/if}}
             </div>
-            <form class="row" method="post" id="uploadForm"  enctype="multipart/form-data">
+            <form class="row" method="post" id="uploadForm" enctype="multipart/form-data">
                 <div class="form-group col-md-4">
                     <label htmlFor="inputEmail" class="form-label">Name</label>
-                    <input type="text" class="form-control" name="title" placeholder="Tên" required=""  value="{{itemPro.title}}"/>
+                    <input type="text" class="form-control" name="title" placeholder="Tên" required=""
+                           value="{{itemPro.title}}"/>
                 </div>
                 <div class="form-group col-md-4">
                     <label htmlFor="input_password" class="form-label">Price</label>
-                    <input type="number" class="form-control" name="price" placeholder="Giá" required="" value="{{itemPro.price}}"/>
+                    <input type="number" class="form-control" name="price" placeholder="Giá" required=""
+                           value="{{itemPro.price}}"/>
                 </div>
                 <div class="form-group col-md-4">
                     <label htmlFor="input_full_name" class="form-label">Mô tả</label>
-                    <input type="text" class="form-control" name="desc" value="{{itemPro.desc}}" placeholder="Mô tả" required="" />
+                    <input type="text" class="form-control" name="desc" value="{{itemPro.desc}}" placeholder="Mô tả"
+                           required=""/>
                 </div>
                 <div class="form-group  col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Chọn loại</label>
                     <select class="form-control form-control-sm" id="select_category" Name="cate"
                             style="width: 400px; height: 50px;" onchange="select();">
+                        <option value="">{{itemPro.category}}</option>
                         <option> Chọn loại</option>
                         {{#each listCate}}
-
-                            <option value="{{itemPro.category}}"> {{this.title}}  </option>
+                            <option > {{this.title}}  </option>
                         {{/each}}
                     </select>
-<!--                    <input type="text" class="form-control" name="category" value="{{itemPro.category}}" placeholder="Màu" required="" />-->
+                    <!--                    <input type="text" class="form-control" name="category" value="{{itemPro.category}}" placeholder="Màu" required="" />-->
 
                 </div>
 
                 <div class="form-group  col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Chọn size</label>
-                    <select  style="height: 100px" class="form-control form-control-sm" id="select_size" size="{{sizeLength}}"
-                             Name="sizes" style="width: 400px;" onchange="select();" multiple>
+                    <select style="height: 100px" class="form-control form-control-sm" id="select_size"
+                            size="{{sizeLength}}"
+                            Name="sizes" style="width: 400px;" onchange="select();" multiple>
                         {{#each listSize}}
 
                             <option value="{{this}}"> {{this}}  </option>
                         {{/each}}
                     </select>
-<!--                    <input type="text" class="form-control" name="sizes" value="{{itemPro.sizes}}" placeholder="Màu" required="" />-->
+                    <!--                    <input type="text" class="form-control" name="sizes" value="{{itemPro.sizes}}" placeholder="Màu" required="" />-->
 
                 </div>
 
                 <div style="" class="form-group  col-md-4">
                     <label for="exampleFormControlInput1" class="form-label">Chọn colors</label>
-                    <select style="height: 100px" class="form-control form-control-sm" id="select_size" size="{{sizeLength}}"
+                    <select style="height: 100px" class="form-control form-control-sm" id="select_color"
+                            size="{{sizeLength}}"
                             Name="color" style="width: 400px;" onchange="select();" multiple>
                         {{#each listColor}}
                             <option value="{{this}}"> {{this}}  </option>
                         {{/each}}
                     </select>
-<!--                    <input type="text" class="form-control" name="color" value="{{itemPro.color}}" placeholder="Màu" required="" />-->
+                    <!--                    <input type="text" class="form-control" name="color" value="{{itemPro.color}}" placeholder="Màu" required="" />-->
 
                 </div>
                 <div class="form-group  col-md-4">
                     <label htmlFor="input_phone_number" class="form-label">Số lượng</label>
 
-                    <input type="text" class="form-control" name="stock" placeholder="Số lượng" required="" value="{{itemPro.stock}}"/>
+                    <input type="text" class="form-control" name="stock" placeholder="Số lượng" required=""
+                           value="{{itemPro.stock}}"/>
 
                 </div>
                 <div class="form-group  col-md-4">
                     <img src="{{itemPro.img}}" style="width: 100px;height: 100px;">
-                    <span id = "status"></span>
-                    <input type="file" name="img"  placeholder="img" id="img" accept="{{itemPro.img}}"/>
-                    <span id = "status"></span>
+                    <span id="status"></span>
+                    <input type="file" name="img" placeholder="img" id="img" accept="{{itemPro.img}}"/>
+                    <span id="status"></span>
                 </div>
 
                 <div class="form-group  col-md-4" style="margin-top: 30px">
