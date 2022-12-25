@@ -26,8 +26,8 @@ exports.postReg= async (req,res)=>{
         if (FindEmail){
             return res.status(409).json("Email này đã được đăng kí");
         }
-        if (FindNumber){
-            return res.status(409).json("Số điện thoại này đã được đăng kí");
+        else if (FindNumber){
+            return res.status(408).json("Số điện thoại này đã được đăng kí");
         }
         userReg.password =await bcrypt.hash(req.body.password,salt);
         userReg.avatar =await filename;
