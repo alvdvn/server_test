@@ -49,15 +49,11 @@
         <button class="close_bar btn-primary" onclick="closeNav()">close</button>
     </div>
     <div class="app-sidebar__user">
-        <img class="app-sidebar__user-avatar" src="{{users.avatar}}" width="50px"
+        <img class="app-sidebar__user-avatar"  src="http://res.cloudinary.com/dzlcjxu3l/image/upload/v1671957078/xonzxst00a6dyglhbh2e.jpg" width="150px" height="80px"
                                         alt="User Image">
         <div>
 
-            <p class="app-sidebar__user-name"><b>{{users.full_name}}</b></p>
-
-
-            <span>Hi <b>{{users.full_name}}</b></span> <br><br>
-
+            <p class="app-sidebar__user-name"><b>Mof shop</b></p>
             <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
         </div>
     </div>
@@ -205,7 +201,6 @@
     function closeNav() {
         document.getElementById("slidebar").hidden = true;
         document.getElementById("main").style.marginLeft = "0px";
-
     }
 </script>
 

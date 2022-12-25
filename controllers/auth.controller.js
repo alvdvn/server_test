@@ -20,7 +20,6 @@ if (user.role === "User"){
         const validatePass = await  bcrypt.compare(body.password,user.password);
         if (validatePass){
             //login ok
-            console.log(req.session.user)
             req.session.user = user
             res.redirect('/pro/list')
         }else {

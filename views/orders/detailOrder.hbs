@@ -104,6 +104,9 @@
                                 <label class="form-check-label" for="inlineCheckbox1">Hủy Đơn hàng này</label>
                             </div>
                         </div>
+                        {{#if msg}}
+                            <p class="text-danger">{{{msg}}}</p>
+                        {{/if}}
                         <div class="row justify-content-between mb-3 mt-3 mt-md-0 ">
                             <div class="col-auto border-line ml-5"> <button type="submit" class="btn btn-success">Cập nhật</button></div>
                             <div class="col-auto border-line  mr-5"> <a href="/order/listorder"><button class="btn btn-success">Hủy Bỏ</button></a>  </div>

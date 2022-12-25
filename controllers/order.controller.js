@@ -40,6 +40,10 @@ exports.PostDetailOrder = async (req,res)=>{
        let dieu_kien ={
            _id: req.params.id
        }
+       const FindByOrderId = await OrderModel.findById(dieu_kien);
+       if (FindByOrderId.status ==="người dùng đã hủy đơn hàng"){
+           res.redirect('/order/listorder');
+       }
        let du_lieu ={};
 
        if (status === "Giao hàng thành công"){
@@ -49,7 +53,7 @@ exports.PostDetailOrder = async (req,res)=>{
            }
        }
        else if (status === "người dùng đã hủy đơn hàng"){
-           const FindByOrderId = await OrderModel.findById(dieu_kien);
+
            const bulkoption = FindByOrderId.products.map((item)=>({
                updateOne: {
                    filter:{_id:item.productId},
