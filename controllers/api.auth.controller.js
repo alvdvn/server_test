@@ -21,6 +21,10 @@ exports.postReg= async (req,res)=>{
     try {
         const salt = await bcrypt.genSalt(10);
         const userReg = new UserModel(req.body);
+        const FindEmail = await UserModel.findOne({email:req.body.email});
+        if (FindEmail){
+            return res.status(409).json("Email này đã được đăng kí");
+        }
         userReg.password =await bcrypt.hash(req.body.password,salt);
         userReg.avatar =await filename;
         await userReg.save()
