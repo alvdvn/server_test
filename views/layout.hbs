@@ -46,20 +46,24 @@
 <nav class="app-sidebar" id="slidebar" hidden="hidden">
 
     <div>
-        <button class="close_bar btn-primary" onclick="closeNav()">close</button>
+        <button class="close_bar " style="background: #001c40; position: absolute; left: 20px;" onclick="closeNav()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-x-diamond" viewBox="0 0 16 16">
+                <path d="M7.987 16a1.526 1.526 0 0 1-1.07-.448L.45 9.082a1.531 1.531 0 0 1 0-2.165L6.917.45a1.531 1.531 0 0 1 2.166 0l6.469 6.468A1.526 1.526 0 0 1 16 8.013a1.526 1.526 0 0 1-.448 1.07l-6.47 6.469A1.526 1.526 0 0 1 7.988 16zM7.639 1.17 4.766 4.044 8 7.278l3.234-3.234L8.361 1.17a.51.51 0 0 0-.722 0zM8.722 8l3.234 3.234 2.873-2.873c.2-.2.2-.523 0-.722l-2.873-2.873L8.722 8zM8 8.722l-3.234 3.234 2.873 2.873c.2.2.523.2.722 0l2.873-2.873L8 8.722zM7.278 8 4.044 4.766 1.17 7.639a.511.511 0 0 0 0 .722l2.874 2.873L7.278 8z"/>
+            </svg>
+        </button>
     </div>
     <div class="app-sidebar__user">
-        <img class="app-sidebar__user-avatar"  src="http://res.cloudinary.com/dzlcjxu3l/image/upload/v1671957078/xonzxst00a6dyglhbh2e.jpg" width="150px" height="80px"
+        <img class="app-sidebar__user-avatar"  src="http://res.cloudinary.com/dzlcjxu3l/image/upload/v1671957078/xonzxst00a6dyglhbh2e.jpg" width="150px" height="75px"
                                         alt="User Image">
         <div>
 
-            <p class="app-sidebar__user-name"><b>Mof shop</b></p>
-            <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
+            <p class="app-sidebar__user-name" style="color:#ffffff;"><b>Mof shop</b></p>
+            <p class="app-sidebar__user-designation" style="color:#ffffff;">Chào mừng bạn trở lại</p>
         </div>
     </div>
     <hr>
     <ul class="app-menu">
-        <li><a class="app-menu__item haha " href="/pro/list">
+        <li><a class="app-menu__item haha " href="/thongke">
             <i class='app-menu__icon bx bx-home'></i>
             <span class="app-menu__label">Trang chủ</span></a></li>
         <li><a class="app-menu__item active" href="/pro/list"><i
@@ -88,14 +92,8 @@
                 class='app-menu__icon bx bxs-bell-ring'></i><span
                 class="app-menu__label">Quản lý thông báo
             </span></a></li>
-        <li><a class="app-menu__item" href="/thongke"><i
-                class='app-menu__icon bx bx-pie-chart-alt-2'></i><span
-                class="app-menu__label">Báo cáo doanh thu</span></a>
-        </li>
 
-        <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-cog'></i><span
-                class="app-menu__label">Cài
-            đặt hệ thống</span></a></li>
+
     </ul>
 
 </nav>

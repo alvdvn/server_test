@@ -21,7 +21,7 @@ if (user.role === "User"){
         if (validatePass){
             //login ok
             req.session.user = user
-            res.redirect('/pro/list')
+            res.redirect('/thongke')
         }else {
             res.render('./User/login',{msg:'Sai mật khẩu Hoặc email'});
         }
