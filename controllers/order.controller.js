@@ -9,7 +9,7 @@ var serverKey = 'AAAA4oos57k:APA91bFyYJ2fZEP7jlGULUwC0NSc4VEFk86XTIx21ZX6f13LUbI
 var fcm = new FCM(serverKey);
 
 exports.getFormlistOrder = async (req, res, next)=>{
-    const listOrder = await orderModel.find();
+    const listOrder = await orderModel.find().sort({_id:-1});
     res.render('./orders/orderList',{listOrder:listOrder});
 
 }
