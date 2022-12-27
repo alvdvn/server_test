@@ -61,7 +61,7 @@
                     <label for="exampleFormControlInput1" class="form-label">Chọn loại</label>
                     <select class="form-control form-control-sm" id="select_category" Name="cate"
                             style="width: 400px; height: 50px;" onchange="select();">
-                        <option value="">{{itemPro.category}}</option>
+                        <option value="{{itemPro.category}}">{{itemPro.category}}</option>
                         <option> Chọn loại</option>
                         {{#each listCate}}
                             <option > {{this.title}}  </option>
