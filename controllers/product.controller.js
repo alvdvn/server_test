@@ -5,7 +5,7 @@ const {streamUpload} =require('../utils/UploadIMG');
 const fs = require('fs')
 
 exports.getListProduct = async (req, res, next) => {
-    const listProduct = await productModel.find().exec();
+    const listProduct = await productModel.find().sort({_id:-1}).exec();
 
     res.render('./products/list', {listProduct: listProduct});
 
