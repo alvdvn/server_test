@@ -13,9 +13,9 @@ exports.postReg= async (req,res)=>{
         result = await streamUploadAPI(req);
         filename=result.url
     }else {
-      const Avatar = await IMGModel.findById({_id:"6366274f29d343cc922c5946"});
-      result = Avatar.IMG;
-        filename=result;
+      // const Avatar = await IMGModel.findById({_id:"6366274f29d343cc922c5946"});
+      // result = Avatar.IMG;
+        filename="";
     }
 
     try {
