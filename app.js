@@ -38,6 +38,7 @@ mongoose
     .connect(process.env.MONGO_URL)
     .then(() => console.log("BD connection Successfull !"))
     .catch((err) => console.log(err));
+mongoose.set('strictQuery', false);
 //session
 app.use(session({
   secret:'fksdfn24235bdInfsdHSNF9999',
