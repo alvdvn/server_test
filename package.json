@@ -36,5 +36,9 @@
     "stripe": "^11.1.0",
     "util": "^0.12.5",
     "uuidv4": "^6.2.13"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.2",
+    "node": "^20.16.0"
   }
 }
